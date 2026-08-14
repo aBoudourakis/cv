@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('src/assets/fonts/Cinzel-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('src/assets/fonts/Cinzel-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('src/assets/fonts/Cinzel-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Roboto', sans-serif;
+
+  --royal-blue: #2447D8;
+  --royal-blue-deep: #172B7A;
+  --royal-blue-soft: #5575EA;
+
+  --gold: #D6AA45;
+  --gold-light: #E8C978;
+
+  --silver: #AEB5C2;
+  --silver-light: #D9DEE7;
+
+  --graphite: #171A21;
+
+  --off-white: #F7F8FA;
+
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20px;
+  z-index: -1;
+
+  background:
+          radial-gradient(
+                  circle at 55% 15%,
+                  rgba(36, 71, 216, 0.12),
+                  transparent 35%
+          ),
+          linear-gradient(
+                  135deg,
+                  #070a0f 0%,
+                  #0c1118 50%,
+                  #080b10 100%
+          );
+
+  //filter: blur(64px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.cv-title {
+  font-family: Cinzel, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.cv-primary-button {
+  background: linear-gradient( 180deg, #315FED, #143AB8 );
+  border-width: 1px;
+  border-radius: 7px;
+  border-color: var(--royal-blue-light);
+  color: white;
+}

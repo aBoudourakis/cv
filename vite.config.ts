@@ -10,6 +10,13 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+
+	resolve: {
+		alias: {
+			src: path.resolve(__dirname, './src'),
+		},
+	},
+
 	server: {
 		host: 'dev.athos-cv.com',
 		port: 443,

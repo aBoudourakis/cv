@@ -1,0 +1,7 @@
+.gold-gradient {
+  background: linear-gradient( 180deg, #FFF2BA 0%, var(--gold-light) 24%, var(--gold) 52%, #9D7227 78%, #F1CF78 100% );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.15)) drop-shadow(0 12px 32px rgba(214,170,69,0.08));
+}

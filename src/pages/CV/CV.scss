@@ -1,0 +1,29 @@
+.CV {
+
+}
+
+/* Desktop */
+.cv-paper {
+  width: min(210mm, calc(100vw - 64px));
+  //padding: 18mm 20mm;
+  background: white;
+  box-sizing: border-box;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .cv-paper {
+    width: calc(100vw - 32px);
+    padding: 40px;
+  }
+}
+
+/* Phone */
+@media (max-width: 600px) {
+  .cv-paper {
+    width: 100%;
+    margin: 0;
+    padding: 24px 20px;
+    min-height: auto;
+  }
+}
