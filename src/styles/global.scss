@@ -48,10 +48,10 @@
   --ab-text-color: var(--graphite);
   --ab-background-color: var(--silver-light);
   --ab-header-color: var(--royal-blue);
+}
 
-  &*{
-    box-sizing: border-box;
-  }
+*{
+  box-sizing: border-box;
 }
 
 body.dark-mode {

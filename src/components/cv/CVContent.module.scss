@@ -1,6 +1,376 @@
 .CVContent {
+  position: relative;
+  display: flex;
+  width: min(210mm, 100vw);
+  max-width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  color: var(--ab-text-color);
+}
+
+/* Floating page navigation, one anchor button per original PDF page. */
+.pageNav {
+  position: sticky;
+  top: 24px;
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  margin: 24px 0 24px 8px;
+  z-index: 2;
+}
+
+.pageNavButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--silver);
+  background: transparent;
+  color: var(--ab-text-color);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+
+  &:hover {
+    border-color: var(--royal-blue);
+    color: var(--royal-blue);
+  }
+}
+
+.pageNavButtonActive {
+  background: var(--royal-blue);
+  border-color: var(--royal-blue);
+  color: white;
+}
+
+/* The single, continuously scrollable document area. */
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding: 40px clamp(20px, 4vw, 64px) 120px;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Invisible marker used purely as a scroll/observer anchor for a PDF page. */
+.pageAnchor {
+  display: block;
+  height: 0;
+  scroll-margin-top: 16px;
+}
+
+/* ---------- Header ---------- */
+.cvHeader {
+  scroll-margin-top: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--silver);
+}
+
+.cvEyebrow {
+  margin: 0 0 4px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.cvName {
+  margin: 0;
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  line-height: 1.2;
+  text-wrap: nowrap;
+  color: var(--ab-header-color);
+}
+
+.cvJobTitle {
+  margin: 4px 0 0;
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  font-weight: 600;
+  color: var(--ab-text-color);
+}
+
+.cvTagline {
+  margin: 2px 0 16px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.95rem;
+  color: var(--royal-blue-soft);
+}
+
+.contactList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.contactIcon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: var(--royal-blue);
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+}
+
+.contactLink,
+.contactText {
+  color: var(--ab-text-color);
+  text-decoration: none;
+}
+
+.contactLink:hover {
+  color: var(--royal-blue);
+  text-decoration: underline;
+}
+
+/* ---------- Sections ---------- */
+.cvSection {
+  margin-bottom: 40px;
+}
+
+.sectionHeading {
+  font-family: var(--font-title), serif;
+  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  color: var(--ab-header-color);
+  margin: 0 0 16px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--gold);
+}
+
+.subsectionHeading {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ab-header-color);
+  margin: 20px 0 10px;
+}
+
+/* Generic entry card reused by experience, education, seminars and projects. */
+.entry {
+  display: grid;
+    grid-template-columns: 1fr 4fr;
+  margin-bottom: 18px;
+}
+
+.entryHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+}
+
+.entryPeriod {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--royal-blue-soft);
+  white-space: nowrap;
+}
+
+.entryBody {
+  margin: 4px 0 0 8px;
+}
+
+.entryTitle {
+  display: flex;
+  margin: -4px 0 0;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: start;
+  color: var(--ab-text-color);
+}
+
+.entryOrg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 2px 0 6px;
+  font-size: 0.9rem;
+  color: var(--ab-text-color);
+  flex-wrap: wrap;
+  //gap: 4px 10px;
+}
+
+.entryLink {
+  color: var(--royal-blue);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.entryLocation {
+  color: var(--silver);
+  font-style: italic;
+}
+
+.entryNote {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--ab-text-color);
+  opacity: 0.85;
+}
+
+.bulletList {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.bulletItem {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: start;
+  margin-bottom: 2px;
+}
+
+/* ---------- Skills ---------- */
+.skillGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px 32px;
+}
+
+.skillGroup {
+  position: relative;
+}
+
+.skillGroupTitle {
+  margin: 0 0 8px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ab-header-color);
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skillItem {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--silver);
+  font-size: 0.78rem;
+  color: var(--ab-text-color);
+}
+
+/* ---------- Languages ---------- */
+.languageList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.languageItem {
+  display: flex;
+  justify-content: space-between;
+  max-width: 320px;
+  font-size: 0.9rem;
+}
+
+.languageName {
+  font-weight: 600;
+}
+
+.languageLevel {
+  color: var(--royal-blue-soft);
+}
+
+/* ---------- Responsive: tablets ---------- */
+@media (max-width: 900px) {
+  .CVContent {
+    width: 100vw;
+  }
+
+  .skillGrid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+/* ---------- Responsive: mobile phones ---------- */
+@media (max-width: 600px) {
+  .pageNav {
+    top: 8px;
+    margin: 12px 0 12px 4px;
+  }
+
+  .pageNavButton {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  .scrollArea {
+    padding: 24px 16px 100px;
+  }
+
+  .entryHead {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contactList {
+    gap: 8px 14px;
+  }
+}
+
+/* ---------- Orientation handling on small devices ---------- */
+@media (max-width: 900px) and (orientation: landscape) {
+  .CVContent {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .scrollArea {
+    padding-top: 16px;
+    padding-bottom: 80px;
+  }
+
+  .cvHeader {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+  .skillGrid {
+    grid-template-columns: 1fr;
+  }
 }
