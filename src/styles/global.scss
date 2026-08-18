@@ -25,9 +25,11 @@
 }
 
 :root {
+  // Font Families
   --font-title: 'Cinzel', serif;
   --font-body: 'Roboto', sans-serif;
 
+  // Color Palette
   --royal-blue: #2447D8;
   --royal-blue-deep: #172B7A;
   --royal-blue-soft: #5575EA;
@@ -42,36 +44,78 @@
 
   --off-white: #F7F8FA;
 
+  // Theme variables
+  --ab-text-color: var(--graphite);
+  --ab-background-color: var(--silver-light);
+  --ab-header-color: var(--royal-blue);
+
+  &*{
+    box-sizing: border-box;
+  }
 }
+
+body.dark-mode {
+  // Theme variables
+  --ab-text-color: var(--silver-light);
+  --ab-background-color: var(--graphite);
+  --ab-header-color: var(--silver-light);
+}
+
+
 body {
+  background: var(--ab-background-color);
   margin: 0;
   min-height: 100vh;
   font-family: "Inter", sans-serif;
-  color: var(--white);
+  color: var(--ab-text-color);
+
+  &::before {
+    content: "";
+    position: fixed;
+    inset: -20px;
+    z-index: -1;
+
+    background: radial-gradient(
+            circle at 55% 15%,
+            rgba(36, 71, 216, 0.12),
+            transparent 35%
+    ),
+    linear-gradient(
+            135deg,
+            #F7F8FA 0%,
+            #E8E9ED 50%,
+            #F7F8FA 100%
+    );
+
+    //filter: blur(64px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: -20px;
-  z-index: -1;
+body.dark-mode {
+  &::before {
+    content: "";
+    position: fixed;
+    inset: -20px;
+    z-index: -1;
 
-  background:
-          radial-gradient(
-                  circle at 55% 15%,
-                  rgba(36, 71, 216, 0.12),
-                  transparent 35%
-          ),
-          linear-gradient(
-                  135deg,
-                  #070a0f 0%,
-                  #0c1118 50%,
-                  #080b10 100%
-          );
+    background: radial-gradient(
+            circle at 55% 15%,
+            rgba(36, 71, 216, 0.12),
+            transparent 35%
+    ),
+    linear-gradient(
+            135deg,
+            #070a0f 0%,
+            #0c1118 50%,
+            #080b10 100%
+    );
 
-  //filter: blur(64px);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+    //filter: blur(64px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
 .cv-title {
@@ -82,7 +126,7 @@ body::before {
 }
 
 .cv-primary-button {
-  background: linear-gradient( 180deg, #315FED, #143AB8 );
+  background: linear-gradient(180deg, #315FED, #143AB8);
   border-width: 1px;
   border-radius: 7px;
   border-color: var(--royal-blue-light);

@@ -1,0 +1,15 @@
+.footer {
+    position: relative;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--ab-text-color);
+    opacity: 0.5;
+
+    .version {
+        position: absolute;
+        bottom: 0;
+        right: 4px;
+        opacity: 0.5;
+    }
+}

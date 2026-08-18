@@ -13,7 +13,7 @@ export default defineConfig({
 
 	resolve: {
 		alias: {
-			src: path.resolve(__dirname, './src'),
+			src: path.resolve(import.meta.dirname, './src'),
 		},
 	},
 
@@ -28,10 +28,10 @@ export default defineConfig({
 
 		https: {
 			key: fs.readFileSync(
-				path.resolve(__dirname, '.cert/dev.athos-cv.com-key.pem')
+				path.resolve(import.meta.dirname, '.cert/dev.athos-cv.com-key.pem')
 			),
 			cert: fs.readFileSync(
-				path.resolve(__dirname, '.cert/dev.athos-cv.com.pem')
+				path.resolve(import.meta.dirname, '.cert/dev.athos-cv.com.pem')
 			),
 		},
 	},
