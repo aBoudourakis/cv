@@ -3,8 +3,9 @@
   display: flex;
   width: min(210mm, 100vw);
   max-width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  //height: 100vh;
+  //height: 100dvh;
+  height: 100%;
   margin: 0 auto;
   color: var(--ab-text-color);
 }
@@ -259,6 +260,15 @@
   gap: 20px 32px;
 }
 
+.skillList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .skillGroup {
   position: relative;
 }
@@ -281,9 +291,9 @@
 }
 
 .skillItem {
-  padding: 3px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--silver);
+  //padding: 3px 10px;
+  //border-radius: 999px;
+  //border: 1px solid var(--silver);
   font-size: 0.78rem;
   color: var(--ab-text-color);
 }

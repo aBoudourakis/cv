@@ -13,6 +13,7 @@ import {
 	// totalPages,
 	type ContactLink,
 } from './cvData';
+import SkillEntry from "src/components/cv/CVSections/SkillEntry.tsx";
 
 /** Small inline icon set used for the contact list, kept dependency-free. */
 const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
@@ -170,7 +171,8 @@ export default function CVContent() {
 											<li className={styles.bulletItem}
 											    key={`${item.company}-experience-bullet-${experienceBulletIndex}`}>
 												{typeof bullet === 'string' ? bullet : bullet.name ? (
-													<a className={styles.entryLink} href={bullet.url} target="_blank" rel="noreferrer" title={bullet.description}>
+													<a className={styles.entryLink} href={bullet.url} target="_blank" rel="noreferrer"
+													   title={bullet.description}>
 														{bullet.name}
 													</a>
 												) : (
@@ -186,8 +188,8 @@ export default function CVContent() {
 				</section>
 
 				<section className={styles.cvSection}>
-					<h2 className={styles.sectionHeading}>IT Skills</h2>
-					<div className={styles.skillGrid}>
+					<h2 className={styles.sectionHeading}>Technical Skills</h2>
+					<div className={styles.skillList}>
 						{skills.map((category, index) => {
 							const isPageBreak = index > 0 && category.page !== skills[index - 1].page;
 							return (
@@ -200,14 +202,7 @@ export default function CVContent() {
 											data-page-anchor={category.page}
 										/>
 									)}
-									<h3 className={styles.skillGroupTitle}>{category.label}</h3>
-									<ul className={styles.skillList}>
-										{category.items.map((skill) => (
-											<li className={styles.skillItem} key={skill}>
-												{skill}
-											</li>
-										))}
-									</ul>
+									<SkillEntry skill={category}/>
 								</div>
 							);
 						})}

@@ -144,45 +144,148 @@ export const experience: ExperienceItem[] = [
 export const skills: SkillCategory[] = [
 	{
 		page: 1,
-		label: 'Programming',
+		label: 'Frontend Development',
 		items: [
-			'HTML', 'CSS', 'PHP', 'Javascript', 'Python', 'Java', 'C++', 'Vue JS 2', 'React', 'NextJS',
-			'Flutter', 'Vuetify', 'Quasar', 'Vite', 'Fluent UI', 'MUI', 'Sharepoint', 'SPFX',
-			'Version Control systems (Github, Gitlab)', 'Linux terminal', 'Webstorm', 'Visual Studio Code',
-			'IntellijIDEA', 'PyCharm',
+			'HTML5',
+			'CSS / SCSS',
+			'JavaScript',
+			'TypeScript',
+			'React',
+			'Next.js',
+			'Vue.js',
+			'Redux Toolkit',
+			'MUI',
+			'AG Grid',
+			'Fluent UI',
+			'Vuetify',
+			'Quasar',
+			'Vite',
 		],
 	},
 	{
 		page: 1,
-		label: 'Machine Learning',
-		items: ['Hadoop', 'Apache Spark', 'PyTorch', 'TensorFlow'],
+		label: 'Architecture & Web Technologies',
+		items: [
+			'REST APIs',
+			'Server-Sent Events (SSE)',
+			'WebSockets',
+			'Frontend Architecture',
+			'State Management',
+			'Component Architecture',
+			'Frontend Performance Optimisation',
+			'OAuth / OpenID Connect',
+			'Keycloak',
+			'Accessibility',
+			'Responsive Design',
+		],
 	},
 	{
 		page: 1,
-		label: '2D Design & Drawing',
-		items: ['Adobe Photoshop', 'Illustrator', 'XD', 'InDesign', 'AUTOCAD'],
+		label: 'Development & Tooling',
+		items: [
+			'Git',
+			'GitHub',
+			'GitLab',
+			'CI/CD',
+			'GitHub Actions',
+			'npm',
+			'Docker',
+			'WebStorm',
+			'VS Code',
+			'Browser DevTools',
+			'ESLint',
+		],
+	},
+	{
+		page: 1,
+		label: 'Testing & Quality',
+		items: [
+			'Jest',
+			'Vitest',
+			'React Testing Library',
+			'Unit Testing',
+			'Integration Testing',
+			'Code Review',
+		],
+	},
+	{
+		page: 1,
+		label: 'AI-Assisted Development',
+		items: [
+			'GitHub Copilot',
+			'Claude Code',
+			'ChatGPT / Codex',
+			'Ollama',
+			'Local LLM Workflows',
+			'AI-assisted Refactoring & Code Review',
+		],
+	},
+
+	{
+		page: 2,
+		label: 'Additional Technologies',
+		items: [
+			'Python',
+			'PHP',
+			'Java',
+			'C++',
+			'Flutter',
+			'SharePoint',
+			'SPFx',
+		],
+	},
+	{
+		page: 2,
+		label: 'Machine Learning & Data',
+		items: [
+			'PyTorch',
+			'TensorFlow',
+			'Apache Spark',
+			'Hadoop',
+		],
+	},
+	{
+		page: 2,
+		label: 'UI / UX & Design Systems',
+		items: [
+			'UI / UX Design',
+			'Design Systems',
+			'Responsive Design',
+			'Accessibility',
+			'Adobe XD',
+			'Adobe Photoshop',
+			'Adobe Illustrator',
+			'AutoCAD',
+		],
 	},
 	{
 		page: 2,
 		label: '3D Design & Animation',
-		items: ['Autodesk Maya', 'Blender', 'zBrush', 'After Effects', 'Photoshop 3D'],
-	},
-	{
-		page: 2,
-		label: 'Audio & Video',
-		items: ['Adobe Premier', 'After Effects', 'Adobe Audition', 'Pro Tracks Plus', 'Steinberg Cubase'],
-	},
-	{
-		page: 2,
-		label: 'Other',
 		items: [
-			'VPN connections and Team-Group management', 'FTP website-forum management',
-			'Accustomed to designing equipment, Trackball, Pen-tablet', 'Efficient in web research',
-			'MS Office', 'Adobe X Pro', 'Windows & Macintosh OS',
+			'Autodesk Maya',
+			'Blender',
+			'ZBrush',
+		],
+	},
+	{
+		page: 2,
+		label: 'Multimedia',
+		items: [
+			'Adobe Premiere Pro',
+			'Adobe After Effects',
+			'Adobe Audition',
+			'Steinberg Cubase',
+		],
+	},
+	{
+		page: 2,
+		label: 'Platforms & Environments',
+		items: [
+			'Windows',
+			'macOS',
 		],
 	},
 ];
-
 export const education: EducationItem[] = [
 	{
 		page: 2,
@@ -268,3 +371,12 @@ export const projects: ProjectItem[] = [
 		description: '3D Modelling & Digitalization of Cultural Heritage content',
 	},
 ];
+
+export type academicEntryModel = {
+	period: string;
+	title: string;
+	subtitle?: string;
+	institution?: string;
+	location?: string;
+	description?: string;
+}

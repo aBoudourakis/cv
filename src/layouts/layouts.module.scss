@@ -1,13 +1,30 @@
 .DesktopLayout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 
   .NavBar {
     flex: 0 0 auto;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--ab-background-color);
   }
 
   .Content {
-    flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .Footer {
+    flex: 0 0 auto;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background: var(--ab-background-color);
   }
 }
