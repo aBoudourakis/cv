@@ -86,7 +86,7 @@
   margin: 0;
   font-family: var(--font-body), sans-serif;
   font-size: clamp(1.4rem, 4vw, 2rem);
-    font-weight: 300;
+  font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.5rem;
   line-height: 1.2;
@@ -168,6 +168,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 1rem;
   font-weight: 600;
+  text-align: start;
   color: var(--ab-header-color);
   margin: 20px 0 10px;
 }
@@ -175,7 +176,7 @@
 /* Generic entry card reused by experience, education, seminars and projects. */
 .entry {
   display: grid;
-    grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 4fr;
   margin-bottom: 18px;
 }
 
@@ -221,7 +222,7 @@
 }
 
 .entryLink {
-  color: var(--royal-blue);
+  color: var(--ab-hyperlink-color);
   text-decoration: none;
 
   &:hover {
@@ -230,7 +231,7 @@
 }
 
 .entryLocation {
-  color: var(--silver);
+  color: var(--ab-text-color-faint);
   font-style: italic;
 }
 
@@ -261,12 +262,12 @@
 }
 
 .skillList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .skillGroup {
@@ -296,6 +297,29 @@
   //border: 1px solid var(--silver);
   font-size: 0.78rem;
   color: var(--ab-text-color);
+}
+
+/* ========== Academics ========== */
+
+/* ---------- Education ---------- */
+.educationEntry {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  margin-bottom: 16px;
+
+  .Period {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--royal-blue-soft);
+    white-space: nowrap;
+  }
+  .Content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+  }
 }
 
 /* ---------- Languages ---------- */

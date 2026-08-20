@@ -37,17 +37,32 @@ export interface EducationItem {
 
 export interface CertificateItem {
 	page: number;
-	period: string;
+	period?: string;
+	year?: string;
 	title: string;
-	institution: string;
+	subtitle?: string;
+	description?: string;
+	institution?: string;
+	issuer?: string;
+	organization?: string;
 	institutionUrl?: string;
-	location: string;
+	location?: string;
+	link?: string;
 }
 
 export interface SeminarItem {
 	page: number;
 	year: string;
 	title: string;
+	description?: string;
+}
+
+export interface AwardItem {
+	page: number;
+	year: string;
+	title: string;
+	subtitle?: string;
+	link?: string;
 	description?: string;
 }
 
@@ -63,6 +78,8 @@ export interface ProjectItem {
 	title: string;
 	source: string;
 	sourceUrl?: string;
+	source2?: string;
+	sourceUrl2?: string;
 	description: string;
 }
 
@@ -291,16 +308,16 @@ export const education: EducationItem[] = [
 		page: 2,
 		period: '2021 – 2025',
 		title: 'MSc in Data Science and Engineering',
-		institution: 'CUT, Limassol, Cyprus',
+		institution: 'Cypus University of Technology',
 		institutionUrl: 'https://www.cut.ac.cy/',
 		location: 'Limassol, Cyprus',
-		thesis: '"Multimodal Deep Learning for Predicting and Detecting Optimal Medical Conditions of a Patient"',
+		thesis: 'Thesis: "Multimodal Deep Learning for Predicting and Detecting Optimal Medical Conditions of a Patient"',
 	},
 	{
 		page: 2,
 		period: '2013 – 2017',
 		title: 'BSc in Computer Engineering & Informatics',
-		institution: 'CUT, Limassol, Cyprus',
+		institution: 'Cypus University of Technology',
 		institutionUrl: 'https://www.cut.ac.cy/',
 		location: 'Limassol, Cyprus',
 	},
@@ -308,7 +325,7 @@ export const education: EducationItem[] = [
 		page: 2,
 		period: '2005 – 2007',
 		title: 'BSc in Electrical and Computer Engineering',
-		institution: 'AUTH, Thessaloniki, Greece',
+		institution: 'Aristotle University of Thessaloniki',
 		institutionUrl: 'https://www.auth.gr/en/',
 		location: 'Thessaloniki, Greece',
 	},
@@ -318,8 +335,9 @@ export const certificates: CertificateItem[] = [
 	{
 		page: 2,
 		period: '2023 - present',
-		title: 'Certificates in Vue JS 2 / React / Next.js / Remix.js / Flutter & Dart',
-		institution: 'UDEMY, online',
+		title: 'Online Courses',
+		subtitle: 'Certificates in Vue JS 2 / React / Next.js / Remix.js / Flutter & Dart',
+		institution: 'UDEMY',
 		institutionUrl: 'https://www.udemy.com/',
 		location: 'online',
 	},
@@ -330,6 +348,7 @@ export const seminars: SeminarItem[] = [
 		page: 2,
 		year: '2018',
 		title: 'Seminar in "Growth Hacking"',
+		description: 'by Panis Pieri, Growth Hacker & Digital Marketing Expert (20+ years experience)',
 	},
 	{
 		page: 2,
@@ -337,6 +356,100 @@ export const seminars: SeminarItem[] = [
 		title: 'Seminar in "UX Research at Google"',
 		description: 'by Katie Tzanidou, User Experience (UX) Research Manager at Google UK',
 	},
+];
+
+export const certificates2: CertificateItem[] = [
+	{
+		page: 2,
+		title: "AI Agents & Workflows - The Practical Guide",
+		subtitle: "Certificate of Completion",
+		year: "2025",
+		link: "ude.my/UC-2d342be5-78a0-4d2b-9046-3b7cf54697ac",
+		issuer: "Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	},
+	{
+		page: 2,
+		title: "Local LLMs via Ollama & LM Studio - The Practical Guide",
+		subtitle: "Certificate of Completion",
+		year: "2025",
+		link: "ude.my/UC-585a9a2c-3bc4-47bc-83f0-5cacb119daf0",
+		issuer: "Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	},
+	{
+		page: 2,
+		title: "Cyprus Seeds for the Future Scholarship 2024",
+		subtitle: "Certificate",
+		description: "Awarded in recognition of outstanding potential, dedication, and commitment to excellence",
+		year: "2025",
+		issuer: "Huawei Technologies (Cyprus) Co. Ltd",
+		organization: "Huawei Technologies (Cyprus) Co. Ltd"
+	},
+	{
+		page: 2,
+		title: "Flutter & Dart - The Complete Guide",
+		subtitle: "Certificate of Completion",
+		year: "2023",
+		link: "ude.my/UC-59c3d1d4-10f9-46ad-a6de-bb4ebdb4d63a",
+		issuer: "Academind by Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	},
+	{
+		page: 2,
+		title: "Remix.js - The Practical Guide",
+		subtitle: "Certificate of Completion",
+		year: "2023",
+		link: "ude.my/UC-86591a0b-376d-46fc-82b0-08fbb2c8d285",
+		issuer: "Academind by Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	},
+	{
+		page: 2,
+		title: "AI-900T00 - Microsoft Azure AI Fundamentals",
+		subtitle: "Microsoft Certificate of Achievement",
+		description: "Successfully completed the Microsoft Official Course. Course duration: 1 day",
+		year: "2022",
+		issuer: "George Lialiaris",
+		organization: "Microsoft"
+	},
+	{
+		page: 2,
+		title: "Next.js & React - The Complete Guide (incl. Two Paths!)",
+		subtitle: "Certificate of Completion",
+		year: "2022",
+		link: "ude.my/UC-94a13e25-f8ec-4982-b719-ba97ccb32e12",
+		issuer: "Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	},
+	{
+		page: 2,
+		title: "Azure Data Fundamentals",
+		subtitle: "Microsoft Certified",
+		description: "Successfully completed the requirements of Azure Data Fundamentals",
+		year: "2022",
+		link: "verify.certiport.com: wYcQK-2FMz",
+		issuer: "Satya Nadella",
+		organization: "Microsoft"
+	},
+	{
+		page: 2,
+		title: "Vue JS 2 - The Complete Guide (incl. Vue Router & Vuex)",
+		subtitle: "Certificate of Completion",
+		year: "2020",
+		link: "ude.my/UC-bf3b87a1-6faf-4821-aa30-8d0baebea7b0",
+		issuer: "Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	},
+	{
+		page: 2,
+		title: "React - The Complete Guide (incl Hooks, React Router, Redux)",
+		subtitle: "Certificate of Completion",
+		year: "2020",
+		link: "ude.my/UC-1717b593-efd9-4293-8113-b846869f9923",
+		issuer: "Academind by Udemy - Maximilian Schwarzmüller",
+		organization: "Udemy"
+	}
 ];
 
 export const languages: LanguageItem[] = [
@@ -368,7 +481,9 @@ export const projects: ProjectItem[] = [
 		title: '3D Modelling & Digitalization of Cultural Heritage content',
 		source: 'EUROPEANA',
 		sourceUrl: 'http://www.europeana.eu/',
-		description: '3D Modelling & Digitalization of Cultural Heritage content',
+		source2: 'APSIDA',
+		sourceUrl2: 'https://apsida.cut.ac.cy/collections/show/141',
+		description: '3D Models of Cultural Heritage content of Cyprus',
 	},
 ];
 

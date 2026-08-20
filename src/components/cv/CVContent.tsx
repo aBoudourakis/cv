@@ -11,9 +11,14 @@ import {
 	seminars,
 	skills,
 	// totalPages,
-	type ContactLink,
+	type ContactLink, certificates2,
 } from './cvData';
 import SkillEntry from "src/components/cv/CVSections/SkillEntry.tsx";
+import AcademicEntry from "src/components/cv/CVSections/AcademicEntry.tsx";
+import SeminarEntry from "src/components/cv/CVSections/SeminarEntry.tsx";
+import LanguageEntry from "src/components/cv/CVSections/LanguageEntry.tsx";
+import ProjectEntry from "src/components/cv/CVSections/ProjectEntry.tsx";
+import CertificateEntry from "src/components/cv/CVSections/CertificateEntry.tsx";
 
 /** Small inline icon set used for the contact list, kept dependency-free. */
 const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
@@ -214,86 +219,129 @@ export default function CVContent() {
 
 					<h3 className={styles.subsectionHeading}>Education</h3>
 					{education.map((item) => (
-						<article className={styles.entry} key={`${item.title}-${item.period}`}>
-							<div className={styles.entryHead}>
-								<span className={styles.entryPeriod}>{item.period}</span>
-								<h4 className={styles.entryTitle}>{item.title}</h4>
-							</div>
-							<p className={styles.entryOrg}>
-								{item.institutionUrl ? (
-									<a className={styles.entryLink} href={item.institutionUrl} target="_blank" rel="noreferrer">
-										{item.institution}
-									</a>
-								) : (
-									<span>{item.institution}</span>
-								)}
-							</p>
-							{item.thesis && <p className={styles.entryNote}>Thesis: {item.thesis}</p>}
-						</article>
+						<AcademicEntry
+							period={item.period}
+							title={item.title}
+							subtitle={item.thesis}
+							institution={item.institution}
+							institutionUrl={item.institutionUrl}
+							location={item.location}
+							key={`${item.title}-${item.period}`}
+						/>
+						// <article className={styles.entry} key={`${item.title}-${item.period}`}>
+						// 	<div className={styles.entryHead}>
+						// 		<div className={styles.entryPeriod}>{item.period}</div>
+						// 		<div className={styles.entryTitle}>{item.title}</div>
+						// 	</div>
+						// 	<p className={styles.entryOrg}>
+						// 		{item.institutionUrl ? (
+						// 			<a className={styles.entryLink} href={item.institutionUrl} target="_blank" rel="noreferrer">
+						// 				{item.institution}
+						// 			</a>
+						// 		) : (
+						// 			<span>{item.institution}</span>
+						// 		)}
+						// 	</p>
+						// 	{item.thesis && <p className={styles.entryNote}>Thesis: {item.thesis}</p>}
+						// </article>
 					))}
 
 					{certificates.map((item) => (
-						<article className={styles.entry} key={`${item.title}-${item.period}`}>
-							<div className={styles.entryHead}>
-								<span className={styles.entryPeriod}>{item.period}</span>
-								<h4 className={styles.entryTitle}>{item.title}</h4>
-							</div>
-							<p className={styles.entryOrg}>
-								{item.institutionUrl ? (
-									<a className={styles.entryLink} href={item.institutionUrl} target="_blank" rel="noreferrer">
-										{item.institution}
-									</a>
-								) : (
-									<span>{item.institution}</span>
-								)}
-							</p>
-						</article>
+						<AcademicEntry
+							period={item.period}
+							title={item.title}
+							subtitle={item.subtitle}
+							institution={item.institution}
+							institutionUrl={item.institutionUrl}
+							location={item.location}
+							key={`${item.title}-${item.period}`}
+						/>
+						// <article className={styles.entry} key={`${item.title}-${item.period}`}>
+						// 	<div className={styles.entryHead}>
+						// 		<span className={styles.entryPeriod}>{item.period}</span>
+						// 		<h4 className={styles.entryTitle}>{item.title}</h4>
+						// 	</div>
+						// 	<p className={styles.entryOrg}>
+						// 		{item.institutionUrl ? (
+						// 			<a className={styles.entryLink} href={item.institutionUrl} target="_blank" rel="noreferrer">
+						// 				{item.institution}
+						// 			</a>
+						// 		) : (
+						// 			<span>{item.institution}</span>
+						// 		)}
+						// 	</p>
+						// </article>
 					))}
 
 					<h3 className={styles.subsectionHeading}>Seminars</h3>
 					{seminars.map((item) => (
-						<article className={styles.entry} key={`${item.title}-${item.year}`}>
-							<div className={styles.entryHead}>
-								<span className={styles.entryPeriod}>{item.year}</span>
-								<h4 className={styles.entryTitle}>{item.title}</h4>
-							</div>
-							{item.description && <p className={styles.entryNote}>{item.description}</p>}
-						</article>
+						<SeminarEntry
+							key={`${item.title}-${item.year}`}
+							period={item.year}
+							title={item.title}
+							subtitle={item.description}
+						/>
 					))}
 
 					<h3 className={styles.subsectionHeading}>Languages</h3>
 					<ul className={styles.languageList}>
 						{languages.map((item) => (
-							<li className={styles.languageItem} key={item.language}>
-								<span className={styles.languageName}>{item.language}</span>
-								<span className={styles.languageLevel}>{item.level}</span>
-							</li>
+							<LanguageEntry
+								key={`lanuage-entry-key-${item.language}`}
+								language={item.language}
+								level={item.level}
+							/>
 						))}
 					</ul>
 				</section>
 
 				<section className={styles.cvSection}>
+					<h2 className={styles.sectionHeading}>Certificates & Awards</h2>
+					<div className={styles.skillList}>
+						{certificates2.map((certificate, index) => {
+							const isPageBreak = index > 0 && certificate.page !== skills[index - 1].page;
+							return (
+								<div className={styles.skillGroup} key={certificate.title}>
+									{isPageBreak && (
+										<span
+											className={styles.pageAnchor}
+											id={`cv-page-${certificate.page}`}
+											ref={registerPageAnchor(certificate.page)}
+											data-page-anchor={certificate.page}
+										/>
+									)}
+									<CertificateEntry
+										title={certificate.title}
+										subtitle={certificate.subtitle}
+										description={certificate.description}
+										year={certificate.year}
+										link={certificate.link}
+										issuer={certificate.issuer}
+										organization={certificate.organization}
+									/>
+								</div>
+							);
+						})}
+					</div>
+				</section>
+
+				<section className={styles.cvSection}>
 					<h2 className={styles.sectionHeading}>Projects</h2>
 					{projects.map((item) => (
-						<article className={styles.entry} key={item.title}>
-							<div className={styles.entryHead}>
-								<span className={styles.entryPeriod}>{item.period}</span>
-								<h3 className={styles.entryTitle}>{item.title}</h3>
-							</div>
-							<p className={styles.entryOrg}>
-								{item.sourceUrl ? (
-									<a className={styles.entryLink} href={item.sourceUrl} target="_blank" rel="noreferrer">
-										{item.source}
-									</a>
-								) : (
-									<span>{item.source}</span>
-								)}
-							</p>
-							<p className={styles.entryNote}>{item.description}</p>
-						</article>
+						<ProjectEntry
+							period={item.period}
+							title={item.title}
+							source={item.source}
+							source2={item.source2}
+							sourceUrl={item.sourceUrl}
+							sourceUrl2={item.sourceUrl2}
+							description={item.description}
+						/>
 					))}
 				</section>
 			</div>
 		</div>
 	);
 }
+
+// TODO: Add AWARDS (Huawei, certs of excellence, etc.) and other sections as needed.

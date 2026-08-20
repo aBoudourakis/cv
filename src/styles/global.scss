@@ -41,24 +41,29 @@
   --silver-light: #D9DEE7;
 
   --graphite: #171A21;
+  --slate: #1d2129;
 
   --off-white: #F7F8FA;
 
   // Theme variables
   --ab-text-color: var(--graphite);
+  --ab-text-color-faint: var(--slate);
   --ab-background-color: var(--silver-light);
   --ab-header-color: var(--royal-blue);
+  --ab-hyperlink-color: var(--royal-blue);
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
 body.dark-mode {
   // Theme variables
   --ab-text-color: var(--silver-light);
+  --ab-text-color-faint: var(--silver);
   --ab-background-color: var(--graphite);
   --ab-header-color: var(--silver-light);
+  --ab-hyperlink-color: var(--royal-blue-soft);
 }
 
 
