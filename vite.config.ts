@@ -6,7 +6,9 @@ import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
+	base: '/',
+
+	plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
