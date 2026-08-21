@@ -5,36 +5,48 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 // https://vite.dev/config/
-export default defineConfig({
-	base: '/',
+export default defineConfig(({ command }) => {
+	const isDev = command === 'serve'
 
-	plugins: [
-    react(),
-    babel({ presets: [reactCompilerPreset()] })
-  ],
+	return {
+		base: '/',
 
-	resolve: {
-		alias: {
-			src: path.resolve(import.meta.dirname, './src'),
-		},
-	},
-
-	server: {
-		host: 'dev.athos-cv.com',
-		port: 443,
-		strictPort: true,
-
-		allowedHosts: [
-			'dev.athos-cv.com',
+		plugins: [
+			react(),
+			babel({ presets: [reactCompilerPreset()] }),
 		],
 
-		https: {
-			key: fs.readFileSync(
-				path.resolve(import.meta.dirname, '.cert/dev.athos-cv.com-key.pem')
-			),
-			cert: fs.readFileSync(
-				path.resolve(import.meta.dirname, '.cert/dev.athos-cv.com.pem')
-			),
+		resolve: {
+			alias: {
+				src: path.resolve(import.meta.dirname, './src'),
+			},
 		},
-	},
+
+		server: isDev
+			? {
+				host: 'dev.athos-cv.com',
+				port: 443,
+				strictPort: true,
+
+				allowedHosts: [
+					'dev.athos-cv.com',
+				],
+
+				https: {
+					key: fs.readFileSync(
+						path.resolve(
+							import.meta.dirname,
+							'.cert/dev.athos-cv.com-key.pem',
+						),
+					),
+					cert: fs.readFileSync(
+						path.resolve(
+							import.meta.dirname,
+							'.cert/dev.athos-cv.com.pem',
+						),
+					),
+				},
+			}
+			: undefined,
+	}
 })
