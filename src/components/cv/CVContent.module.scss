@@ -1,13 +1,24 @@
 .CVContent {
   position: relative;
   display: flex;
-  width: min(210mm, 100vw);
-  max-width: 100%;
+  //width: min(210mm, 100vw);
+  width: 100%;
+  //max-width: 100%;
+  max-width: 420mm;
   //height: 100vh;
   //height: 100dvh;
   height: 100%;
   margin: 0 auto;
+  //margin: 0;
   color: var(--ab-text-color);
+
+  /* Reads as a virtual sheet of paper resting on the ambient page background. */
+  background: var(--ab-background-color);
+  //box-shadow:
+  //  0 0 0 1px var(--border-color),
+  //  0 12px 40px var(--shadow-color);
+  //border-left: 1px solid var(--ab-text-color-faint);
+  //border-right: 1px solid var(--ab-text-color-faint);
 }
 
 /* Floating page navigation, one anchor button per original PDF page. */
@@ -191,6 +202,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
+  text-align: start;
   color: var(--royal-blue-soft);
   white-space: nowrap;
 }
