@@ -1,34 +1,93 @@
-# React + TypeScript + Vite
+# Athos CV
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Personal CV and portfolio website for **Athinodoros Boudourakis**, a front-end engineer based in Limassol, Cyprus.
 
-Currently, two official plugins are available:
+The site presents professional experience, technical skills, education, certifications, languages, and selected projects in a responsive web CV. It also includes a PDF archive of earlier work samples and links to external professional profiles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Highlights
 
-## React Compiler
+- Interactive CV with work experience, skills, academics, certificates, awards, and projects
+- Selected work samples embedded from a portfolio PDF
+- Links to LinkedIn, GitHub, project websites, and certificate documents
+- Responsive layout with light and dark theme support
+- Client-side routing with React Router
+- Automated production deployment to GitHub Pages
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Application routes
 
-Note: This will impact Vite dev & build performances.
+| Route | Description |
+| --- | --- |
+| `/` | Curriculum vitae |
+| `/portfolio` | Selected work samples up to 2017 |
+| `/contact` | Contact page |
 
-## Expanding the Oxlint configuration
+## Technology
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- React 19
+- TypeScript
+- Vite
+- React Router
+- SCSS modules
+- React Compiler
+- Oxlint
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Getting started
+
+### Prerequisites
+
+- Node.js 22 or later
+- npm
+
+### Install dependencies
+
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Start the development server
+
+```bash
+npm run dev
+```
+
+The development server uses the local HTTPS configuration for `dev.athos-cv.com`. Ensure the certificates in `.cert/` are available when running the configured server.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+### Lint the project
+
+```bash
+npm run lint
+```
+
+## Project structure
+
+```text
+src/
+├── components/
+│   ├── core/       # Navigation, footer, and theme controls
+│   └── cv/         # CV content, data, and section components
+├── layouts/        # Shared application layout
+├── pages/          # CV, portfolio, and contact routes
+├── styles/         # Global styles and visual effects
+└── assets/         # Fonts, images, and the source CV PDF
+public/
+├── certificates/   # Certificate documents
+└── *.pdf           # Portfolio work samples
+```
+
+The CV content is maintained as structured data in `src/components/cv/cvData.ts`, keeping the presentation components separate from the professional profile content.
+
+## Deployment
+
+Pushes to the `main` branch build the Vite application and deploy the generated `dist/` directory to GitHub Pages through the workflow in `.github/workflows/deploy.yml`.
