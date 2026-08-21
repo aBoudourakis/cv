@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
-import Contact from './pages/Contact/Contact.tsx'
 import CV from './pages/CV/CV.tsx'
 import Portfolio from './pages/Portfolio/Portfolio.tsx'
 
@@ -14,15 +13,17 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path: 'CV',
+        Component: CV,
+      },
+      {
+        index: true,
+        path: 'cv',
         Component: CV,
       },
       {
         path: 'portfolio',
         Component: Portfolio,
-      },
-      {
-        path: 'contact',
-        Component: Contact,
       },
       {
         path: '*',
