@@ -1,0 +1,19 @@
+.Portfolio {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.PdfViewer {
+  width: 100%;
+  height: calc(100vh - 120px);
+  border: 0;
+}
+
+.Disclaimer {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ab-text-color-faint);
+  font-style: italic;
+}

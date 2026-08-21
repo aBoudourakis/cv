@@ -176,10 +176,14 @@ export default function CVContent() {
 											<li className={styles.bulletItem}
 											    key={`${item.company}-experience-bullet-${experienceBulletIndex}`}>
 												{typeof bullet === 'string' ? bullet : bullet.name ? (
-													<a className={styles.entryLink} href={bullet.url} target="_blank" rel="noreferrer"
-													   title={bullet.description}>
-														{bullet.name}
-													</a>
+													<>
+														{bullet.url.includes('youtube') &&
+                                <span style={{fontSize: '0.9em', marginRight: '0.35rem'}}>▶</span>}
+														<a className={styles.entryLink} href={bullet.url} target="_blank" rel="noreferrer"
+														   title={bullet.description}>
+															{bullet.name}
+														</a>
+													</>
 												) : (
 													<span>{bullet.url}</span>
 												)}

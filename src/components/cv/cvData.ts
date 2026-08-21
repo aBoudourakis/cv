@@ -9,6 +9,8 @@ export interface ContactLink {
 	icon: 'phone' | 'email' | 'linkedin' | 'portfolio' | 'github';
 }
 
+export type BulletItem = string | { name: string; url: string; description: string };
+
 export interface ExperienceItem {
 	page: number;
 	period: string;
@@ -16,7 +18,7 @@ export interface ExperienceItem {
 	company: string;
 	companyUrl?: string;
 	location: string;
-	bullets: string[] | { name: string; url: string; description: string }[];
+	bullets: BulletItem[];
 }
 
 export interface SkillCategory {
@@ -139,6 +141,7 @@ export const experience: ExperienceItem[] = [
 			'Carried out product gamification features design',
 			'Led the Graphics Design team',
 			'Co-directed a Cinematic trailer for the application',
+			{name: 'Watch Cinematic Trailer', url: 'https://www.youtube.com/watch?v=-cYUbAW83so', description: 'YouTube link'},
 			'Built UI Elements for graphics and audio interface',
 			'Product & content marketing regulation',
 			'Acted as a content writer for microtransaction features',
@@ -509,6 +512,13 @@ export const projects: ProjectItem[] = [
 		source2: 'APSIDA',
 		sourceUrl2: 'https://apsida.cut.ac.cy/collections/show/141',
 		description: '3D Models of Cultural Heritage content of Cyprus',
+	},
+	{
+		page: 2,
+		period: '2015',
+		title: 'Complete Management System - Fasouri Watermania Waterpark',
+		source: 'Fasouri Watermania Waterpark',
+		description: 'Staff management - Stock Control - Machinery - Maintenance Management (Mobile First - Employees Tablets)',
 	},
 ];
 
