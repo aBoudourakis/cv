@@ -90,7 +90,7 @@ export const totalPages = 2;
 
 export const header = {
 	name: 'Athinodoros Boudourakis',
-	title: 'Front-End Developer',
+	title: 'Front-End Engineer',
 	tagline: 'ReactJS - VueJS - Flutter',
 	page: 1,
 };

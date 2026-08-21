@@ -61,6 +61,9 @@
   --background-highlight: rgba(255, 255, 255, 0.85);
   --border-color: rgba(23, 26, 33, 0.08);
   --shadow-color: rgba(23, 43, 122, 0.14);
+
+  position: relative;
+  z-index: 1;
 }
 
 * {
@@ -88,6 +91,7 @@ body.dark-mode {
 
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100vh;
   font-family: "Inter", sans-serif;
@@ -118,28 +122,71 @@ body {
 }
 
 body.dark-mode {
-  background:
-          radial-gradient(
-                  circle at 15% 20%,
-                  rgb(55 95 220 / 22%) 0,
-                  transparent 34%
-          ),
-          radial-gradient(
-                  circle at 85% 75%,
-                  rgb(190 145 45 / 14%) 0,
-                  transparent 30%
-          ),
-          radial-gradient(
-                  ellipse at 65% 5%,
-                  rgb(160 170 195 / 10%) 0,
-                  transparent 38%
-          ),
-          linear-gradient(
-                  145deg,
-                  rgb(9 13 23) 0%,
-                  rgb(17 23 36) 48%,
-                  rgb(7 10 18) 100%
-          );
+  position: relative;
+  overflow-x: hidden;
+  background: #10151f;
+
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 30;
+
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+    opacity: 0.008;
+    mix-blend-mode: soft-light;
+  }
+}
+
+.BackgroundEffects {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.BlueGlow,
+.SilverGlow,
+.GoldGlow {
+  position: absolute;
+  border-radius: 50%;
+  transform: translateZ(0);
+}
+
+.BlueGlow {
+  width: 34vw;
+  height: 58vh;
+
+  left: -18vw;
+  top: 10vh;
+
+  background: rgb(65 105 230 / 14%);
+  filter: blur(190px);
+}
+
+.SilverGlow {
+  width: 28vw;
+  height: 42vh;
+
+  right: -18vw;
+  top: -16vh;
+
+  background: rgb(190 200 220 / 7%);
+  filter: blur(210px);
+}
+
+.GoldGlow {
+  width: 34vw;
+  height: 58vh;
+
+  right: -20vw;
+  bottom: -4vh;
+
+  background: rgb(230 185 75 / 9%);
+  filter: blur(200px);
 }
 
 .cv-title {

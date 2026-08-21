@@ -5,10 +5,17 @@ import DesktopLayout from "src/layouts/desktopLayout.tsx";
 
 function App() {
   return (
+    <>
+      <div className={'BackgroundEffects'}>
+        <div className={'BlueGlow'} />
+        <div className={'SilverGlow'} />
+        <div className={'GoldGlow'} />
+      </div>
     <div className="app-shell">
       <DesktopLayout />
       <ThemeSwitch />
     </div>
+    </>
   )
 }
 
