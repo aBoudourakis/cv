@@ -13,8 +13,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to="/CV" replace />,
+      },
+      {
         path: 'CV',
         Component: CV,
+      },
+      {
+        path: 'cv',
+        element: <Navigate to="/CV" replace />,
       },
       {
         path: 'portfolio',
