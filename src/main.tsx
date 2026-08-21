@@ -17,11 +17,6 @@ const router = createBrowserRouter([
         Component: CV,
       },
       {
-        index: true,
-        path: 'cv',
-        Component: CV,
-      },
-      {
         path: 'portfolio',
         Component: Portfolio,
       },
