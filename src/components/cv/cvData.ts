@@ -405,6 +405,7 @@ export const certificates2: CertificateItem[] = [
 		subtitle: "Certificate",
 		description: "Awarded in recognition of outstanding potential, dedication, and commitment to excellence",
 		year: "2025",
+		link: '/certificates/AthinodorosBoudourakis_Huawei_Award_20250312162504.pdf',
 		issuer: "Huawei Technologies (Cyprus) Co. Ltd",
 		organization: "Huawei Technologies (Cyprus) Co. Ltd"
 	},
@@ -432,6 +433,7 @@ export const certificates2: CertificateItem[] = [
 		subtitle: "Microsoft Certificate of Achievement",
 		description: "Successfully completed the Microsoft Official Course. Course duration: 1 day",
 		year: "2022",
+		link: '/certificates/AthinodorosBoudourakisAI-900T00.pdf',
 		issuer: "George Lialiaris",
 		organization: "Microsoft"
 	},
@@ -450,7 +452,8 @@ export const certificates2: CertificateItem[] = [
 		subtitle: "Microsoft Certified",
 		description: "Successfully completed the requirements of Azure Data Fundamentals",
 		year: "2022",
-		link: "verify.certiport.com: wYcQK-2FMz",
+		// link: "verify.certiport.com: wYcQK-2FMz",
+		link: "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=456&cvid=8604R9cIWbvURhlkTAKoew==",
 		issuer: "Satya Nadella",
 		organization: "Microsoft"
 	},

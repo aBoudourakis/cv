@@ -26,9 +26,17 @@ export default function CertificateEntry({
 			<div className={styles.Content}>
 				<div className={styles.Title}>
 					{link && link.length > 0 ? (
-						<a href={link.startsWith('http://') || link.startsWith('https://')
-							? link
-							: `https://${link}`} target="_blank">
+						<a
+							href={
+								link.startsWith('http://') ||
+								link.startsWith('https://') ||
+								link.startsWith('/')
+									? link
+									: `https://${link}`
+							}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<span style={{marginLeft: '-24px'}}>🔗</span> {title}
 						</a>
 					) : (

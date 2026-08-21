@@ -255,12 +255,6 @@
 }
 
 /* ---------- Skills ---------- */
-.skillGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px 32px;
-}
-
 .skillList {
   display: flex;
   flex-wrap: wrap;
@@ -268,36 +262,19 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* Column layout wrapping each Technical Skills category (see SkillEntry/CVSections.module.scss). */
+.skillGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
 
 .skillGroup {
   width: 100%;
   position: relative;
-}
-
-.skillGroupTitle {
-  margin: 0 0 8px;
-  font-family: var(--font-body), sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ab-header-color);
-}
-
-.skillList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.skillItem {
-  //padding: 3px 10px;
-  //border-radius: 999px;
-  //border: 1px solid var(--silver);
-  font-size: 0.78rem;
-  color: var(--ab-text-color);
 }
 
 /* ========== Academics ========== */
@@ -353,10 +330,6 @@
   .CVContent {
     width: 100vw;
   }
-
-  .skillGrid {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  }
 }
 
 /* ---------- Responsive: mobile phones ---------- */
@@ -404,8 +377,3 @@
   }
 }
 
-@media (max-width: 480px) and (orientation: portrait) {
-  .skillGrid {
-    grid-template-columns: 1fr;
-  }
-}

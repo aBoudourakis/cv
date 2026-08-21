@@ -194,7 +194,7 @@ export default function CVContent() {
 
 				<section className={styles.cvSection}>
 					<h2 className={styles.sectionHeading}>Technical Skills</h2>
-					<div className={styles.skillList}>
+					<div className={styles.skillGroups}>
 						{skills.map((category, index) => {
 							const isPageBreak = index > 0 && category.page !== skills[index - 1].page;
 							return (

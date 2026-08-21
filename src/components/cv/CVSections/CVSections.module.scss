@@ -1,39 +1,61 @@
-.Skill {
+.SkillGroup {
+  scroll-margin-top: 16px;
+}
+
+.SkillGroupHeader {
   display: flex;
-  //flex-direction: row;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: start;
-  justify-content: start;
-  gap: 4px 8px;
+  align-items: center;
+  gap: 9px;
 
-  .Label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+  margin-bottom: 7px;
+}
 
-  .Content {
-    font-size: 12px;
-    color: var(--royal-blue-soft);
-  }
+.SkillAccent {
+  flex-shrink: 0;
 
-  .Items {
-    font-size: 12px;
+  width: 2px;
+  height: 16px;
 
-    .Item {
-      white-space: nowrap;
+  background-color: var(--gold);
+}
 
-      &:not(:first-child)::before {
-        content: '·';
-        font-size: 18px;
-        font-weight: bold;
-        margin: 0 8px;
-        position: relative;
-        top: 2px;
-      }
-    }
-  }
+.SkillGroupTitle {
+  margin: 0;
+
+  //color: var(--royal-blue-deep);
+  color: var(--royal-blue-soft);
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.SkillList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding-left: 11px;
+
+  color: var(--ab-text-color);
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.SkillItem {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.SkillSeparator {
+  margin: 0 8px;
+
+  color: var(--gold);
+  font-size: 9px;
+  line-height: 1;
 }
 
 /* ========== Academics ========== */
