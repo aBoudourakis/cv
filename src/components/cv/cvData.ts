@@ -20,7 +20,8 @@ export interface ExperienceItem {
 }
 
 export interface SkillCategory {
-	page: number;
+	page?: number;
+	id?: string;
 	label: string;
 	items: string[];
 }
@@ -161,16 +162,17 @@ export const experience: ExperienceItem[] = [
 export const skills: SkillCategory[] = [
 	{
 		page: 1,
-		label: 'Frontend Development',
+		id: 'frontend-engineering',
+		label: 'Frontend Engineering',
 		items: [
-			'HTML5',
-			'CSS / SCSS',
 			'JavaScript',
 			'TypeScript',
 			'React',
 			'Next.js',
 			'Vue.js',
 			'Redux Toolkit',
+			'HTML5',
+			'CSS / SCSS',
 			'MUI',
 			'AG Grid',
 			'Fluent UI',
@@ -181,24 +183,49 @@ export const skills: SkillCategory[] = [
 	},
 	{
 		page: 1,
-		label: 'Architecture & Web Technologies',
+		id: 'frontend-architecture',
+		label: 'Frontend Architecture',
 		items: [
-			'REST APIs',
-			'Server-Sent Events (SSE)',
-			'WebSockets',
-			'Frontend Architecture',
-			'State Management',
 			'Component Architecture',
-			'Frontend Performance Optimisation',
-			'OAuth / OpenID Connect',
-			'Keycloak',
-			'Accessibility',
+			'State Management',
+			'Design Systems',
 			'Responsive Design',
+			'Accessibility',
+			'Frontend Performance Optimisation',
+			'Cross-browser Development',
 		],
 	},
 	{
 		page: 1,
-		label: 'Development & Tooling',
+		id: 'web-application-technologies',
+		label: 'Web & Application Technologies',
+		items: [
+			'REST APIs',
+			'Server-Sent Events (SSE)',
+			'WebSockets',
+			'Real-time Applications',
+			'OAuth / OpenID Connect',
+			'Keycloak',
+		],
+	},
+	{
+		page: 1,
+		id: 'engineering-quality',
+		label: 'Engineering Quality',
+		items: [
+			'Jest',
+			'Vitest',
+			'React Testing Library',
+			'Unit Testing',
+			'Integration Testing',
+			'Code Review',
+			'ESLint',
+		],
+	},
+	{
+		page: 1,
+		id: 'development-delivery',
+		label: 'Development & Delivery',
 		items: [
 			'Git',
 			'GitHub',
@@ -207,40 +234,44 @@ export const skills: SkillCategory[] = [
 			'GitHub Actions',
 			'npm',
 			'Docker',
+			'Browser DevTools',
 			'WebStorm',
 			'VS Code',
-			'Browser DevTools',
-			'ESLint',
 		],
 	},
 	{
 		page: 1,
-		label: 'Testing & Quality',
-		items: [
-			'Jest',
-			'Vitest',
-			'React Testing Library',
-			'Unit Testing',
-			'Integration Testing',
-			'Code Review',
-		],
-	},
-	{
-		page: 1,
-		label: 'AI-Assisted Development',
+		id: 'ai-assisted-engineering',
+		label: 'AI-Assisted Engineering',
 		items: [
 			'GitHub Copilot',
 			'Claude Code',
 			'ChatGPT / Codex',
 			'Ollama',
 			'Local LLM Workflows',
-			'AI-assisted Refactoring & Code Review',
+			'AI-assisted Refactoring',
+			'AI-assisted Code Review',
 		],
 	},
-
 	{
-		page: 2,
-		label: 'Additional Technologies',
+		page: 1,
+		id: 'ui-ux-visual-design',
+		label: 'UI / UX & Visual Design',
+		items: [
+			'UI / UX Design',
+			'Interface Design',
+			'Visual Hierarchy',
+			'Interaction Design',
+			'Prototyping',
+			'Adobe XD',
+			'Adobe Photoshop',
+			'Adobe Illustrator',
+		],
+	},
+	{
+		page: 1,
+		id: 'additional-development',
+		label: 'Additional Development',
 		items: [
 			'Python',
 			'PHP',
@@ -252,7 +283,8 @@ export const skills: SkillCategory[] = [
 		],
 	},
 	{
-		page: 2,
+		page: 1,
+		id: 'machine-learning-data',
 		label: 'Machine Learning & Data',
 		items: [
 			'PyTorch',
@@ -262,30 +294,19 @@ export const skills: SkillCategory[] = [
 		],
 	},
 	{
-		page: 2,
-		label: 'UI / UX & Design Systems',
-		items: [
-			'UI / UX Design',
-			'Design Systems',
-			'Responsive Design',
-			'Accessibility',
-			'Adobe XD',
-			'Adobe Photoshop',
-			'Adobe Illustrator',
-			'AutoCAD',
-		],
-	},
-	{
-		page: 2,
-		label: '3D Design & Animation',
+		page: 1,
+		id: '3d-spatial-design',
+		label: '3D & Spatial Design',
 		items: [
 			'Autodesk Maya',
 			'Blender',
 			'ZBrush',
+			'AutoCAD',
 		],
 	},
 	{
-		page: 2,
+		page: 1,
+		id: 'multimedia',
 		label: 'Multimedia',
 		items: [
 			'Adobe Premiere Pro',
@@ -295,8 +316,9 @@ export const skills: SkillCategory[] = [
 		],
 	},
 	{
-		page: 2,
-		label: 'Platforms & Environments',
+		page: 1,
+		id: 'platforms',
+		label: 'Platforms',
 		items: [
 			'Windows',
 			'macOS',

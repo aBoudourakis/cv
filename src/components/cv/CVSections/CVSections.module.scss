@@ -99,8 +99,9 @@
   display: grid;
   grid-template-columns: 2fr 7fr;
   margin-bottom: 16px;
+  width: 100%;
 
-  .Title {
+  .Year {
     font-family: var(--font-body), sans-serif;
     font-size: 0.8rem;
     font-weight: 600;
@@ -115,13 +116,24 @@
     align-items: start;
     justify-content: start;
 
-    .Year {
+    .Title {
       font-family: var(--font-body), sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 600;
       text-align: start;
-      color: var(--ab-text-color);
+      color: var(--royal-blue-soft);
+      white-space: nowrap;
+
+      a {
+        color: var(--ab-hyperlink-color);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
+
 
     .Subtitle {
       font-family: var(--font-body), sans-serif;
@@ -130,6 +142,17 @@
       font-weight: 400;
       text-align: start;
       color: var(--ab-text-color-faint);
+    }
+
+    .Link {
+      a {
+        color: var(--ab-hyperlink-color);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     .Institution {

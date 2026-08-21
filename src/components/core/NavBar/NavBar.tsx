@@ -1,26 +1,41 @@
-import {NavLink} from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import styles from './NavBar.module.scss';
 
 export default function NavBar() {
 	/** CONSTS **/
 	const navItems = [
-		{name: 'CV', href: '/'},
-		{name: 'Portfolio', href: '/portfolio'},
+		{ name: 'CV', href: '/' },
+		{ name: 'Portfolio', href: '/portfolio' },
 	];
 
 	/** RENDER **/
 	return (
-		<header className="site-header">
-			<NavLink className="brand-link" to="/">
+		<header className={styles.SiteHeader}>
+			<NavLink className={styles.BrandLink} to="/">
 				Athinodoros
-				<img src="images/Monogram_favicon_512.png" alt="Athos CV Logo" height={'48px'}/>
+
+				<img
+					className={styles.BrandLogo}
+					src="/images/Monogram_favicon_512.png"
+					alt="Athos CV Logo"
+				/>
+
 				Boudourakis
 			</NavLink>
-			<nav className="site-nav" aria-label="Main navigation">
-				{
-					navItems.map((item) => (
-						<NavLink key={item.name} to={item.href}>{item.name}</NavLink>
-					))
-				}
+
+			<nav className={styles.SiteNav} aria-label="Main navigation">
+				{navItems.map((item) => (
+					<NavLink
+						key={item.href}
+						to={item.href}
+						end={item.href === '/'}
+						className={({ isActive }) =>
+							`${styles.NavItem} ${isActive ? styles.Active : ''}`
+						}
+					>
+						{item.name}
+					</NavLink>
+				))}
 			</nav>
 		</header>
 	);

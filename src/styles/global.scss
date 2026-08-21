@@ -51,6 +51,9 @@
   --ab-background-color: var(--silver-light);
   --ab-header-color: var(--royal-blue);
   --ab-hyperlink-color: var(--royal-blue);
+
+  // Scoped variables
+  --ab-title-color: var(--royal-blue);
 }
 
 * {
@@ -64,6 +67,9 @@ body.dark-mode {
   --ab-background-color: var(--graphite);
   --ab-header-color: var(--silver-light);
   --ab-hyperlink-color: var(--royal-blue-soft);
+
+  // Scoped variables
+    --ab-title-color: var(--silver-light);
 }
 
 

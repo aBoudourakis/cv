@@ -203,7 +203,7 @@ export default function CVContent() {
 										<span
 											className={styles.pageAnchor}
 											id={`cv-page-${category.page}`}
-											ref={registerPageAnchor(category.page)}
+											ref={registerPageAnchor(category.page || 0)}
 											data-page-anchor={category.page}
 										/>
 									)}
@@ -299,9 +299,9 @@ export default function CVContent() {
 					<h2 className={styles.sectionHeading}>Certificates & Awards</h2>
 					<div className={styles.skillList}>
 						{certificates2.map((certificate, index) => {
-							const isPageBreak = index > 0 && certificate.page !== skills[index - 1].page;
+							const isPageBreak = index > 0 && certificate.page !== certificates2[index - 1].page;
 							return (
-								<div className={styles.skillGroup} key={certificate.title}>
+								<>
 									{isPageBreak && (
 										<span
 											className={styles.pageAnchor}
@@ -319,7 +319,7 @@ export default function CVContent() {
 										issuer={certificate.issuer}
 										organization={certificate.organization}
 									/>
-								</div>
+								</>
 							);
 						})}
 					</div>

@@ -12,23 +12,34 @@ interface ICertificateEntryProps {
 }
 
 export default function CertificateEntry({
-	title,
-  subtitle,
-  description,
-	year,
-  link,
-  issuer,
-  organization
-}: ICertificateEntryProps) {
+	                                         title,
+	                                         subtitle,
+	                                         description,
+	                                         year,
+	                                         link,
+	                                         issuer,
+	                                         organization
+                                         }: ICertificateEntryProps) {
 	return (
 		<article className={styles.CertificateEntry}>
-			<div className={styles.Title}>{title}</div>
-			{subtitle && <div className={styles.Subtitle}>{subtitle}</div>}
-			{description && <div className={styles.Description}>{description}</div>}
-			{year && <div className={styles.Year}>{year}</div>}
-			{link && <div className={styles.Link}>{link}</div>}
-			{issuer && <div className={styles.Issuer}>{issuer}</div>}
-			{organization && <div className={styles.Organization}>{organization}</div>}
+			<div className={styles.Year}>{year}</div>
+			<div className={styles.Content}>
+				<div className={styles.Title}>
+					{link && link.length > 0 ? (
+						<a href={link.startsWith('http://') || link.startsWith('https://')
+							? link
+							: `https://${link}`} target="_blank">
+							<span style={{marginLeft: '-24px'}}>🔗</span> {title}
+						</a>
+					) : (
+						title
+					)}
+				</div>
+				{subtitle && <div className={styles.Subtitle}>{subtitle}</div>}
+				{description && <div className={styles.Description}>{description}</div>}
+				{issuer && <div className={styles.Issuer}>{issuer}</div>}
+				{organization && <div className={styles.Organization}>{organization}</div>}
+			</div>
 		</article>
 	);
 }
