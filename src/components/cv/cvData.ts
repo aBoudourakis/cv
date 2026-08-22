@@ -106,7 +106,7 @@ export const contactLinks: ContactLink[] = [
 	// { label: '+357 96452647', icon: 'phone' },
 	{ label: 'a.boudourakis@gmail.com', href: 'mailto:a.boudourakis@gmail.com', icon: 'email' },
 	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/athinodoros-boudourakis-25498041', icon: 'linkedin' },
-	{ label: 'Portfolio', href: 'https://athos-cv.web.app/Portfolio', icon: 'portfolio' },
+	{ label: 'Portfolio', href: '/portfolio', icon: 'portfolio' },
 	{ label: 'GitHub', href: 'https://github.com/aBoudourakis', icon: 'github' },
 ];
 
