@@ -94,7 +94,7 @@ export const totalPages = 2;
 export const header = {
 	name: 'Athinodoros Boudourakis',
 	title: 'Front-End Software Engineer',
-	tagline: 'ReactJS - VueJS - Flutter',
+	tagline: 'React · Vue.js · Flutter',
 	summary:
 		'Front-end engineer with 10+ years building production React and Vue applications across fintech, ' +
 		'shipping and cybersecurity — focused on component architecture, performance, and accessible, ' +
@@ -183,11 +183,11 @@ export const skills: SkillCategory[] = [
 			'Redux Toolkit',
 			'HTML5',
 			'CSS / SCSS',
-			'MUI',
+			'Material UI (MUI)',
 			'AG Grid',
 			'Fluent UI',
 			'Vuetify',
-			'Quasar',
+			'Quasar Framework',
 			'Vite',
 		],
 	},
@@ -208,13 +208,13 @@ export const skills: SkillCategory[] = [
 	{
 		page: 1,
 		id: 'web-application-technologies',
-		label: 'Web & Application Technologies',
+		label: 'Frontend Architecture & Web Engineering',
 		items: [
 			'REST APIs',
 			'Server-Sent Events (SSE)',
-			'WebSockets',
+			'WebSocket',
 			'Real-time Applications',
-			'OAuth / OpenID Connect',
+			'OAuth 2.0 / OpenID Connect (OIDC)',
 			'Keycloak',
 		],
 	},
@@ -256,7 +256,7 @@ export const skills: SkillCategory[] = [
 		items: [
 			'GitHub Copilot',
 			'Claude Code',
-			'ChatGPT / Codex',
+			'ChatGPT / OpenAI Codex',
 			'Ollama',
 			'Local LLM Workflows',
 			'AI-assisted Refactoring',
