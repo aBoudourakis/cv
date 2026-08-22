@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Athinodoros Boudourakis CV</title>
+    <!--
+      GitHub Pages is a static host with no server-side rewrites, so a direct
+      request to a client-side route (e.g. /CV, /Portfolio) 404s. This encodes
+      the requested path into a query string and redirects to the SPA's index,
+      which restores the original URL via history.replaceState (see index.html).
+      https://github.com/rafgraph/spa-github-pages
+    -->
+    <script>
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/?/' +
+        l.pathname.slice(1).replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
