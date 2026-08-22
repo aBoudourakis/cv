@@ -171,7 +171,7 @@
 /* On the narrowest phones the full wordmark no longer fits comfortably next
    to CV / Portfolio navigation — fall back to the monogram alone rather than
    truncating the name or letting it wrap. */
-@media (max-width: 380px) {
+@media (max-width: 460px) {
   .BrandWordmark {
     display: none;
   }
