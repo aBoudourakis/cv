@@ -504,11 +504,11 @@ export const projects: ProjectItem[] = [
 		sourceUrl2: 'https://www.facebook.com/groups/872505479922591',
 		source3: 'Photographic Footage',
 		sourceUrl3: '/covid-shield-cyprus',
-		description: 'One of the first 10 volunteers who helped form a grassroots 3D-printing initiative during the initial COVID-19 outbreak in Cyprus, which later expanded to around 100 contributors producing protective face shields for hospitals, clinics and medical professionals.',
+		description: 'One of the first 10 volunteers who helped form a grassroots 3D-printing initiative during the initial COVID-19 outbreak in Cyprus, which later expanded to more than 70 contributors producing protective face shields for hospitals, clinics and medical professionals.',
 		bullets: [
 			'One of the first 10 volunteers who helped form a grassroots 3D-printing initiative during the initial COVID-19 outbreak in Cyprus.',
 			'Contributed to the production of protective face shields for hospitals, clinics and medical professionals.',
-			'Supported an initiative that later expanded to around 100 contributors.',
+			'Supported an initiative that later expanded to more than 70 contributors.',
 			'Designed the group’s logo used in communication channels.'
 		]
 	},
