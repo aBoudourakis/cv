@@ -1,30 +1,36 @@
 .theme-switch {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  display: inline-flex;
 }
 
 .theme-switch-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  border: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md, 8px);
   background: transparent;
-  color: inherit;
+  color: var(--ab-text-color-faint);
   cursor: pointer;
-  opacity: 0.7;
-  transition: all ease-in-out 0.2s;
+  opacity: 0.85;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 
   &:hover {
-    transform: scale(1.1);
-    opacity: 1;
+    color: var(--ab-hyperlink-color);
+    background: var(--ab-divider-color);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--royal-blue-soft);
+    box-shadow: 0 0 0 2px var(--royal-blue-soft);
   }
 }
 
 .theme-switch-button svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;

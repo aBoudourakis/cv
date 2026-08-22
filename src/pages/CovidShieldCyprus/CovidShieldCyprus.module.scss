@@ -1,0 +1,143 @@
+/*
+ * Intentionally neutral, unbranded page styling — does not reuse the main
+ * application's royal-blue/gold palette, gradients, or typography system.
+ * White/near-white surface, near-black text, plain system sans-serif.
+ */
+
+.CovidShieldCyprus {
+  width: 100%;
+  min-height: 100%;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* ---------- Introduction ---------- */
+.Intro {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 48px 24px 40px;
+}
+
+.HeaderRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
+
+.Logo {
+  display: block;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.Heading {
+  min-width: 0;
+}
+
+.Title {
+  margin: 0 0 6px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #111111;
+}
+
+.Subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #555555;
+}
+
+.Description {
+  min-width: 0;
+}
+
+.Paragraph {
+  //max-width: 60ch;
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+  color: #333333;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* ---------- Gallery ---------- */
+/* CSS-columns masonry: preserves each photo's natural aspect ratio without
+   cropping or uniform card heights. */
+.Gallery {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 24px auto 0;
+  padding: 0 8px 56px;
+  column-count: 1;
+  column-gap: 8px;
+}
+
+.GalleryItem {
+  margin: 0 0 8px;
+  break-inside: avoid;
+}
+
+.GalleryImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .GalleryImage:hover {
+    transform: scale(1.01);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 640px) {
+  .Intro {
+    padding: 72px 32px 40px;
+  }
+
+  .HeaderRow {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .Gallery {
+    column-count: 2;
+    column-gap: 12px;
+    padding: 0 16px 64px;
+  }
+
+  .GalleryItem {
+    margin-bottom: 12px;
+  }
+}
+
+@media (min-width: 900px) {
+  .Gallery {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 1400px) {
+  .Gallery {
+    column-count: 4;
+  }
+}

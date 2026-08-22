@@ -1,4 +1,5 @@
 import styles from './CVSections.module.scss';
+import {ExternalLinkIcon} from "src/components/core/Icons/Icons.tsx";
 
 interface ICertificateEntryProps {
 	page?: number;
@@ -37,7 +38,8 @@ export default function CertificateEntry({
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							<span style={{marginLeft: '-24px'}}>🔗</span> {title}
+							{title}
+							<ExternalLinkIcon/>
 						</a>
 					) : (
 						title
