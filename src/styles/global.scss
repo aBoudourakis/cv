@@ -77,6 +77,11 @@
   // Readable royal-blue tone for role/subtitle text (meets AA contrast; distinct from link colour).
   --ab-subtitle-color: var(--royal-blue-deep);
 
+  // Scrollbar colors are explicit so Chromium does not select a dark native style in light mode.
+  --scrollbar-track: #E7EAF0;
+  --scrollbar-thumb: #AEB7C8;
+  --scrollbar-thumb-hover: #8995AB;
+
   // Scoped variables
   --ab-title-color: var(--royal-blue-deep);
 
@@ -93,9 +98,32 @@
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border: 3px solid var(--scrollbar-track);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 body.dark-mode {
+  color-scheme: dark;
+
   // Theme variables
   --ab-text-color: var(--silver-light);
   --ab-text-color-faint: var(--silver);
@@ -105,6 +133,9 @@ body.dark-mode {
   --ab-divider-color: rgba(217, 222, 231, 0.16);
   --ab-accent-color: var(--gold-light);
   --ab-subtitle-color: var(--royal-blue-bright);
+  --scrollbar-track: #20283A;
+  --scrollbar-thumb: #56627A;
+  --scrollbar-thumb-hover: #70809E;
 
   // Scoped variables
     --ab-title-color: var(--silver-light);
