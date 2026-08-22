@@ -412,7 +412,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "Cyprus Seeds for the Future Scholarship 2024",
-		subtitle: "Certificate",
+		subtitle: "Award",
 		description: "Awarded in recognition of outstanding potential, dedication, and commitment to excellence",
 		year: "2025",
 		link: '/certificates/AthinodorosBoudourakis_Huawei_Award_20250312162504.pdf',
