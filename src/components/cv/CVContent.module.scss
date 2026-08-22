@@ -1,130 +1,150 @@
 .CVContent {
   position: relative;
   display: flex;
-  //width: min(210mm, 100vw);
-  width: 100%;
-  //max-width: 100%;
-  max-width: 420mm;
-  //height: 100vh;
-  //height: 100dvh;
-  height: 100%;
-  margin: 0 auto;
-  //margin: 0;
-  color: var(--ab-text-color);
-
-  /* Reads as a virtual sheet of paper resting on the ambient page background. */
-  background: var(--ab-background-color);
-  //box-shadow:
-  //  0 0 0 1px var(--border-color),
-  //  0 12px 40px var(--shadow-color);
-  //border-left: 1px solid var(--ab-text-color-faint);
-  //border-right: 1px solid var(--ab-text-color-faint);
-}
-
-/* Floating page navigation, one anchor button per original PDF page. */
-.pageNav {
-  position: sticky;
-  top: 24px;
-  align-self: flex-start;
-  display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px;
-  margin: 24px 0 24px 8px;
-  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: var(--ab-text-color);
+  background: var(--ab-background-color);
 }
 
-.pageNavButton {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--silver);
-  background: transparent;
-  color: var(--ab-text-color);
-  font-family: var(--font-body), sans-serif;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all ease-in-out 0.2s;
+/* ---------- CV section navigation ---------- */
+/* A discreet document index. Below the wide-desktop breakpoint it renders as a
+   compact horizontally scrollable tab strip above the CV (see large-desktop
+   override below for the outside-rail treatment). It never takes up permanent
+   layout width, so the CV column stays perfectly centered at every size. */
+.sectionNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-md);
+  justify-content: space-evenly;
+  max-width: 512px;
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--space-2xs) clamp(20px, 4vw, 56px);
+  overflow-x: auto;
+  background: var(--ab-background-color);
+  border-bottom: 1px solid var(--ab-divider-color);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  z-index: 2;
 
-  &:hover {
-    border-color: var(--royal-blue);
-    color: var(--royal-blue);
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-.pageNavButtonActive {
-  background: var(--royal-blue);
-  border-color: var(--royal-blue);
-  color: white;
+.sectionNavButton {
+  position: relative;
+  flex-shrink: 0;
+  text-align: left;
+  padding: var(--space-2xs) 2px;
+  min-height: 32px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--ab-text-color-faint);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+
+  &:hover {
+    color: var(--ab-hyperlink-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
 }
 
-/* The single, continuously scrollable document area. */
+.sectionNavButtonActive {
+  color: var(--ab-hyperlink-color);
+  border-bottom-color: var(--ab-hyperlink-color);
+  font-weight: 600;
+}
+
+/* The single, continuously scrollable document area — always centered in the
+   viewport regardless of the section nav, which is positioned independently. */
 .scrollArea {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--cv-content-width);
+  margin-inline: auto;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  padding: 40px clamp(20px, 4vw, 64px) 120px;
+  padding: var(--space-xl) clamp(20px, 4vw, 56px) 120px;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Invisible marker used purely as a scroll/observer anchor for a PDF page. */
-.pageAnchor {
-  display: block;
-  height: 0;
-  scroll-margin-top: 16px;
+@media (prefers-reduced-motion: reduce) {
+  .scrollArea {
+    scroll-behavior: auto;
+  }
 }
 
-/* ---------- Header ---------- */
+/* ---------- Header / Profile ---------- */
 .cvHeader {
-  scroll-margin-top: 16px;
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--silver);
+  scroll-margin-top: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--ab-divider-color);
 }
 
 .cvEyebrow {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   font-family: var(--font-body), sans-serif;
   font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--ab-accent-color);
 }
 
+/* The single strongest typographic element on the page. */
 .cvName {
   margin: 0;
-  font-family: var(--font-body), sans-serif;
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.5rem;
-  line-height: 1.2;
-  text-wrap: nowrap;
+  font-family: var(--font-title), serif;
+  font-size: clamp(2rem, 5.4vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
   color: var(--ab-header-color);
 }
 
 .cvJobTitle {
-  margin: 4px 0 0;
+  margin: var(--space-2xs) 0 0;
   font-family: var(--font-body), sans-serif;
-  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
   font-weight: 600;
-  color: var(--ab-text-color);
+  color: var(--ab-subtitle-color);
 }
 
-.cvTagline {
-  margin: 2px 0 16px;
+.cvSummary {
+  margin: var(--space-sm) 0 var(--space-md);
+  max-width: 62ch;
   font-family: var(--font-body), sans-serif;
-  font-size: 0.95rem;
-  color: var(--royal-blue-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ab-text-color);
 }
 
 .contactList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px 20px;
+  align-items: center;
+  gap: var(--space-2xs) var(--space-md);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -141,7 +161,7 @@
   display: inline-flex;
   width: 16px;
   height: 16px;
-  color: var(--royal-blue);
+  color: var(--ab-text-color-faint);
 
   svg {
     width: 100%;
@@ -152,118 +172,160 @@
 
 .contactLink,
 .contactText {
-  color: var(--ab-text-color);
+  color: var(--ab-text-color-faint);
   text-decoration: none;
 }
 
 .contactLink:hover {
-  color: var(--royal-blue);
+  color: var(--ab-hyperlink-color);
   text-decoration: underline;
+}
+
+.contactLink:focus-visible {
+  outline: 2px solid var(--royal-blue-soft);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 /* ---------- Sections ---------- */
 .cvSection {
-  margin-bottom: 40px;
+  margin-bottom: var(--space-2xl);
+  scroll-margin-top: var(--space-sm);
 }
 
 .sectionHeading {
   font-family: var(--font-title), serif;
-  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  font-weight: 600;
   color: var(--ab-header-color);
-  margin: 0 0 16px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--gold);
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-2xs);
+  border-bottom: 2px solid var(--ab-accent-color);
 }
 
 .subsectionHeading {
   font-family: var(--font-body), sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-align: start;
   color: var(--ab-header-color);
-  margin: 20px 0 10px;
+  margin: var(--space-lg) 0 var(--space-xs);
 }
 
-/* Generic entry card reused by experience, education, seminars and projects. */
+/* Generic entry layout reused by experience (see overrides), education, seminars and projects. */
 .entry {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  margin-bottom: 18px;
-}
-
-.entryHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 12px;
+  gap: 0 var(--space-sm);
+  margin-bottom: var(--space-lg);
 }
 
 .entryPeriod {
+  grid-column: 1;
+  grid-row: 1 / span 2;
   font-family: var(--font-body), sans-serif;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   text-align: start;
-  color: var(--royal-blue-soft);
+  color: var(--ab-text-color-faint);
   white-space: nowrap;
 }
 
+.entryHead {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
 .entryBody {
-  margin: 4px 0 0 8px;
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
 }
 
-.entryTitle {
-  display: flex;
-  margin: -4px 0 0;
-  font-family: var(--font-body), sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-align: start;
-  color: var(--ab-text-color);
-}
-
+/* Company is the strongest identifier within an experience entry. */
 .entryOrg {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin: 2px 0 6px;
-  font-size: 0.9rem;
-  color: var(--ab-text-color);
   flex-wrap: wrap;
-  //gap: 4px 10px;
+  align-items: baseline;
+  gap: var(--space-3xs) var(--space-xs);
+}
+
+.entryCompany,
+.entryCompanyLink {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ab-text-color);
+}
+
+.entryCompanyLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ab-hyperlink-color);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* Role sits directly under the company — secondary but still clearly readable. */
+.entryTitle {
+  margin: 2px 0 var(--space-2xs);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: start;
+  color: var(--ab-text-color-faint);
 }
 
 .entryLink {
+  display: inline-flex;
+  align-items: center;
   color: var(--ab-hyperlink-color);
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
 }
 
 .entryLocation {
   color: var(--ab-text-color-faint);
+  font-size: 0.85rem;
   font-style: italic;
 }
 
 .entryNote {
-  margin: 4px 0 0;
+  margin: var(--space-3xs) 0 0;
   font-size: 0.85rem;
   color: var(--ab-text-color);
   opacity: 0.85;
 }
 
 .bulletList {
-  margin: 6px 0 0;
+  margin: var(--space-2xs) 0 0;
   padding-left: 20px;
 }
 
 .bulletItem {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.55;
   text-align: start;
-  margin-bottom: 2px;
+  margin-bottom: var(--space-3xs);
 }
 
 /* ---------- Skills ---------- */
@@ -280,36 +342,13 @@
 .skillGroups {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-md);
   width: 100%;
 }
 
 .skillGroup {
   width: 100%;
   position: relative;
-}
-
-/* ========== Academics ========== */
-
-/* ---------- Education ---------- */
-.educationEntry {
-  display: grid;
-  grid-template-columns: 2fr 5fr;
-  margin-bottom: 16px;
-
-  .Period {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--royal-blue-soft);
-    white-space: nowrap;
-  }
-  .Content {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-  }
 }
 
 /* ---------- Languages ---------- */
@@ -322,70 +361,87 @@
   gap: 6px;
 }
 
-.languageItem {
-  display: flex;
-  justify-content: space-between;
-  max-width: 320px;
-  font-size: 0.9rem;
+/* ---------- Responsive: large desktop ---------- */
+@media (min-width: 1400px) {
+  .scrollArea {
+    padding-left: clamp(20px, 3vw, 72px);
+    padding-right: clamp(20px, 3vw, 72px);
+  }
 }
 
-.languageName {
-  font-weight: 600;
-}
+/* ---------- Responsive: wide desktop / ultrawide ----------
+   Once there is genuinely enough room beside the centered CV, the section
+   index detaches from the top of the document and becomes a quiet vertical
+   rail sitting just outside the CV's own left edge — attached to the
+   document, not the browser window. The CV's centering is untouched: the
+   rail is positioned out of flow and never reserves layout width. */
+@media (min-width: 1600px) {
+  .sectionNav {
+    position: absolute;
+    top: var(--space-2xl);
+    left: calc(50% - (var(--cv-content-width) / 2) - 174px);
+    flex-direction: column;
+    align-items: flex-start;
+    width: 150px;
+    gap: var(--space-3xs);
+    padding: 0;
+    background: none;
+    border-bottom: 0;
+    overflow: visible;
+  }
 
-.languageLevel {
-  color: var(--royal-blue-soft);
-}
+  .sectionNavButton {
+    width: 100%;
+    min-height: 0;
+    padding: var(--space-3xs) 0 var(--space-3xs) var(--space-sm);
+    border-bottom: 0;
+    border-left: 2px solid transparent;
+  }
 
-/* ---------- Responsive: tablets ---------- */
-@media (max-width: 900px) {
-  .CVContent {
-    width: 100vw;
+  .sectionNavButtonActive {
+    border-left-color: var(--ab-hyperlink-color);
+    border-bottom-color: transparent;
   }
 }
 
 /* ---------- Responsive: mobile phones ---------- */
-@media (max-width: 600px) {
-  .pageNav {
-    top: 8px;
-    margin: 12px 0 12px 4px;
-  }
-
-  .pageNavButton {
-    width: 28px;
-    height: 28px;
-    font-size: 0.75rem;
-  }
-
+/* Treat the CV as a native single-column webpage rather than a shrunk desktop layout. */
+@media (max-width: 720px) {
   .scrollArea {
-    padding: 24px 16px 100px;
-  }
-
-  .entryHead {
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .contactList {
-    gap: 8px 14px;
-  }
-}
-
-/* ---------- Orientation handling on small devices ---------- */
-@media (max-width: 900px) and (orientation: landscape) {
-  .CVContent {
-    height: 100vh;
-    height: 100dvh;
-  }
-
-  .scrollArea {
-    padding-top: 16px;
-    padding-bottom: 80px;
+    padding: var(--space-md) 20px 96px;
   }
 
   .cvHeader {
-    margin-bottom: 20px;
-    padding-bottom: 16px;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs) 0;
+  }
+
+  .entryHead {
+    grid-column: 1;
+    grid-row: auto;
+    order: 1;
+  }
+
+  .entryPeriod {
+    grid-column: 1;
+    grid-row: auto;
+    order: 2;
+    margin-top: var(--space-3xs);
+  }
+
+  .entryBody {
+    grid-column: 1;
+    grid-row: auto;
+    order: 3;
+    margin-top: var(--space-2xs);
+  }
+
+  .contactList {
+    gap: var(--space-2xs) var(--space-sm);
   }
 }
-

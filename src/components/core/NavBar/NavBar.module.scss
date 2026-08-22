@@ -2,38 +2,84 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-sm);
 
   width: 100%;
-  min-height: 88px;
-  padding: 0 36px;
+  min-height: 72px;
+  padding: 0 clamp(16px, 4vw, 36px);
 
-  border-bottom: 1px solid var(--silver);
+  border-bottom: 1px solid var(--ab-divider-color);
 }
 
 .BrandLink {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-2xs);
+  min-width: 0;
 
   color: var(--ab-title-color);
-  font-family: var(--font-title), serif;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-
   text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
 }
 
-.BrandLogo {
-  width: 48px;
-  height: 48px;
+/* Inline wordmark: ATHINODOROS [monogram] BOUDOURAKIS — the monogram acts as a
+   distinctive identity mark between the given name and surname, rather than a
+   conventional logo-before-name lockup. */
+.BrandWordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.BrandNamePart {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-title), serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.BrandMonogram {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
+}
+
+/* Fallback mark shown alone on the narrowest screens, where the full inline
+   wordmark no longer fits comfortably next to CV / Portfolio navigation. */
+.BrandMonogramCompact {
+  display: none;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.SiteControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ControlsDivider {
+  width: 1px;
+  height: 24px;
+  background: var(--ab-divider-color);
 }
 
 .SiteNav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: var(--space-md);
 }
 
 .NavItem {
@@ -42,12 +88,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
 
   padding: 12px 2px;
 
-  color: var(--royal-blue-deep);
+  color: var(--ab-text-color);
   font-family: var(--font-body), sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   text-decoration: none;
 
@@ -63,14 +110,14 @@
     width: 0;
     height: 2px;
 
-    background-color: var(--gold);
+    background-color: var(--ab-accent-color);
 
     transform: translateX(-50%);
     transition: width 180ms ease;
   }
 
   &:hover {
-    color: var(--royal-blue);
+    color: var(--ab-hyperlink-color);
 
     &::after {
       width: 80%;
@@ -85,9 +132,51 @@
 }
 
 .Active {
-  color: var(--royal-blue);
+  color: var(--ab-hyperlink-color);
 
   &::after {
     width: 80%;
+  }
+}
+
+/* ---------- Responsive ---------- */
+/* First, moderately shrink the inline wordmark rather than dropping it. */
+@media (max-width: 560px) {
+  .BrandWordmark {
+    gap: 7px;
+  }
+
+  .BrandNamePart {
+    font-size: 15px;
+  }
+
+  .BrandMonogram {
+    width: 22px;
+    height: 22px;
+  }
+
+  .SiteHeader {
+    min-height: 64px;
+  }
+
+  .SiteNav {
+    gap: var(--space-sm);
+  }
+
+  .NavItem {
+    font-size: 15px;
+  }
+}
+
+/* On the narrowest phones the full wordmark no longer fits comfortably next
+   to CV / Portfolio navigation — fall back to the monogram alone rather than
+   truncating the name or letting it wrap. */
+@media (max-width: 380px) {
+  .BrandWordmark {
+    display: none;
+  }
+
+  .BrandMonogramCompact {
+    display: inline-flex;
   }
 }

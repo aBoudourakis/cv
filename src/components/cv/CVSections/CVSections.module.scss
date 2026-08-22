@@ -1,3 +1,4 @@
+/* ---------- Technical Skills ---------- */
 .SkillGroup {
   scroll-margin-top: 16px;
 }
@@ -7,7 +8,7 @@
   align-items: center;
   gap: 9px;
 
-  margin-bottom: 7px;
+  margin-bottom: var(--space-2xs);
 }
 
 .SkillAccent {
@@ -16,14 +17,13 @@
   width: 2px;
   height: 16px;
 
-  background-color: var(--gold);
+  background-color: var(--ab-accent-color);
 }
 
 .SkillGroupTitle {
   margin: 0;
 
-  //color: var(--royal-blue-deep);
-  color: var(--royal-blue-soft);
+  color: var(--ab-header-color);
   font-family: var(--font-body), sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -53,26 +53,68 @@
 .SkillSeparator {
   margin: 0 8px;
 
-  color: var(--gold);
+  color: var(--ab-text-color-faint);
   font-size: 9px;
   line-height: 1;
 }
 
-/* ========== Academics ========== */
+/* ========== Shared two-column entry layout ========== */
+/* Reused by Academics, Certificates, Seminars, Languages and Projects.
+   Left column carries the muted date/period; right column the content. */
+%entry-grid {
+  display: grid;
+  grid-template-columns: 2fr 7fr;
+  gap: 0 var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+%entry-period {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: start;
+  color: var(--ab-text-color-faint);
+  white-space: nowrap;
+}
+
+%entry-title {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: start;
+  color: var(--ab-text-color);
+}
+
+%entry-subtitle {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: start;
+  color: var(--ab-text-color-faint);
+}
+
+%entry-link {
+  color: var(--ab-hyperlink-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
 
 /* ---------- Education ---------- */
 .AcademicEntry {
-  display: grid;
-  grid-template-columns: 2fr 7fr;
-  margin-bottom: 16px;
+  @extend %entry-grid;
 
   .Period {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: start;
-    color: var(--royal-blue-soft);
-    white-space: nowrap;
+    @extend %entry-period;
   }
 
   .Content {
@@ -80,56 +122,37 @@
     flex-direction: column;
     align-items: start;
     justify-content: start;
+    gap: 2px;
 
     .Title {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-align: start;
-      color: var(--ab-text-color);
+      @extend %entry-title;
     }
 
     .Subtitle {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.8rem;
-      line-height: 1rem;
-      font-weight: 400;
-      text-align: start;
-      color: var(--ab-text-color-faint);
+      @extend %entry-subtitle;
     }
 
     .Institution {
       font-family: var(--font-body), sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.88rem;
+      font-weight: 500;
       text-align: start;
-      color: var(--ab-text-color);
+      color: var(--ab-text-color-faint);
 
       a {
-        color: var(--ab-hyperlink-color);
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
+        @extend %entry-link;
       }
     }
   }
 }
 
+/* ---------- Certificates & Awards ---------- */
 .CertificateEntry {
-  display: grid;
-  grid-template-columns: 2fr 7fr;
-  margin-bottom: 16px;
+  @extend %entry-grid;
   width: 100%;
 
   .Year {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: start;
-    color: var(--royal-blue-soft);
-    white-space: nowrap;
+    @extend %entry-period;
   }
 
   .Content {
@@ -137,138 +160,80 @@
     flex-direction: column;
     align-items: start;
     justify-content: start;
+    gap: 2px;
 
     .Title {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-align: start;
-      color: var(--royal-blue-soft);
-      white-space: nowrap;
+      @extend %entry-title;
 
       a {
-        color: var(--ab-hyperlink-color);
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
+        @extend %entry-link;
+        display: inline-flex;
+        align-items: center;
       }
     }
 
-
     .Subtitle {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.8rem;
-      line-height: 1rem;
-      font-weight: 400;
-      text-align: start;
-      color: var(--ab-text-color-faint);
+      @extend %entry-subtitle;
     }
 
     .Link {
       a {
-        color: var(--ab-hyperlink-color);
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
+        @extend %entry-link;
       }
     }
 
     .Institution {
       font-family: var(--font-body), sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 500;
       text-align: start;
-      color: var(--ab-text-color);
+      color: var(--ab-text-color-faint);
 
       a {
-        color: var(--ab-hyperlink-color);
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
+        @extend %entry-link;
       }
     }
   }
 }
 
-/* Seminars */
+/* ---------- Seminars ---------- */
 .SeminarEntry {
-  display: grid;
-  grid-template-columns: 2fr 7fr;
-  margin-bottom: 16px;
+  @extend %entry-grid;
 
   .Period {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: start;
-    color: var(--royal-blue-soft);
-    white-space: nowrap;
+    @extend %entry-period;
   }
 
   .Title {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-align: start;
-    color: var(--ab-text-color);
+    @extend %entry-title;
   }
 
   .Subtitle {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    line-height: 1rem;
-    font-weight: 400;
-    text-align: start;
-    color: var(--ab-text-color-faint);
+    @extend %entry-subtitle;
   }
 }
 
+/* ---------- Languages ---------- */
 .LanguageEntry {
-  display: grid;
-  grid-template-columns: 2fr 7fr;
-  margin-bottom: 16px;
+  @extend %entry-grid;
+  margin-bottom: var(--space-2xs);
 
   .Language {
-    //font-family: var(--font-body), sans-serif;
-    //font-size: 0.9rem;
-    //font-weight: 600;
-    //text-align: start;
-    //color: var(--ab-text-color);
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: start;
-    color: var(--royal-blue-soft);
-    white-space: nowrap;
+    @extend %entry-title;
+    font-size: 0.88rem;
   }
 
   .Level {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 400;
-    text-align: start;
-    color: var(--ab-text-color-faint);
+    @extend %entry-subtitle;
   }
 }
 
+/* ---------- Projects ---------- */
 .ProjectEntry {
-  display: grid;
-  grid-template-columns: 2fr 7fr;
-  margin-bottom: 16px;
+  @extend %entry-grid;
 
   .Period {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: start;
-    color: var(--royal-blue-soft);
-    white-space: nowrap;
+    @extend %entry-period;
   }
 
   .Content {
@@ -276,46 +241,64 @@
     flex-direction: column;
     align-items: start;
     justify-content: start;
+    gap: 2px;
 
     .Title {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-align: start;
-      color: var(--ab-text-color);
+      @extend %entry-title;
     }
 
     .Subtitle {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.8rem;
-      line-height: 1rem;
-      font-weight: 400;
-      text-align: start;
-      color: var(--ab-text-color-faint);
+      @extend %entry-subtitle;
     }
 
     .SourceLink {
-      color: var(--ab-hyperlink-color);
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
+      @extend %entry-link;
+      display: inline-flex;
+      align-items: center;
     }
 
     .Description {
-      font-family: var(--font-body), sans-serif;
-      font-size: 0.8rem;
-      line-height: 1rem;
-      font-weight: 400;
-      text-align: start;
-      color: var(--ab-text-color-faint);
+      @extend %entry-subtitle;
     }
   }
 }
 
 .Location {
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   color: var(--ab-text-color-faint);
   font-style: italic;
+}
+
+/* ---------- Responsive: mobile phones ---------- */
+/* Stack the shared two-column entry layout into a single readable column. */
+@media (max-width: 720px) {
+  .AcademicEntry,
+  .CertificateEntry,
+  .SeminarEntry,
+  .ProjectEntry {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs) 0;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Language pairs are short — keep them on one line rather than stacking. */
+  .LanguageEntry {
+    grid-template-columns: auto 1fr;
+    gap: 0 var(--space-2xs);
+  }
+
+  .AcademicEntry .Period,
+  .CertificateEntry .Year,
+  .SeminarEntry .Period,
+  .ProjectEntry .Period {
+    order: 2;
+  }
+
+  .AcademicEntry .Content,
+  .CertificateEntry .Content,
+  .SeminarEntry .Title,
+  .SeminarEntry .Subtitle,
+  .ProjectEntry .Content {
+    order: 1;
+  }
 }

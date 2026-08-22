@@ -83,15 +83,22 @@ export interface ProjectItem {
 	sourceUrl?: string;
 	source2?: string;
 	sourceUrl2?: string;
+	source3?: string;
+	sourceUrl3?: string;
 	description: string;
+	bullets?: string[];
 }
 
 export const totalPages = 2;
 
 export const header = {
 	name: 'Athinodoros Boudourakis',
-	title: 'Front-End Engineer',
+	title: 'Front-End Software Engineer',
 	tagline: 'ReactJS - VueJS - Flutter',
+	summary:
+		'Front-end engineer with 10+ years building production React and Vue applications across fintech, ' +
+		'shipping and cybersecurity — focused on component architecture, performance, and accessible, ' +
+		'well-designed interfaces.',
 	page: 1,
 };
 
@@ -490,6 +497,24 @@ export const projects: ProjectItem[] = [
 	{
 		page: 2,
 		period: '2021',
+		title: 'COVID-19 Protective Face Shield Initiative — Cyprus',
+		source: 'News Page',
+		sourceUrl: 'https://en.philenews.com/local/citizens-make-hundreds-of-face-shields-per-day-for-limassol-hospital/',
+		source2: 'Facebook Page',
+		sourceUrl2: 'https://www.facebook.com/groups/872505479922591',
+		source3: 'Photographic Footage',
+		sourceUrl3: '/covid-shield-cyprus',
+		description: 'One of the first 10 volunteers who helped form a grassroots 3D-printing initiative during the initial COVID-19 outbreak in Cyprus, which later expanded to around 100 contributors producing protective face shields for hospitals, clinics and medical professionals.',
+		bullets: [
+			'One of the first 10 volunteers who helped form a grassroots 3D-printing initiative during the initial COVID-19 outbreak in Cyprus.',
+			'Contributed to the production of protective face shields for hospitals, clinics and medical professionals.',
+			'Supported an initiative that later expanded to around 100 contributors.',
+			'Designed the group’s logo used in communication channels.'
+		]
+	},
+	{
+		page: 2,
+		period: '2017 – 2021',
 		title: 'Cyber Range training platform',
 		source: 'app.cyberranges.com',
 		sourceUrl: 'https://app.cyberranges.com',

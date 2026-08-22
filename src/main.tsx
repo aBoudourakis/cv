@@ -5,6 +5,8 @@ import './index.css'
 import App from './App.tsx'
 import CV from './pages/CV/CV.tsx'
 import Portfolio from './pages/Portfolio/Portfolio.tsx'
+import CovidShieldCyprus from "src/pages/CovidShieldCyprus/CovidShieldCyprus.tsx";
+import BlankLayout from "src/layouts/blankLayout.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,12 +22,30 @@ const router = createBrowserRouter([
         Component: CV,
       },
       {
+        path: 'cv',
+        element: <Navigate to="/CV" replace />,
+      },
+      {
         path: 'portfolio',
         Component: Portfolio,
       },
       {
+        path: 'Portfolio',
+        Component: Portfolio,
+      },
+      {
         path: '*',
-        element: <Navigate to="/" replace />,
+        element: <Navigate to="/CV" replace />,
+      },
+    ],
+  },
+  {
+    path: '/covid-shield-cyprus',
+    Component: BlankLayout,
+    children: [
+      {
+        index: true,
+        Component: CovidShieldCyprus,
       },
     ],
   },

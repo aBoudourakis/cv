@@ -1,19 +1,137 @@
 .Portfolio {
+  position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  color: var(--ab-text-color);
+  background: var(--ab-background-color);
 }
 
-.PdfViewer {
+/* The single scrollable document area, matching the CV's own internal-scroll pattern. */
+.ScrollArea {
   width: 100%;
-  height: calc(100vh - 120px);
-  border: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Compact intro ---------- */
+.PortfolioHeader {
+  width: 100%;
+  padding: var(--space-md) clamp(12px, 4vw, 56px) 0;
+  box-sizing: border-box;
+}
+
+.PortfolioHeaderContent {
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.HeaderRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.Eyebrow {
+  margin: 0 0 var(--space-3xs);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ab-accent-color);
+}
+
+.Title {
+  margin: 0;
+  font-family: var(--font-title), serif;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 600;
+  color: var(--ab-header-color);
+}
+
+.OpenLink {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+  color: var(--ab-hyperlink-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
 }
 
 .Disclaimer {
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  font-size: 0.9rem;
+  margin: var(--space-2xs) 0 0;
+  max-width: 62ch;
+  font-size: 0.85rem;
+  line-height: 1.5;
   color: var(--ab-text-color-faint);
-  font-style: italic;
+}
+
+/* ---------- Portfolio page sequence ---------- */
+/* Mobile-first: pages run edge-to-edge with only a modest gap between sheets. */
+.PortfolioPages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding: var(--space-md) 0 var(--space-xl);
+  box-sizing: border-box;
+}
+
+.PortfolioPage {
+  margin: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.PortfolioPageImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+/* ---------- Tablet: fluid width, breathing room, subtle page shadow ---------- */
+@media (min-width: 640px) {
+  .PortfolioPages {
+    gap: 20px;
+    padding: var(--space-lg) var(--space-sm) var(--space-xl);
+  }
+
+  .PortfolioPage {
+    width: min(100%, 1000px);
+  }
+
+  .PortfolioPageImage {
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ---------- Desktop: comfortable reading width, generous page rhythm ---------- */
+@media (min-width: 1024px) {
+  .PortfolioHeader {
+    padding-top: var(--space-lg);
+  }
+
+  .PortfolioPages {
+    gap: 32px;
+    padding: var(--space-lg) var(--space-md) var(--space-2xl);
+  }
 }

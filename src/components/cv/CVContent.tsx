@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import styles from './CVContent.module.scss';
 import {
 	certificates,
@@ -10,8 +10,8 @@ import {
 	projects,
 	seminars,
 	skills,
-	// totalPages,
-	type ContactLink, certificates2,
+	certificates2,
+	type ContactLink,
 } from './cvData';
 import SkillEntry from "src/components/cv/CVSections/SkillEntry.tsx";
 import AcademicEntry from "src/components/cv/CVSections/AcademicEntry.tsx";
@@ -19,6 +19,7 @@ import SeminarEntry from "src/components/cv/CVSections/SeminarEntry.tsx";
 import LanguageEntry from "src/components/cv/CVSections/LanguageEntry.tsx";
 import ProjectEntry from "src/components/cv/CVSections/ProjectEntry.tsx";
 import CertificateEntry from "src/components/cv/CVSections/CertificateEntry.tsx";
+import {ExternalLinkIcon, PlayIcon} from "src/components/core/Icons/Icons.tsx";
 
 /** Small inline icon set used for the contact list, kept dependency-free. */
 const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
@@ -54,87 +55,100 @@ const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
 	),
 };
 
-// type PageId = 1 | 2;
+/** Sections surfaced in the discreet CV section index (desktop side rail / mobile tab strip). */
+const SECTION_NAV = [
+	{id: 'cv-profile', label: 'Profile'},
+	{id: 'cv-experience', label: 'Experience'},
+	{id: 'cv-skills', label: 'Technical Skills'},
+	{id: 'cv-education', label: 'Education'},
+	{id: 'cv-certifications', label: 'Certifications'},
+] as const;
+
+type SectionId = typeof SECTION_NAV[number]['id'];
+
+/** Resolves whether a bullet/link points at a YouTube video, to show a play affordance instead of an external-link one. */
+function isVideoLink(url: string) {
+	return url.includes('youtube') || url.includes('youtu.be');
+}
 
 export default function CVContent() {
 	/** REFS **/
 	const scrollRef = useRef<HTMLDivElement | null>(null);
-	const pageAnchorRefs = useRef<Map<number, HTMLElement>>(new Map());
+	const sectionRefs = useRef<Map<SectionId, HTMLElement>>(new Map());
 
 	/** STATE **/
-	// const [activePage, setActivePage] = useState<number>(1);
-	//
-	// const pages = useMemo<PageId[]>(
-	// 	() => Array.from({ length: totalPages }, (_, i) => (i + 1) as PageId),
-	// 	[]
-	// );
+	const [activeSection, setActiveSection] = useState<SectionId>(SECTION_NAV[0].id);
+
+	const prefersReducedMotion = useMemo(
+		() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+		[]
+	);
 
 	/**
-	 * Tracks which PDF page anchor is currently closest to the top of the
-	 * scroll container so the page navigation indicator stays in sync while
-	 * the user scrolls through the single continuous document.
+	 * Tracks which CV section is closest to the top of the scroll container so
+	 * the section index stays in sync while the user scrolls the document.
 	 */
 	useEffect(() => {
 		const root = scrollRef.current;
 		if (!root) return;
 
 		const observer = new IntersectionObserver(
-			(_entries) => {
-				// const visible = entries
-				// 	.filter((entry) => entry.isIntersecting)
-				// 	.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+			(entries) => {
+				const visible = entries
+					.filter((entry) => entry.isIntersecting)
+					.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-				// if (visible.length > 0) {
-				// 	const page = Number((visible[0].target as HTMLElement).dataset.pageAnchor);
-				// 	if (!Number.isNaN(page)) setActivePage(page);
-				// }
+				if (visible.length > 0) {
+					setActiveSection(visible[0].target.id as SectionId);
+				}
 			},
 			{root, rootMargin: '0px 0px -70% 0px', threshold: 0}
 		);
 
-		pageAnchorRefs.current.forEach((el) => observer.observe(el));
+		sectionRefs.current.forEach((el) => observer.observe(el));
 		return () => observer.disconnect();
 	}, []);
 
-	/** Registers an element as the anchor point for a given PDF page number. **/
-	const registerPageAnchor = (page: number) => (el: HTMLElement | null) => {
-		if (el) pageAnchorRefs.current.set(page, el);
+	/** Registers an element as the anchor point for a given CV section. **/
+	const registerSection = (id: SectionId) => (el: HTMLElement | null) => {
+		if (el) sectionRefs.current.set(id, el);
 	};
 
-	// /** Smoothly scrolls the internal container to the anchor of the requested page. **/
-	// const scrollToPage = (page: number) => {
-	// 	pageAnchorRefs.current.get(page)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-	// };
+	/** Smoothly scrolls the internal container to the requested section, respecting reduced-motion preference. **/
+	const scrollToSection = (id: SectionId) => {
+		sectionRefs.current.get(id)?.scrollIntoView({
+			behavior: prefersReducedMotion ? 'auto' : 'smooth',
+			block: 'start',
+		});
+	};
 
 	/** RENDER **/
 	return (
 		<div className={styles.CVContent}>
-			{/*<nav className={styles.pageNav} aria-label="CV page navigation">*/}
-			{/*	{pages.map((page) => (*/}
-			{/*		<button*/}
-			{/*			key={page}*/}
-			{/*			type="button"*/}
-			{/*			className={`${styles.pageNavButton} ${activePage === page ? styles.pageNavButtonActive : ''}`}*/}
-			{/*			onClick={() => scrollToPage(page)}*/}
-			{/*			aria-current={activePage === page}*/}
-			{/*		>*/}
-			{/*			{page}*/}
-			{/*		</button>*/}
-			{/*	))}*/}
-			{/*</nav>*/}
+			<nav className={styles.sectionNav} aria-label="CV section navigation">
+				{SECTION_NAV.map((section) => (
+					<button
+						key={section.id}
+						type="button"
+						className={`${styles.sectionNavButton} ${activeSection === section.id ? styles.sectionNavButtonActive : ''}`}
+						onClick={() => scrollToSection(section.id)}
+						aria-current={activeSection === section.id ? 'true' : undefined}
+					>
+						{section.label}
+					</button>
+				))}
+			</nav>
 
 			<div className={styles.scrollArea} ref={scrollRef}>
 				<header
 					className={styles.cvHeader}
-					id="cv-page-1"
-					ref={registerPageAnchor(1)}
-					data-page-anchor={1}
+					id="cv-profile"
+					ref={registerSection('cv-profile')}
 				>
 					<p className={styles.cvEyebrow}>Curriculum Vitae</p>
 					<h1 className={styles.cvName}>{header.name}</h1>
-					{/*<p className={styles.cvJobTitle}>{header.title}</p>*/}
-					<p className={styles.cvTagline}>{header.title}</p>
-					{/*<p className={styles.cvTagline}>{header.tagline}</p>*/}
+					<p className={styles.cvJobTitle}>{header.title}</p>
+					<p className={styles.cvSummary}>{header.summary}</p>
 					<ul className={styles.contactList}>
 						{contactLinks.map((link) => (
 							<li className={styles.contactItem} key={link.label}>
@@ -151,39 +165,40 @@ export default function CVContent() {
 					</ul>
 				</header>
 
-				<section className={styles.cvSection}>
+				<section className={styles.cvSection} id="cv-experience" ref={registerSection('cv-experience')}>
 					<h2 className={styles.sectionHeading}>Work Experience</h2>
 					{experience.map((item) => (
 						<article className={styles.entry} key={`${item.company}-${item.period}`}>
 							<div className={styles.entryPeriod}>
 								{item.period}
 							</div>
-							<div className={styles.entryBody}>
-								<div className={styles.entryTitle}>{item.title}</div>
+							<div className={styles.entryHead}>
 								<div className={styles.entryOrg}>
 									{item.companyUrl ? (
-										<a className={styles.entryLink} href={item.companyUrl} target="_blank" rel="noreferrer">
+										<a className={styles.entryCompanyLink} href={item.companyUrl} target="_blank" rel="noreferrer">
 											{item.company}
+											<ExternalLinkIcon/>
 										</a>
 									) : (
-										<span>{item.company}</span>
+										<span className={styles.entryCompany}>{item.company}</span>
 									)}
 									{item.location && <span className={styles.entryLocation}>{item.location}</span>}
 								</div>
+								<div className={styles.entryTitle}>{item.title}</div>
+							</div>
+							<div className={styles.entryBody}>
 								{item.bullets.length > 0 && (
 									<ul className={styles.bulletList}>
 										{item.bullets.map(((bullet: string | any, experienceBulletIndex: number) => (
 											<li className={styles.bulletItem}
 											    key={`${item.company}-experience-bullet-${experienceBulletIndex}`}>
 												{typeof bullet === 'string' ? bullet : bullet.name ? (
-													<>
-														{bullet.url.includes('youtube') &&
-                                <span style={{fontSize: '0.9em', marginRight: '0.35rem'}}>▶</span>}
-														<a className={styles.entryLink} href={bullet.url} target="_blank" rel="noreferrer"
-														   title={bullet.description}>
-															{bullet.name}
-														</a>
-													</>
+													<a className={styles.entryLink} href={bullet.url} target="_blank" rel="noreferrer"
+													   title={bullet.description}>
+														{isVideoLink(bullet.url) ? <PlayIcon/> : null}
+														{bullet.name}
+														{!isVideoLink(bullet.url) && <ExternalLinkIcon/>}
+													</a>
 												) : (
 													<span>{bullet.url}</span>
 												)}
@@ -196,32 +211,20 @@ export default function CVContent() {
 					))}
 				</section>
 
-				<section className={styles.cvSection}>
+				<section className={styles.cvSection} id="cv-skills" ref={registerSection('cv-skills')}>
 					<h2 className={styles.sectionHeading}>Technical Skills</h2>
 					<div className={styles.skillGroups}>
-						{skills.map((category, index) => {
-							const isPageBreak = index > 0 && category.page !== skills[index - 1].page;
-							return (
-								<div className={styles.skillGroup} key={category.label}>
-									{isPageBreak && (
-										<span
-											className={styles.pageAnchor}
-											id={`cv-page-${category.page}`}
-											ref={registerPageAnchor(category.page || 0)}
-											data-page-anchor={category.page}
-										/>
-									)}
-									<SkillEntry skill={category}/>
-								</div>
-							);
-						})}
+						{skills.map((category) => (
+							<div className={styles.skillGroup} key={category.label}>
+								<SkillEntry skill={category}/>
+							</div>
+						))}
 					</div>
 				</section>
 
-				<section className={styles.cvSection}>
-					<h2 className={styles.sectionHeading}>Academics</h2>
+				<section className={styles.cvSection} id="cv-education" ref={registerSection('cv-education')}>
+					<h2 className={styles.sectionHeading}>Education</h2>
 
-					<h3 className={styles.subsectionHeading}>Education</h3>
 					{education.map((item) => (
 						<AcademicEntry
 							period={item.period}
@@ -232,22 +235,6 @@ export default function CVContent() {
 							location={item.location}
 							key={`${item.title}-${item.period}`}
 						/>
-						// <article className={styles.entry} key={`${item.title}-${item.period}`}>
-						// 	<div className={styles.entryHead}>
-						// 		<div className={styles.entryPeriod}>{item.period}</div>
-						// 		<div className={styles.entryTitle}>{item.title}</div>
-						// 	</div>
-						// 	<p className={styles.entryOrg}>
-						// 		{item.institutionUrl ? (
-						// 			<a className={styles.entryLink} href={item.institutionUrl} target="_blank" rel="noreferrer">
-						// 				{item.institution}
-						// 			</a>
-						// 		) : (
-						// 			<span>{item.institution}</span>
-						// 		)}
-						// 	</p>
-						// 	{item.thesis && <p className={styles.entryNote}>Thesis: {item.thesis}</p>}
-						// </article>
 					))}
 
 					{certificates.map((item) => (
@@ -260,21 +247,6 @@ export default function CVContent() {
 							location={item.location}
 							key={`${item.title}-${item.period}`}
 						/>
-						// <article className={styles.entry} key={`${item.title}-${item.period}`}>
-						// 	<div className={styles.entryHead}>
-						// 		<span className={styles.entryPeriod}>{item.period}</span>
-						// 		<h4 className={styles.entryTitle}>{item.title}</h4>
-						// 	</div>
-						// 	<p className={styles.entryOrg}>
-						// 		{item.institutionUrl ? (
-						// 			<a className={styles.entryLink} href={item.institutionUrl} target="_blank" rel="noreferrer">
-						// 				{item.institution}
-						// 			</a>
-						// 		) : (
-						// 			<span>{item.institution}</span>
-						// 		)}
-						// 	</p>
-						// </article>
 					))}
 
 					<h3 className={styles.subsectionHeading}>Seminars</h3>
@@ -299,33 +271,21 @@ export default function CVContent() {
 					</ul>
 				</section>
 
-				<section className={styles.cvSection}>
+				<section className={styles.cvSection} id="cv-certifications" ref={registerSection('cv-certifications')}>
 					<h2 className={styles.sectionHeading}>Certificates & Awards</h2>
 					<div className={styles.skillList}>
-						{certificates2.map((certificate, index) => {
-							const isPageBreak = index > 0 && certificate.page !== certificates2[index - 1].page;
-							return (
-								<>
-									{isPageBreak && (
-										<span
-											className={styles.pageAnchor}
-											id={`cv-page-${certificate.page}`}
-											ref={registerPageAnchor(certificate.page)}
-											data-page-anchor={certificate.page}
-										/>
-									)}
-									<CertificateEntry
-										title={certificate.title}
-										subtitle={certificate.subtitle}
-										description={certificate.description}
-										year={certificate.year}
-										link={certificate.link}
-										issuer={certificate.issuer}
-										organization={certificate.organization}
-									/>
-								</>
-							);
-						})}
+						{certificates2.map((certificate) => (
+							<CertificateEntry
+								key={`${certificate.title}-${certificate.year}`}
+								title={certificate.title}
+								subtitle={certificate.subtitle}
+								description={certificate.description}
+								year={certificate.year}
+								link={certificate.link}
+								issuer={certificate.issuer}
+								organization={certificate.organization}
+							/>
+						))}
 					</div>
 				</section>
 
@@ -333,12 +293,15 @@ export default function CVContent() {
 					<h2 className={styles.sectionHeading}>Projects</h2>
 					{projects.map((item) => (
 						<ProjectEntry
+							key={`${item.title}-${item.period}`}
 							period={item.period}
 							title={item.title}
 							source={item.source}
 							source2={item.source2}
 							sourceUrl={item.sourceUrl}
 							sourceUrl2={item.sourceUrl2}
+							source3={item.source3}
+							sourceUrl3={item.sourceUrl3}
 							description={item.description}
 						/>
 					))}
@@ -347,5 +310,3 @@ export default function CVContent() {
 		</div>
 	);
 }
-
-// TODO: Add AWARDS (Huawei, certs of excellence, etc.) and other sections as needed.
