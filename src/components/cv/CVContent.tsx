@@ -62,6 +62,7 @@ const SECTION_NAV = [
 	{id: 'cv-skills', label: 'Technical Skills'},
 	{id: 'cv-education', label: 'Education'},
 	{id: 'cv-certifications', label: 'Certifications'},
+	{id: 'cv-projects', label: 'Projects'},
 ] as const;
 
 type SectionId = typeof SECTION_NAV[number]['id'];
@@ -84,29 +85,33 @@ export default function CVContent() {
 		[]
 	);
 
-	/**
-	 * Tracks which CV section is closest to the top of the scroll container so
-	 * the section index stays in sync while the user scrolls the document.
-	 */
+	/** Tracks the last section anchor to cross the activation line while scrolling. */
 	useEffect(() => {
 		const root = scrollRef.current;
 		if (!root) return;
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const visible = entries
-					.filter((entry) => entry.isIntersecting)
-					.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+		const updateActiveSection = () => {
+			const activationLine = root.getBoundingClientRect().top + root.clientHeight * 0.3;
+			let currentSection: SectionId = SECTION_NAV[0].id;
 
-				if (visible.length > 0) {
-					setActiveSection(visible[0].target.id as SectionId);
+			SECTION_NAV.forEach(({id}) => {
+				const section = sectionRefs.current.get(id);
+				if (section && section.getBoundingClientRect().top <= activationLine) {
+					currentSection = id;
 				}
-			},
-			{root, rootMargin: '0px 0px -70% 0px', threshold: 0}
-		);
+			});
 
-		sectionRefs.current.forEach((el) => observer.observe(el));
-		return () => observer.disconnect();
+			setActiveSection(currentSection);
+		};
+
+		updateActiveSection();
+		root.addEventListener('scroll', updateActiveSection, {passive: true});
+		window.addEventListener('resize', updateActiveSection);
+
+		return () => {
+			root.removeEventListener('scroll', updateActiveSection);
+			window.removeEventListener('resize', updateActiveSection);
+		};
 	}, []);
 
 	/** Registers an element as the anchor point for a given CV section. **/
@@ -289,7 +294,7 @@ export default function CVContent() {
 					</div>
 				</section>
 
-				<section className={styles.cvSection}>
+				<section className={styles.cvSection} ref={registerSection('cv-projects')} id="cv-projects">
 					<h2 className={styles.sectionHeading}>Projects</h2>
 					{projects.map((item) => (
 						<ProjectEntry
