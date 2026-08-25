@@ -1,8 +1,8 @@
 {
   "name": "athos-cv",
   "private": true,
-  "version": "1.0.17",
   "type": "module",
+  "version": "1.0.18",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

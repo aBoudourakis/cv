@@ -5,13 +5,13 @@ interface IProjectEntryProps {
 	page?: number;
 	period: string;
 	title: string;
-	source: string;
+	source?: string;
 	sourceUrl?: string;
 	source2?: string;
 	sourceUrl2?: string;
 	source3?: string;
 	sourceUrl3?: string;
-	description: string;
+	description?: string;
 }
 
 export default function ProjectEntry({
@@ -22,10 +22,10 @@ export default function ProjectEntry({
 	  <div className={styles.Content}>
 		  <div className={styles.Title}>{title}</div>
 		  <div className={styles.Subtitle}>
-			  <a className={styles.SourceLink} href={sourceUrl} target="_blank" rel="noopener noreferrer">
+			  {sourceUrl && <a className={styles.SourceLink} href={sourceUrl} target="_blank" rel="noopener noreferrer">
 				  {source}
 				  <ExternalLinkIcon/>
-			  </a>
+			  </a>}
 		  </div>
 		  {sourceUrl2 && sourceUrl2.length > 0 && source2 && source2.length > 0 && (
 			  <div className={styles.Subtitle}>

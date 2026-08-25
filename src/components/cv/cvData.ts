@@ -79,13 +79,15 @@ export interface ProjectItem {
 	page: number;
 	period: string;
 	title: string;
-	source: string;
+	subtitle?: string;
+	subtitle2?: string;
+	source?: string;
 	sourceUrl?: string;
 	source2?: string;
 	sourceUrl2?: string;
 	source3?: string;
 	sourceUrl3?: string;
-	description: string;
+	description?: string;
 	bullets?: string[];
 }
 
@@ -149,7 +151,7 @@ export const experience: ExperienceItem[] = [
 			'Led the Graphics Design team',
 			'Co-directed a Cinematic trailer for the application',
 			{name: 'Watch Cinematic Trailer', url: 'https://www.youtube.com/watch?v=-cYUbAW83so', description: 'YouTube link'},
-			'Built UI Elements for graphics and audio interface',
+			'UI Gamification Elements Design (Graphics and Audio)',
 			'Product & content marketing regulation',
 			'Acted as a content writer for microtransaction features',
 		],
@@ -157,7 +159,7 @@ export const experience: ExperienceItem[] = [
 	{
 		page: 1,
 		period: '2011 – 2017',
-		title: 'Web & Graphics Designer',
+		title: 'Web & Graphics Design - Brand Identity',
 		company: 'Freelancer',
 		location: '',
 		bullets: [
@@ -180,6 +182,8 @@ export const skills: SkillCategory[] = [
 			'React',
 			'Next.js',
 			'Vue.js',
+			'Dart',
+			'Swift',
 			'Redux Toolkit',
 			'HTML5',
 			'CSS / SCSS',
@@ -357,7 +361,7 @@ export const education: EducationItem[] = [
 		page: 2,
 		period: '2005 – 2007',
 		title: 'BSc in Electrical and Computer Engineering',
-		institution: 'Aristotle University of Thessaloniki',
+		institution: 'Aristotle University of Thessaloniki (partial studies)',
 		institutionUrl: 'https://www.auth.gr/en/',
 		location: 'Thessaloniki, Greece',
 	},
@@ -380,13 +384,13 @@ export const seminars: SeminarItem[] = [
 		page: 2,
 		year: '2018',
 		title: 'Seminar in "Growth Hacking"',
-		description: 'by Panis Pieri, Growth Hacker & Digital Marketing Expert (20+ years experience)',
+		description: 'Panis Pieri, Growth Hacker & Digital Marketing Expert (20+ years experience)',
 	},
 	{
 		page: 2,
 		year: '2017',
 		title: 'Seminar in "UX Research at Google"',
-		description: 'by Katie Tzanidou, User Experience (UX) Research Manager at Google UK',
+		description: 'Katie Tzanidou, User Experience (UX) Research Manager at Google UK',
 	},
 ];
 
@@ -394,7 +398,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "AI Agents & Workflows - The Practical Guide",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2025",
 		link: "ude.my/UC-2d342be5-78a0-4d2b-9046-3b7cf54697ac",
 		issuer: "Udemy - Maximilian Schwarzmüller",
@@ -403,7 +407,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "Local LLMs via Ollama & LM Studio - The Practical Guide",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2025",
 		link: "ude.my/UC-585a9a2c-3bc4-47bc-83f0-5cacb119daf0",
 		issuer: "Udemy - Maximilian Schwarzmüller",
@@ -422,7 +426,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "Flutter & Dart - The Complete Guide",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2023",
 		link: "ude.my/UC-59c3d1d4-10f9-46ad-a6de-bb4ebdb4d63a",
 		issuer: "Academind by Udemy - Maximilian Schwarzmüller",
@@ -431,7 +435,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "Remix.js - The Practical Guide",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2023",
 		link: "ude.my/UC-86591a0b-376d-46fc-82b0-08fbb2c8d285",
 		issuer: "Academind by Udemy - Maximilian Schwarzmüller",
@@ -450,7 +454,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "Next.js & React - The Complete Guide (incl. Two Paths!)",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2022",
 		link: "ude.my/UC-94a13e25-f8ec-4982-b719-ba97ccb32e12",
 		issuer: "Udemy - Maximilian Schwarzmüller",
@@ -470,7 +474,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "Vue JS 2 - The Complete Guide (incl. Vue Router & Vuex)",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2020",
 		link: "ude.my/UC-bf3b87a1-6faf-4821-aa30-8d0baebea7b0",
 		issuer: "Udemy - Maximilian Schwarzmüller",
@@ -479,7 +483,7 @@ export const certificates2: CertificateItem[] = [
 	{
 		page: 2,
 		title: "React - The Complete Guide (incl Hooks, React Router, Redux)",
-		subtitle: "Certificate of Completion",
+		subtitle: "Certificate",
 		year: "2020",
 		link: "ude.my/UC-1717b593-efd9-4293-8113-b846869f9923",
 		issuer: "Academind by Udemy - Maximilian Schwarzmüller",
@@ -494,6 +498,14 @@ export const languages: LanguageItem[] = [
 ];
 
 export const projects: ProjectItem[] = [
+	{
+		page: 2,
+		period: '2017 – 2021',
+		title: 'Cyber Range training platform',
+		source: 'Cyber Ranges',
+		sourceUrl: 'https://app.cyberranges.com',
+		description: 'Cyber security training platform used for National competitions in the Middle East and Africa',
+	},
 	{
 		page: 2,
 		period: '2021',
@@ -514,11 +526,12 @@ export const projects: ProjectItem[] = [
 	},
 	{
 		page: 2,
-		period: '2017 – 2021',
-		title: 'Cyber Range training platform',
-		source: 'app.cyberranges.com',
-		sourceUrl: 'https://app.cyberranges.com',
-		description: 'Cyber security training platform used for National competitions in the Middle East and Africa',
+		period: '2020',
+		title: 'InterPrice',
+		source: 'Web3 fintech platform developed for selected affiliates',
+		sourceUrl: 'https://digicash.synapse.gr',
+		description: 'cryptocurrency wallet integration, peer-to-peer asset transfers, crypto-denominated lending,\n' +
+			'and digital currency payments',
 	},
 	{
 		page: 2,
@@ -532,11 +545,9 @@ export const projects: ProjectItem[] = [
 		page: 2,
 		period: '2016',
 		title: '3D Modelling & Digitalization of Cultural Heritage content',
-		source: 'EUROPEANA',
-		sourceUrl: 'http://www.europeana.eu/',
-		source2: 'APSIDA',
-		sourceUrl2: 'https://apsida.cut.ac.cy/collections/show/141',
-		description: '3D Models of Cultural Heritage content of Cyprus',
+		source: 'APSIDA',
+		sourceUrl: 'https://apsida.cut.ac.cy/collections/show/141',
+		description: '3D Models of Cultural Heritage content of Cyprus aggregated into Europeana',
 	},
 	{
 		page: 2,
