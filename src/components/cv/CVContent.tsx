@@ -66,6 +66,7 @@ const SECTION_NAV = [
 ] as const;
 
 type SectionId = typeof SECTION_NAV[number]['id'];
+const PDF_PATH = '/Athinodoros_Boudourakis_CV_2026_digital.pdf';
 
 /** Resolves whether a bullet/link points at a YouTube video, to show a play affordance instead of an external-link one. */
 function isVideoLink(url: string) {
@@ -127,6 +128,15 @@ export default function CVContent() {
 		});
 	};
 
+	const downloadPdf = () => {
+		const link = document.createElement('a');
+		link.href = PDF_PATH;
+		link.download = 'Athinodoros_Boudourakis_CV_2026_digital.pdf';
+		document.body.appendChild(link);
+		link.click();
+		link.remove();
+	};
+
 	/** RENDER **/
 	return (
 		<div className={styles.CVContent}>
@@ -168,6 +178,12 @@ export default function CVContent() {
 							</li>
 						))}
 					</ul>
+					<button className={styles.downloadButton} type="button" onClick={downloadPdf}>
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<use href="/icons.svg#pdf-icon"/>
+						</svg>
+						Download PDF
+					</button>
 				</header>
 
 				<section className={styles.cvSection} id="cv-experience" ref={registerSection('cv-experience')}>
