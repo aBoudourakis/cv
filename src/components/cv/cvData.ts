@@ -115,7 +115,7 @@ export const contactLinks: ContactLink[] = [
 export const experience: ExperienceItem[] = [
 	{
 		page: 1,
-		period: '07.2023 – present',
+		period: '07.2023 – 10.2026',
 		title: 'Front-end Developer',
 		company: 'Dealio Ltd.',
 		companyUrl: 'https://dealio.ai/',
@@ -528,8 +528,10 @@ export const projects: ProjectItem[] = [
 		page: 2,
 		period: '2020',
 		title: 'InterPrice',
-		source: 'Web3 fintech platform developed for selected affiliates',
-		sourceUrl: 'https://digicash.synapse.gr',
+		source: 'InterPrice',
+		sourceUrl: 'https://interprice.io/',
+		source2: 'Web3 fintech platform developed for selected affiliates',
+		sourceUrl2: 'https://digicash.synapse.gr',
 		description: 'cryptocurrency wallet integration, peer-to-peer asset transfers, crypto-denominated lending,\n' +
 			'and digital currency payments',
 	},

@@ -1,0 +1,1 @@
+- [X] update InterPrice website to current (consider demo synapse digicash as 2nd URL)
