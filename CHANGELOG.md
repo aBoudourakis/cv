@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.4] - 2026-09-13
+
+### Changed
+
+- Default theme is now the visitor's system preference (`prefers-color-scheme`), applied before first paint to avoid a flash of the wrong theme; falls back to dark mode if the browser reports no preference either way. The manual theme switch still overrides it for the session as before.
+
 ## [1.3.3] - 2026-09-12
 
 ### Fixed

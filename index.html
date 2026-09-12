@@ -22,6 +22,20 @@
     </script>
   </head>
   <body>
+    <!-- Applies the initial theme before first paint, so there's no flash of
+         the wrong theme. Default: the system's preference; if the browser
+         can't report one either way, fall back to dark mode. ThemeSwitch.tsx
+         reads this same 'dark-mode' class on mount and takes over from here. -->
+    <script>
+      (function () {
+        try {
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var isDark = prefersDark || !prefersLight;
+          document.body.classList.toggle('dark-mode', isDark);
+        } catch (e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
