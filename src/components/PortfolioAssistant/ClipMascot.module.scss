@@ -25,6 +25,24 @@
   transition: opacity 200ms ease, stroke 200ms ease;
 }
 
+/* Nose/mouth read as bent wire, not a pasted-on face — same metal gradient
+   as the body loops. */
+.Nose,
+.Mouth {
+  stroke: url(#clipMetalGradient);
+}
+
+/* Brows use the solid, slightly darker metal tone (not the gradient) so
+   they stay legible as a distinct feature rather than blending into the
+   body's own shine. */
+.Brow {
+  stroke: var(--assistant-metal-strong);
+  opacity: 0.85;
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
 .Eye {
   transform-origin: center;
   transform-box: fill-box;
@@ -54,6 +72,11 @@
 
   .Eye {
     animation: none;
+  }
+
+  /* A small curious brow-raise — the one deliberately animated facial cue. */
+  .Brow {
+    transform: translateY(-1.5px);
   }
 }
 

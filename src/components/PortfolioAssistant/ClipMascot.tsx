@@ -16,8 +16,9 @@ const MAX_PUPIL_OFFSET = 1.6;
  * Original paperclip-inspired mascot ("Clip") — an inline SVG so its colors
  * follow the --assistant-* theme tokens and its states are plain CSS classes
  * (see docs/Clip_bot_specification.md #4/#19). Deliberately not a copy of
- * Microsoft's Clippy: a symmetrical double-loop silhouette with restrained,
- * simple eyes rather than an illustrated face/eyebrows.
+ * Microsoft's Clippy: a symmetrical double-loop silhouette with large,
+ * friendly eyes, brows and a small nose/mouth rendered as bent wire — the
+ * same metal gradient/stroke as the body — rather than an illustrated face.
  *
  * Reduced motion is handled globally (src/styles/global.scss zeroes all
  * animation/transition durations under prefers-reduced-motion), so no
@@ -76,27 +77,36 @@ export default function ClipMascot({ state, size = 56, className }: ClipMascotPr
 				{/* Body — two centered stadium loops, the classic flattened paperclip silhouette. */}
 				<rect
 					className={styles.ClipOuter}
-					x="15" y="8" width="34" height="72" rx="17"
+					x="13" y="8" width="38" height="72" rx="19"
 					fill="none" stroke="url(#clipMetalGradient)" strokeWidth="7"
 				/>
 				<rect
 					className={styles.ClipInner}
-					x="23" y="18" width="18" height="52" rx="9"
+					x="21" y="18" width="22" height="52" rx="11"
 					fill="none" stroke="url(#clipMetalGradient)" strokeWidth="6"
 				/>
 
 				{/* Small warm gold highlights — a restrained "glint", not a full glow. */}
-				<path className={styles.Highlight} d="M20 15c1.5-2.5 3.4-4 5.8-4.6" fill="none" strokeLinecap="round" strokeWidth="3" />
-				<path className={styles.Highlight} d="M26 22c1-1.6 2.3-2.6 3.9-3" fill="none" strokeLinecap="round" strokeWidth="2.2" />
+				<path className={styles.Highlight} d="M17 15c1.5-2.5 3.4-4 5.8-4.6" fill="none" strokeLinecap="round" strokeWidth="3" />
+				<path className={styles.Highlight} d="M24 21c1-1.6 2.3-2.6 3.9-3" fill="none" strokeLinecap="round" strokeWidth="2.2" />
 
-				{/* Eyes — expressive but restrained: no eyebrows/mouth. */}
+				{/* Face — the eyebrows, nose and mouth are drawn as bent wire (same metal
+				    gradient/stroke as the body loops above) so the clip's own bends read
+				    as an expression, rather than looking like a pasted-on cartoon face. */}
+				<path className={styles.Brow} d="M18 22c3-4.5 8-6 11-4.5" fill="none" strokeLinecap="round" strokeWidth="3" />
+				<path className={styles.Brow} d="M35 17.5c3-1.5 8 0 11 4.5" fill="none" strokeLinecap="round" strokeWidth="3" />
+
+				<path className={styles.Nose} d="M30 35c-3 3-3.4 7-1 9" fill="none" strokeLinecap="round" strokeWidth="2.8" />
+				<path className={styles.Mouth} d="M22 49.5c3.3 5.3 14.7 5.3 20 0" fill="none" strokeLinecap="round" strokeWidth="3.2" />
+
+				{/* Eyes — large and expressive, the mascot's main focal point. */}
 				<g className={styles.Eye}>
-					<circle cx="26" cy="30" r="5.4" fill="var(--assistant-eye-sclera, #F7F9FC)" stroke="var(--assistant-border)" strokeWidth="0.75" />
-					<circle className={styles.Pupil} cx="26" cy="30" r="2.3" fill="var(--assistant-eye-pupil, #1B2233)" />
+					<circle cx="23" cy="27" r="7.2" fill="var(--assistant-eye-sclera, #F7F9FC)" stroke="var(--assistant-border)" strokeWidth="0.85" />
+					<circle className={styles.Pupil} cx="23" cy="27" r="3.2" fill="var(--assistant-eye-pupil, #1B2233)" />
 				</g>
 				<g className={styles.Eye}>
-					<circle cx="38" cy="30" r="5.4" fill="var(--assistant-eye-sclera, #F7F9FC)" stroke="var(--assistant-border)" strokeWidth="0.75" />
-					<circle className={styles.Pupil} cx="38" cy="30" r="2.3" fill="var(--assistant-eye-pupil, #1B2233)" />
+					<circle cx="41" cy="27" r="7.2" fill="var(--assistant-eye-sclera, #F7F9FC)" stroke="var(--assistant-border)" strokeWidth="0.85" />
+					<circle className={styles.Pupil} cx="41" cy="27" r="3.2" fill="var(--assistant-eye-pupil, #1B2233)" />
 				</g>
 			</svg>
 
