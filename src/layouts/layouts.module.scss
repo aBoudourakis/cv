@@ -3,6 +3,14 @@
   flex-direction: column;
   height: 100vh;
   height: 100dvh;
+  /* --app-vh is set from window.visualViewport in App.tsx and kept in sync
+     on resize — some WebKit-based mobile browsers (notably Chrome on iOS,
+     which layers its own collapsible toolbar on top of shared WebKit
+     viewport handling) don't reliably recompute 100dvh as that toolbar
+     shows/hides on scroll, leaving a gap of raw body background below the
+     footer. The JS-measured value corrects that in real time; the dvh
+     value above is the pre-JS/no-JS fallback. */
+  height: var(--app-vh, 100dvh);
   overflow: hidden;
 
   .NavBar {

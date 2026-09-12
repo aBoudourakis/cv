@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.6] - 2026-09-13
+
+### Fixed
+
+- Mobile Chrome on iOS could show a gap of raw page background between the footer and the true bottom of the screen, with the assistant launcher appearing to float in it — `100dvh` isn't reliably recomputed by that browser as its collapsible toolbar shows/hides on scroll. `DesktopLayout` now prefers a `--app-vh` custom property kept in sync with `window.visualViewport` (`src/utils/useViewportHeight.ts`), falling back to `100dvh`/`100vh` where JS hasn't run yet or `visualViewport` is unavailable.
+
 ## [1.3.5] - 2026-09-13
 
 ### Fixed
