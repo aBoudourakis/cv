@@ -11,7 +11,9 @@
   width: 60px;
   height: 60px;
   padding: 0;
-  border: 1px solid var(--assistant-border);
+  /* A persistent gold ring badge, matching the reference concept — not just
+     a hover accent. */
+  border: 1.5px solid var(--assistant-accent);
   border-radius: 50%;
 
   background: var(--assistant-surface);
@@ -22,8 +24,8 @@
 
   &:hover,
   &:focus-visible {
-    border-color: var(--assistant-accent);
-    box-shadow: 0 8px 24px var(--assistant-shadow), 0 0 0 1px var(--assistant-accent);
+    border-color: var(--assistant-accent-strong);
+    box-shadow: 0 8px 24px var(--assistant-shadow), 0 0 0 2px var(--assistant-accent-strong);
   }
 
   &:focus-visible {
