@@ -125,6 +125,8 @@ The mascot's illustrated states live in `public/images/Clip/` (source PNGs) and 
 
 Pushes to the `main` branch build the Vite application and deploy the generated `dist/` directory to GitHub Pages through the workflow in `.github/workflows/deploy.yml`.
 
+The build step needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` set as **repository secrets** (Settings → Secrets and variables → Actions) — Vite bakes `VITE_`-prefixed values into the bundle at build time, so without them the deployed site's portfolio assistant always shows its "not configured yet" state, regardless of which page a visitor is on. Use the same values as your local `.env.local`.
+
 ## Changelog
 
 Notable changes are tracked in [CHANGELOG.md](CHANGELOG.md).

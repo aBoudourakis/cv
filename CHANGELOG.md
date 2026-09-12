@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.3] - 2026-09-12
+
+### Fixed
+
+- The GitHub Pages deploy workflow never passed `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` to the build step, so the deployed portfolio assistant always showed its "not configured yet" state — a build-time bundling issue, not a routing or CORS one. The workflow now reads them from repository secrets.
+
 ## [1.3.2] - 2026-09-12
 
 ### Added

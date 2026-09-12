@@ -35,6 +35,16 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # VITE_-prefixed vars are the only ones Vite bakes into the browser
+          # bundle at build time — without these set as repository secrets,
+          # the deployed site ships with the assistant's "not configured yet"
+          # state regardless of which page a visitor is on (this is a
+          # build-time value, not something a route/CORS config affects).
+          # Safe to expose: the public Supabase project URL and anon key,
+          # never the service-role key. See README.md > Portfolio Assistant.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
