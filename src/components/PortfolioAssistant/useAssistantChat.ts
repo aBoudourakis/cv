@@ -22,6 +22,18 @@ function getPlaceholderTurnstileToken(): string {
 	return `pending-${createId()}`;
 }
 
+// Defends against a very easy mistake: .env.local writes VITE_SUPABASE_URL
+// shell-style with surrounding quotes (VITE_SUPABASE_URL='https://...'),
+// which is fine for Node's own env-file loader but NOT for a value pasted
+// verbatim into a GitHub Actions secret — secrets are raw strings, quotes
+// and all. A quoted value no longer starts with "http", so the browser
+// treats it as a *relative* path on the current page's own origin instead
+// of an absolute URL, silently sending the request to the wrong place.
+function sanitizeEnvUrl(value: string | undefined): string | undefined {
+	const trimmed = value?.trim().replace(/^['"]|['"]$/g, '');
+	return trimmed || undefined;
+}
+
 function statusForErrorCode(code: string | undefined): ConversationStatus {
 	if (code === 'RATE_LIMITED' || code === 'DAILY_LIMIT_REACHED' || code === 'MONTHLY_LIMIT_REACHED') {
 		return 'rate_limited';
@@ -49,10 +61,10 @@ export function useAssistantChat(): UseAssistantChatResult {
 	// resubmit landing between a click and the next render.
 	const pendingRef = useRef(false);
 
-	const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-	const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+	const supabaseUrl = sanitizeEnvUrl(import.meta.env.VITE_SUPABASE_URL);
+	const supabaseAnonKey = sanitizeEnvUrl(import.meta.env.VITE_SUPABASE_ANON_KEY);
 	const configError =
-		!supabaseUrl || !supabaseAnonKey
+		!supabaseUrl || !supabaseAnonKey || !/^https?:\/\//.test(supabaseUrl)
 			? 'The portfolio assistant is not configured yet. Please check back later.'
 			: null;
 

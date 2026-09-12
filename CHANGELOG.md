@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.5] - 2026-09-13
+
+### Fixed
+
+- The deployed assistant sent every request to the wrong URL: `VITE_SUPABASE_URL` had been pasted into the GitHub Actions secret with its `.env.local` shell-style quotes intact (`'https://...'`), which GitHub Actions stores verbatim. A value not starting with `http` is treated by the browser as a path relative to the current page rather than an absolute URL, so requests silently went to `athinodoros.boudourakis.com/'https://...'/...` and got a generic host 405 instead of ever reaching Supabase.
+- `useAssistantChat.ts` now strips stray surrounding quotes/whitespace from both Supabase env vars and validates the URL actually starts with `http(s)://`, falling back to the "not configured yet" notice instead of silently misfiring if this happens again.
+
 ## [1.3.4] - 2026-09-13
 
 ### Changed
