@@ -4,38 +4,59 @@
 }
 
 .LauncherButton {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 60px;
-  height: 60px;
+  /* Sized to the mascot itself (70px wide, ~86px tall at its 1.234 aspect
+     ratio) — the ring behind it is a separate, smaller decorative element,
+     not the button's own hit area. */
+  width: 70px;
+  height: 86px;
   padding: 0;
-  /* A persistent gold ring badge, matching the reference concept — not just
-     a hover accent. */
-  border: 1.5px solid var(--assistant-accent);
-  border-radius: 50%;
-
-  background: var(--assistant-surface);
-  box-shadow: 0 6px 20px var(--assistant-shadow);
+  border: none;
+  background: none;
   cursor: pointer;
 
-  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
-
-  &:hover,
-  &:focus-visible {
-    border-color: var(--assistant-accent-strong);
-    box-shadow: 0 8px 24px var(--assistant-shadow), 0 0 0 2px var(--assistant-accent-strong);
-  }
+  transition: transform 200ms ease;
 
   &:focus-visible {
     outline: 2px solid var(--royal-blue-soft);
     outline-offset: 3px;
+    border-radius: 50%;
   }
 
   &:active {
     transform: scale(0.96);
   }
+}
+
+/* The gold ring badge — deliberately smaller than the mascot and sitting
+   behind it, centered on the lower ~60% of its height so the clip's head
+   pokes out above (docs reference: Clip_reference.png). No fill — the page
+   background shows through, matching the reference's transparent center. */
+.Ring {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 1.5px solid var(--assistant-accent);
+  background: none;
+  box-shadow: 0 4px 14px var(--assistant-shadow);
+
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.LauncherButton:hover .Ring,
+.LauncherButton:focus-visible .Ring {
+  border-color: var(--assistant-accent-strong);
+  box-shadow: 0 6px 18px var(--assistant-shadow), 0 0 0 2px var(--assistant-accent-strong);
 }
 
 /* ---------- Tooltip ---------- */
@@ -69,11 +90,6 @@
 
 /* ---------- Responsive: mobile ---------- */
 @media (max-width: 640px) {
-  .LauncherButton {
-    width: 56px;
-    height: 56px;
-  }
-
   /* A finger, not a cursor, triggers "hover" on mobile — keep the tooltip for
      desktop pointer/keyboard use only, avoid it sticking after a tap. */
   .Tooltip {

@@ -51,7 +51,8 @@ const AssistantLauncher = forwardRef<HTMLButtonElement, AssistantLauncherProps>(
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
 			>
-				<ClipMascot state={mascotState} size={40} />
+				<span className={styles.Ring} aria-hidden="true" />
+				<ClipMascot state={mascotState} size={70} />
 			</button>
 		</div>
 	);
