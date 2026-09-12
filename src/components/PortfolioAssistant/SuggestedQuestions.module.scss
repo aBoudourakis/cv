@@ -1,0 +1,57 @@
+.Suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.SuggestionsLabel {
+  margin: 0;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ab-text-color-faint);
+}
+
+.SuggestionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.SuggestionChip {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--assistant-border);
+  border-radius: var(--radius-md);
+
+  background: var(--assistant-surface-alt);
+  color: var(--ab-text-color);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--ab-hyperlink-color);
+    color: var(--ab-hyperlink-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

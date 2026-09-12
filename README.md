@@ -12,6 +12,7 @@ The site presents professional experience, technical skills, education, certific
 - Responsive layout with light and dark theme support
 - Client-side routing with React Router
 - Automated production deployment to GitHub Pages
+- "Clip" — a floating, RAG-powered portfolio assistant that answers visitor questions grounded in the CV/portfolio content (see [Portfolio Assistant](#portfolio-assistant))
 
 ## Application routes
 
@@ -30,6 +31,8 @@ The site presents professional experience, technical skills, education, certific
 - SCSS modules
 - React Compiler
 - Oxlint
+- Vitest & Testing Library (component tests)
+- Supabase (Postgres/pgvector + Edge Functions) for the portfolio assistant's RAG backend
 
 ## Getting started
 
@@ -70,23 +73,49 @@ npm run preview
 npm run lint
 ```
 
+### Run tests
+
+```bash
+npm run test        # single run (vitest run)
+npm run test:watch  # watch mode
+```
+
 ## Project structure
 
 ```text
 src/
 ├── components/
-│   ├── core/       # Navigation, footer, and theme controls
-│   └── cv/         # CV content, data, and section components
+│   ├── core/                # Navigation, footer, and theme controls
+│   ├── cv/                  # CV content, data, and section components
+│   └── PortfolioAssistant/  # "Clip" — the floating RAG assistant UI (see below)
 ├── layouts/        # Shared application layout
 ├── pages/          # CV, portfolio, and contact routes
 ├── styles/         # Global styles and visual effects
+├── test/           # Vitest setup (jsdom polyfills, RTL cleanup)
 └── assets/         # Fonts, images, and the source CV PDF
 public/
 ├── certificates/   # Certificate documents
 └── *.pdf           # Portfolio work samples
+rag/                # Knowledge-base chunking/ingestion for the portfolio assistant (npm run rag:ingest)
+supabase/           # Database migrations + the portfolio-chat Edge Function
 ```
 
 The CV content is maintained as structured data in `src/components/cv/cvData.ts`, keeping the presentation components separate from the professional profile content.
+
+## Portfolio Assistant
+
+"Clip" is a floating assistant launcher (bottom-right on every CV/Portfolio page) that answers visitor questions using retrieval-augmented generation grounded in the CV/portfolio content — see `docs/Clip_bot_specification.md` for the UI spec and `docs/RAG Portfolio Assistant Implementation Specification.md` for the end-to-end architecture.
+
+The UI lives entirely in `src/components/PortfolioAssistant/` and talks to the already-deployed `supabase/functions/portfolio-chat` Edge Function. To run it locally against the real backend, set these in `.env.local` (see `.env.example`):
+
+```text
+VITE_SUPABASE_URL=       # the Supabase project URL
+VITE_SUPABASE_ANON_KEY=  # the project's anon/publishable key — never the service-role key
+```
+
+Without them, the assistant still renders (launcher, mascot, suggested questions) but shows a friendly "not configured yet" notice instead of calling the backend — it never crashes or silently fails.
+
+Cloudflare Turnstile bot verification is not wired into the frontend yet (see `useAssistantChat.ts`); the Edge Function currently only checks that a token was sent, not that it's valid.
 
 ## Deployment
 

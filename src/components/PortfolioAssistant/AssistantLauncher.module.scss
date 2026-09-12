@@ -1,0 +1,80 @@
+.LauncherWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.LauncherButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: 1px solid var(--assistant-border);
+  border-radius: 50%;
+
+  background: var(--assistant-surface);
+  box-shadow: 0 6px 20px var(--assistant-shadow);
+  cursor: pointer;
+
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--assistant-accent);
+    box-shadow: 0 8px 24px var(--assistant-shadow), 0 0 0 1px var(--assistant-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 3px;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+/* ---------- Tooltip ---------- */
+.Tooltip {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 12px);
+  transform: translateY(-50%) translateX(4px);
+
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--assistant-border);
+
+  background: var(--assistant-surface);
+  color: var(--ab-text-color);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px var(--assistant-shadow);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.TooltipVisible {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ---------- Responsive: mobile ---------- */
+@media (max-width: 640px) {
+  .LauncherButton {
+    width: 56px;
+    height: 56px;
+  }
+
+  /* A finger, not a cursor, triggers "hover" on mobile — keep the tooltip for
+     desktop pointer/keyboard use only, avoid it sticking after a tap. */
+  .Tooltip {
+    display: none;
+  }
+}

@@ -92,6 +92,18 @@
   --border-color: rgba(23, 26, 33, 0.08);
   --shadow-color: rgba(23, 43, 122, 0.14);
 
+  // Portfolio Assistant ("Clip") — derived from the palette above rather than a
+  // separate one, so the mascot/panel stay visually integrated in both themes.
+  --assistant-metal: var(--silver);
+  --assistant-metal-strong: var(--stone);
+  --assistant-highlight: var(--silver-light);
+  --assistant-accent: var(--gold);
+  --assistant-accent-strong: var(--gold-light);
+  --assistant-surface: #FFFFFF;
+  --assistant-surface-alt: var(--off-white);
+  --assistant-border: rgba(23, 26, 33, 0.12);
+  --assistant-shadow: rgba(23, 43, 122, 0.16);
+
   position: relative;
   z-index: 1;
 }
@@ -146,6 +158,17 @@ body.dark-mode {
   --background-highlight: #1c263b;
   --border-color: rgba(217, 222, 231, 0.1);
   --shadow-color: rgba(0, 0, 0, 0.55);
+
+  // Portfolio Assistant ("Clip") — dark glass-like surface, brighter metal/gold.
+  --assistant-metal: var(--silver-light);
+  --assistant-metal-strong: var(--silver);
+  --assistant-highlight: #EDF1F7;
+  --assistant-accent: var(--gold-light);
+  --assistant-accent-strong: var(--gold-light);
+  --assistant-surface: var(--navy-deep);
+  --assistant-surface-alt: #1B2233;
+  --assistant-border: rgba(217, 222, 231, 0.14);
+  --assistant-shadow: rgba(0, 0, 0, 0.5);
 }
 
 
