@@ -384,6 +384,13 @@ deno_version = 2
 # [edge_runtime.secrets]
 # secret_key = "env(SECRET_VALUE)"
 
+[functions.portfolio-chat]
+enabled = true
+# Requires the frontend to send the Supabase anon key as a Bearer token
+# (default supabase-js/functions.invoke() behaviour) — this is not a
+# public/unauthenticated endpoint.
+verify_jwt = true
+
 [analytics]
 enabled = true
 port = 54327
