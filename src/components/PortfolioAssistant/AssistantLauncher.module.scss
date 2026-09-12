@@ -39,18 +39,24 @@
 .Ring {
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 73%;
   transform: translate(-50%, -50%);
   z-index: 0;
 
-  width: 78px;
-  height: 78px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: 1.5px solid var(--assistant-accent);
   background: none;
   box-shadow: 0 4px 14px var(--assistant-shadow);
+  opacity: 0.5;
 
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  //transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition: all ease-in-out 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .LauncherButton:hover .Ring,

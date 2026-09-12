@@ -21,7 +21,7 @@
 /* ---------- States ---------- */
 
 .MascotRoot[data-state='hover'] {
-  transform: rotate(-4deg) translateY(-1px);
+  transform: rotate(-4deg) translateY(-1px) scale(1.1);
 }
 
 .MascotRoot[data-state='open'] {
