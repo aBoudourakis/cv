@@ -1,0 +1,29 @@
+.MascotRoot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--assistant-mascot-size, 56px);
+  /* Matches the source illustrations' aspect ratio (1129x1393). */
+  height: calc(var(--assistant-mascot-size, 56px) * 1.234);
+  transition: transform 220ms ease;
+}
+
+.MascotImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ---------- States ---------- */
+
+.MascotRoot[data-state='hover'] {
+  transform: rotate(-4deg) translateY(-1px) scale(1.1);
+}
+
+.MascotRoot[data-state='open'] {
+  transform: none;
+}
