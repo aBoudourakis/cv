@@ -18,9 +18,10 @@ The site presents professional experience, technical skills, education, certific
 
 | Route | Description |
 | --- | --- |
-| `/` | Curriculum vitae |
-| `/portfolio` | Selected work samples up to 2017 |
-| `/contact` | Contact page |
+| `/CV` (also `/cv`) | Curriculum vitae — the default view |
+| `/portfolio` (also `/Portfolio`) | Selected work samples up to 2017 |
+| `/covid-shield-cyprus` | COVID-19 Protective Face Shield Initiative case study |
+| `/` and any unmatched path | Redirects to `/CV` |
 
 ## Technology
 
@@ -33,6 +34,7 @@ The site presents professional experience, technical skills, education, certific
 - Oxlint
 - Vitest & Testing Library (component tests)
 - Supabase (Postgres/pgvector + Edge Functions) for the portfolio assistant's RAG backend
+- Mistral AI (embeddings + generation, pinned model snapshots) for the portfolio assistant
 
 ## Getting started
 
@@ -89,7 +91,7 @@ src/
 │   ├── cv/                  # CV content, data, and section components
 │   └── PortfolioAssistant/  # "Clip" — the floating RAG assistant UI (see below)
 ├── layouts/        # Shared application layout
-├── pages/          # CV, portfolio, and contact routes
+├── pages/          # CV, portfolio, and COVID-19 case-study routes
 ├── styles/         # Global styles and visual effects
 ├── test/           # Vitest setup (jsdom polyfills, RTL cleanup)
 └── assets/         # Fonts, images, and the source CV PDF
@@ -117,6 +119,12 @@ Without them, the assistant still renders (launcher, mascot, suggested questions
 
 Cloudflare Turnstile bot verification is not wired into the frontend yet (see `useAssistantChat.ts`); the Edge Function currently only checks that a token was sent, not that it's valid.
 
+The mascot's illustrated states live in `public/images/Clip/` (source PNGs) and `public/images/Clip/optimized/` (the WebP files actually loaded at runtime — re-encode with a tool like ffmpeg after replacing any source artwork, so the app keeps loading the small optimized versions rather than the multi-megabyte originals).
+
 ## Deployment
 
 Pushes to the `main` branch build the Vite application and deploy the generated `dist/` directory to GitHub Pages through the workflow in `.github/workflows/deploy.yml`.
+
+## Changelog
+
+Notable changes are tracked in [CHANGELOG.md](CHANGELOG.md).
