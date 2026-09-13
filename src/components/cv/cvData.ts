@@ -546,6 +546,14 @@ export const projects: ProjectItem[] = [
 	{
 		page: 2,
 		period: '2016',
+		title: 'Pathfinder — Digital Art & Audiovisual Production',
+		source: 'Skitali / nowwhat',
+		sourceUrl: 'https://nowwhat.com.cy/projects/skitali/aboudourakis/',
+		description: 'Original audiovisual artwork created for Skitali, a collaborative video-art project and digital archive supported by the Cyprus Ministry of Education and Culture',
+	},
+	{
+		page: 2,
+		period: '2016',
 		title: '3D Modelling & Digitalization of Cultural Heritage content',
 		source: 'APSIDA',
 		sourceUrl: 'https://apsida.cut.ac.cy/collections/show/141',
