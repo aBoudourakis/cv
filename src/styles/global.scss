@@ -250,3 +250,21 @@ body.dark-mode {
   margin-right: 0.35em;
   color: var(--ab-hyperlink-color);
 }
+
+/* Beyond Work music player controls (see MusicWorkCard.tsx). */
+.ab-icon--pause {
+  width: 0.85em;
+  height: 0.85em;
+}
+
+.ab-icon--loading {
+  width: 0.85em;
+  height: 0.85em;
+  animation: ab-icon-spin 900ms linear infinite;
+}
+
+@keyframes ab-icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

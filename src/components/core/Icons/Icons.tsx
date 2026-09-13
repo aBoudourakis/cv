@@ -35,3 +35,37 @@ export function PlayIcon() {
 		</svg>
 	);
 }
+
+/** Used by the Beyond Work music player's play/pause control (see MusicWorkCard.tsx). */
+export function PauseIcon() {
+	return (
+		<svg
+			className="ab-icon ab-icon--pause"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path d="M7 5h3v14H7zm7 0h3v14h-3z" fill="currentColor" />
+		</svg>
+	);
+}
+
+/** A single quiet spinner arc, rotated via CSS — used while a music sample is loading. */
+export function LoadingIcon() {
+	return (
+		<svg
+			className="ab-icon ab-icon--loading"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path
+				d="M12 3a9 9 0 1 0 9 9"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+			/>
+		</svg>
+	);
+}

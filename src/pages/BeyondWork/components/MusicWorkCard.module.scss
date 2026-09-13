@@ -1,0 +1,205 @@
+/*
+ * A discreet portfolio entry, not a media-player widget: a round outline
+ * play/pause button in the CV's "downloadButton" visual language, a quiet
+ * metadata line, and a slim custom range control. No cards-within-cards,
+ * no waveform, no album-art placeholder gradients.
+ */
+
+.Card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--ab-divider-color);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* Mirrors CVContent's .downloadButton treatment (outline + header color, hyperlink on hover). */
+.PlayButton {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 2px;
+  border: 1px solid var(--ab-header-color);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ab-header-color);
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--ab-hyperlink-color);
+    color: var(--ab-hyperlink-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.Info {
+  min-width: 0;
+  flex: 1;
+}
+
+.Title {
+  margin: 0 0 2px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ab-text-color);
+}
+
+.Meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ab-text-color-faint);
+}
+
+.Description {
+  margin: var(--space-3xs) 0 0;
+  max-width: 58ch;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ab-text-color-faint);
+}
+
+/* ---------- Progress control ---------- */
+.ProgressRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.Time {
+  flex-shrink: 0;
+  min-width: 80px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  color: var(--ab-text-color-faint);
+}
+
+/* Custom range: a slim 4px track with a comfortable ~32px tall hit area, so
+   it stays easy to grab on touch without looking oversized. The played
+   portion is drawn via a CSS-variable-driven gradient (WebKit/Blink, which
+   have no fill pseudo-element) or the native ::-moz-range-progress
+   (Firefox) — both read the same --ab-hyperlink-color/--ab-divider-color
+   tokens, so light/dark just falls out of the existing theme. */
+.Progress {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1 1 140px;
+  min-width: 120px;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      var(--ab-hyperlink-color) var(--progress-percent, 0%),
+      var(--ab-divider-color) var(--progress-percent, 0%)
+    );
+  }
+
+  &::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--ab-divider-color);
+  }
+
+  &::-moz-range-progress {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--ab-hyperlink-color);
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    margin-top: -5px;
+    border: 2px solid var(--ab-background-color);
+    border-radius: 50%;
+    background: var(--ab-hyperlink-color);
+    box-shadow: 0 0 0 1px var(--ab-divider-color);
+    transition: transform 120ms ease;
+  }
+
+  &::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--ab-background-color);
+    border-radius: 50%;
+    background: var(--ab-hyperlink-color);
+    box-shadow: 0 0 0 1px var(--ab-divider-color);
+    transition: transform 120ms ease;
+  }
+
+  &:hover:not(:disabled)::-webkit-slider-thumb,
+  &:focus-visible::-webkit-slider-thumb {
+    transform: scale(1.2);
+  }
+
+  &:hover:not(:disabled)::-moz-range-thumb,
+  &:focus-visible::-moz-range-thumb {
+    transform: scale(1.2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+
+  &:disabled {
+    cursor: default;
+
+    &::-webkit-slider-runnable-track {
+      background: var(--ab-divider-color);
+    }
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
+      opacity: 0.5;
+    }
+  }
+}
+
+.ErrorMessage {
+  margin: var(--space-3xs) 0 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ab-text-color-faint);
+}
+
+@media (max-width: 400px) {
+  .Time {
+    min-width: 0;
+    text-align: left;
+  }
+}

@@ -141,6 +141,25 @@
   }
 }
 
+/* "Beyond Work" reads as additional, optional context rather than a third
+   primary CV/Portfolio-weight destination — reduced opacity at rest, full
+   opacity on hover/focus/active. Active/hover state is still communicated
+   through color and the underline above (never opacity alone), so it stays
+   legible and doesn't read as disabled. */
+.NavItemSecondary {
+  opacity: 0.72;
+  transition: opacity 180ms ease, color 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+  }
+
+  &.Active {
+    opacity: 1;
+  }
+}
+
 /* ---------- Responsive ---------- */
 /* First, moderately shrink the inline wordmark rather than dropping it. */
 @media (max-width: 560px) {
@@ -180,5 +199,16 @@
 
   .BrandMonogramCompact {
     display: inline-flex;
+  }
+
+  /* A third nav label ("Beyond Work") needs a bit more headroom than CV/Portfolio
+     alone did at this width — tighten gap and type size slightly rather than
+     letting the row overflow. */
+  .SiteNav {
+    gap: var(--space-xs);
+  }
+
+  .NavItem {
+    font-size: 14px;
   }
 }

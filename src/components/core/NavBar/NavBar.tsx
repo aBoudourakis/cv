@@ -4,9 +4,10 @@ import ThemeSwitch from 'src/components/core/ThemeSwitch/ThemeSwitch.tsx';
 
 export default function NavBar() {
 	/** CONSTS **/
-	const navItems = [
+	const navItems: { name: string; href: string; secondary?: boolean }[] = [
 		{ name: 'CV', href: '/CV' },
 		{ name: 'Portfolio', href: '/portfolio' },
+		{ name: 'Beyond Work', href: '/beyond-work', secondary: true },
 	];
 	const location = useLocation();
 
@@ -59,7 +60,11 @@ export default function NavBar() {
 							key={item.href}
 							to={item.href}
 							className={({ isActive }) =>
-								`${styles.NavItem} ${isActive ? styles.Active : ''}`
+								[
+									styles.NavItem,
+									item.secondary ? styles.NavItemSecondary : '',
+									isActive ? styles.Active : '',
+								].filter(Boolean).join(' ')
 							}
 						>
 							{item.name}

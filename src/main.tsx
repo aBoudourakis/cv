@@ -6,6 +6,7 @@ import App from './App.tsx'
 import CV from './pages/CV/CV.tsx'
 import Portfolio from './pages/Portfolio/Portfolio.tsx'
 import CovidShieldCyprus from "src/pages/CovidShieldCyprus/CovidShieldCyprus.tsx";
+import BeyondWork from "src/pages/BeyondWork/BeyondWork.tsx";
 import BlankLayout from "src/layouts/blankLayout.tsx";
 
 const router = createBrowserRouter([
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'Portfolio',
         Component: Portfolio,
+      },
+      {
+        path: 'beyond-work',
+        Component: BeyondWork,
+      },
+      {
+        path: 'Beyond-Work',
+        element: <Navigate to="/beyond-work" replace />,
       },
       {
         path: '*',
