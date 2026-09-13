@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.9] - 2026-09-13
+
+### Added
+
+- Assistant-only professional knowledge layer: a new `assistant_knowledge` Supabase table (RLS-locked, `service_role`-only) holds curated, recruiter-facing professional context — working style, career/technology preferences, architecture priorities, real-time and AI project depth — that isn't necessarily rendered on the CV page itself. `rag/ingest.ts` now embeds its enabled rows alongside the public CV data into the same `portfolio_documents` index, each row tagged with `visibility` (`public`/`assistant_only`) and `priority` for internal debugging and a modest retrieval ranking nudge — see `docs/RAG Portfolio Assistant Implementation Specification.md` §39 for the architecture and how to add/update/disable an entry.
+- `rag/evaluation/questions.json` and `npm run rag:evaluate` — a RAG evaluation dataset and script covering both knowledge sources.
+
 ## [1.3.6] - 2026-09-13
 
 ### Fixed

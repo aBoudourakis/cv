@@ -108,6 +108,8 @@ The CV content is maintained as structured data in `src/components/cv/cvData.ts`
 
 "Clip" is a floating assistant launcher (bottom-right on every CV/Portfolio page) that answers visitor questions using retrieval-augmented generation grounded in the CV/portfolio content — see `docs/Clip_bot_specification.md` for the UI spec and `docs/RAG Portfolio Assistant Implementation Specification.md` for the end-to-end architecture.
 
+The knowledge base is built from two sources: the public CV/portfolio data (`src/components/cv/cvData.ts`) and a curated, recruiter-facing `assistant_knowledge` table (working style, career preferences, architectural priorities, etc.) that isn't necessarily rendered on the CV page itself — see spec §39, "Assistant-Only Professional Knowledge Layer", for how the two are combined and how to add/update/disable an entry.
+
 The UI lives entirely in `src/components/PortfolioAssistant/` and talks to the already-deployed `supabase/functions/portfolio-chat` Edge Function. To run it locally against the real backend, set these in `.env.local` (see `.env.example`):
 
 ```text

@@ -1342,4 +1342,95 @@ remaining known limitations
 
 Stop after the feature branch is complete and tested.
 
+---
+
+# 39. Assistant-Only Professional Knowledge Layer
+
+The knowledge base has two sources of truth, normalized into the same chunk
+shape and embedded into the same `portfolio_documents` table:
+
+```text
+Public CV/portfolio data              Curated assistant-only knowledge
+(src/components/cv/cvData.ts)         (assistant_knowledge table)
+        │                                      │
+        └──────────────┬───────────────────────┘
+                        ▼
+              rag/ingest.ts (normalize, hash, chunk)
+                        ▼
+                   embeddings
+                        ▼
+              portfolio_documents (RAG retrieval index)
+```
+
+**Public CV data** (`rag/chunk.ts`) is exactly what a visitor can already see
+on the CV page — the same content, chunked for retrieval.
+
+**Assistant-only knowledge** (`assistant_knowledge` table, read by
+`rag/assistantKnowledge.ts`) is additional recruiter-facing professional
+context that is deliberately *not* rendered on the one-page CV — working
+style, career/technology preferences, architectural priorities, depth on
+real-time/AI work, etc. It lets the assistant answer questions a recruiter,
+hiring manager, or technical interviewer would reasonably ask, without
+cluttering the CV itself. It stays strictly professional — see the seed
+migration's header comment for what's explicitly excluded (medical,
+financial, family, political/religious, and other personal information).
+
+`portfolio_documents` remains a derived index, not an editorial source: every
+row there was produced by ingesting one of the two sources above, and is
+never hand-edited directly. Each row carries `visibility` (`'public'` or
+`'assistant_only'`) and `priority` (1-3) — internal bookkeeping for
+debugging and a **modest** ranking signal, respectively. Priority never
+overrides semantic relevance; see `match_portfolio_documents` in
+`supabase/migrations/20260913090100_add_portfolio_documents_visibility_priority.sql`.
+Neither field is exposed to visitors — `supabase/functions/portfolio-chat/index.ts`'s
+`toSource()` only ever forwards `id`, `title`, `category`, `source`, `url`
+and `sectionId`. Assistant-only sources naturally have no `url`/`sectionId`
+(nothing was fabricated — `AssistantSources.tsx` renders them as plain,
+non-clickable text with a friendly `Category · Title` label, e.g.
+"Working Style · Engineering Working Style" — never a raw table/row id).
+
+## Maintaining assistant-only knowledge
+
+Entries live in version-controlled migrations, not as rows edited by hand in
+Supabase Studio:
+
+- **Add an entry** — add a new migration with an
+  `insert into assistant_knowledge (...) values (...) on conflict (slug) do update ...`
+  statement (see `supabase/migrations/20260913090200_seed_assistant_knowledge.sql`
+  for the pattern). Pick a category from the list in that table's `category`
+  column comment, a `priority` (1 = supporting/general, 2 = relevant, 3 =
+  strong/authoritative), and keep `content` concise enough to work well as a
+  single RAG chunk (roughly CV-chunk-sized — a paragraph, not an essay).
+- **Update an entry** — add a migration that re-inserts the same `slug` with
+  new `title`/`content`/`category`/`source_label`/`priority`; the
+  `on conflict (slug) do update` upsert applies it idempotently.
+- **Disable an entry** — add a migration that sets `enabled = false` for that
+  `slug`. `rag/ingest.ts` only reads `enabled = true` rows, so a disabled
+  entry is skipped on the next ingest and its previously-embedded row is
+  deleted from `portfolio_documents` (same "no longer produced" cleanup
+  ingestion already does for removed CV entries).
+- **Apply migrations**: `npx supabase db push` (or your usual Supabase
+  migration workflow).
+- **Re-run ingestion**: `npm run rag:ingest` — embeds only new/changed
+  content (public or assistant-only) via the existing sha256 content-hash
+  check in `rag/diff.ts`; unchanged chunks are never re-embedded. Preview
+  first with `npm run rag:ingest:dry` (public CV chunks only — the dry-run
+  never touches Supabase, so it can't preview `assistant_knowledge` rows;
+  the output says so explicitly).
+- **Verify retrieval**: `npm run rag:search -- "your question"` for a single
+  question, or `npm run rag:evaluate` to run the full dataset in
+  `rag/evaluation/questions.json` and check that each question's top matches
+  include at least one expected category.
+
+## Security
+
+`assistant_knowledge` uses the same locked-down RLS pattern as
+`portfolio_documents`: RLS enabled, zero `anon`/`authenticated` policies, and
+explicit grants to `service_role` only (see
+`supabase/migrations/20260913090000_add_assistant_knowledge.sql`). It is
+never queried at request time by `supabase/functions/portfolio-chat` — only
+`rag/ingest.ts`, running locally/in CI with `SUPABASE_SERVICE_ROLE_KEY`,
+reads it. The service-role key is never sent to, or reachable from, the
+browser bundle.
+
 Wait for explicit approval before merging.

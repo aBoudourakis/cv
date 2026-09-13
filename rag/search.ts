@@ -43,6 +43,8 @@ interface MatchRow {
 	source_url: string | null;
 	section_id: string | null;
 	metadata: Record<string, unknown>;
+	visibility: string;
+	priority: number;
 	similarity: number;
 }
 
@@ -130,7 +132,10 @@ async function main() {
 	}
 
 	matches.forEach((match, index) => {
-		console.log(`${index + 1}. [${match.similarity.toFixed(4)}] ${match.title} (${match.category}, id=${match.id})`);
+		console.log(
+			`${index + 1}. [${match.similarity.toFixed(4)}] ${match.title} (${match.category}, id=${match.id}, ` +
+				`${match.visibility}, priority=${match.priority})`,
+		);
 		console.log(`   ${previewOf(match.content)}`);
 		if (match.source_url) {
 			console.log(`   source: ${match.source ?? match.source_url} — ${match.source_url}`);
