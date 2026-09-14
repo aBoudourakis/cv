@@ -1,3 +1,5 @@
+import type {ReactNode} from 'react';
+
 // Page-local content for the "Beyond Work" page — kept separate from
 // presentation (BeyondWork.tsx) and styling (BeyondWork.module.scss),
 // mirroring the project's data/component/style separation used elsewhere
@@ -31,6 +33,28 @@ export interface musicWorkEntry {
 	type?: string;
 	instruments?: string[];
 	description?: string;
+}
+
+export interface InterestActivityMoreItem {
+	title: string;
+	description?: string;
+}
+
+/**
+ * The optional "more" detail behind an interest/activity's info icon.
+ * Deliberately a plain union rather than a `{type: ...}` discriminated one —
+ * the real data today only ever needs the structured-item-list form, with
+ * plain text or a custom ReactNode anticipated as the only other cases (see
+ * InterestActivityItem.tsx, which tells the list form apart from everything
+ * else with a runtime shape check rather than a stored tag).
+ */
+export type InterestActivityMore = InterestActivityMoreItem[] | ReactNode;
+
+export interface InterestActivity {
+	name: string;
+	description?: string;
+	/** Only rendered as an info icon + popover when present and non-empty — see InterestActivityItem.tsx. */
+	more?: InterestActivityMore;
 }
 
 export interface WorkingTrait {
@@ -85,25 +109,26 @@ export const musicWorks: musicWorkEntry[] = [
 	}
 ];
 
-export const interestsActivities = [
+export const interestsActivities: InterestActivity[] = [
 	{
 		name: 'Martial Arts',
-		description: 'Practiced Kung Fu and Tai Chi intensively for approximately 8 years.',
+		description: 'Practiced Kung Fu and Tai Chi intensively for approximately 10 years.',
 		more: [
 			{title: 'Hapkido', description: '1 year'},
 			{title: 'Ying Jow Pai Kung Fu', description: '1 year'},
-			{title: 'Northern Fist Shaolin Kung Fu', description: '6 years'},
+			{title: 'Northern Fist Shaolin Kung Fu', description: '4 years'},
 			{title: 'Traditional Yang Style Tai Chi', description: '2 years'},
+			{title: "Kung Fu To'a", description: '2 years'},
 			{title: 'Wu Style Tai Chi', description: '1 year'},
 		]
 	},
 	{
 		name: 'Archery',
-		description: 'Approximately 2 years of consistent recurve bow practice',
+		description: 'Approximately 2 years of recurve bow training',
 	},
 	{
 		name: 'Kayaking',
-		description: 'An outdoor sport I practiced regularly for several years.',
+		description: 'An outdoor sport I practiced regularly for some years.',
 	},
 	{
 		name: 'Fishing',

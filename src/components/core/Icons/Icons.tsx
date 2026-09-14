@@ -50,6 +50,22 @@ export function PauseIcon() {
 	);
 }
 
+/** Used by the Beyond Work "Interests & Activities" info control (see InterestActivityItem.tsx). */
+export function InfoIcon() {
+	return (
+		<svg
+			className="ab-icon ab-icon--info"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+			<line x1="12" y1="11" x2="12" y2="16.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+			<circle cx="12" cy="7.75" r="1.15" fill="currentColor" />
+		</svg>
+	);
+}
+
 /** A single quiet spinner arc, rotated via CSS — used while a music sample is loading. */
 export function LoadingIcon() {
 	return (

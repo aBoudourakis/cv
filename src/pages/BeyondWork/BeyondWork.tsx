@@ -1,5 +1,6 @@
 import styles from './BeyondWork.module.scss';
 import MusicWorks from './components/MusicWorks';
+import InterestActivityItem from './components/InterestActivityItem';
 import {
 	creativeInterests,
 	interestsActivities,
@@ -49,15 +50,13 @@ export default function BeyondWork() {
 
 					<MusicWorks/>
 
-					<section className={styles.Section} aria-labelledby="beyond-work-disciplines">
-						<h2 className={styles.SectionHeading} id="beyond-work-disciplines">
-							Disciplines &amp; Activities
+					<section className={styles.Section} aria-labelledby="beyond-work-interests-activities">
+						<h2 className={styles.SectionHeading} id="beyond-work-interests-activities">
+							Interests &amp; Activities
 						</h2>
-						<ul className={styles.DisciplineList}>
+						<ul className={styles.ActivityList}>
 							{interestsActivities.map((activity) => (
-								<li className={styles.ActivityItem} key={activity.name}>
-									{activity.name}
-								</li>
+								<InterestActivityItem activity={activity} key={activity.name}/>
 							))}
 						</ul>
 					</section>

@@ -132,25 +132,15 @@
   color: var(--ab-text-color-faint);
 }
 
-/* ---------- Disciplines & Activities ---------- */
-/* A quiet index of names rather than a technical skill list — no bullets,
-   no pills, just hairline separators and generous vertical rhythm. */
-.DisciplineList {
+/* ---------- Interests & Activities ---------- */
+/* A quiet index of name/description pairs rather than a technical skill
+   list — no bullets, no pills, just hairline separators and generous
+   vertical rhythm. Each entry's own styling lives in
+   components/InterestActivityItem.module.scss. */
+.ActivityList {
   margin: var(--space-md) 0 0;
   padding: 0;
   list-style: none;
-}
-
-.ActivityItem {
-  padding: var(--space-xs) 0;
-  font-family: var(--font-body), sans-serif;
-  font-size: 0.98rem;
-  color: var(--ab-text-color);
-  border-bottom: 1px solid var(--ab-divider-color);
-
-  &:last-child {
-    border-bottom: 0;
-  }
 }
 
 /* ---------- How I Work ---------- */
