@@ -1,8 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap');
+// Roboto (body text) is the only family actually loaded from Google Fonts —
+// Cinzel is self-hosted below, so the request only asks Google for the
+// weights that aren't already local (previously this @import also requested
+// Cinzel 400/500/600/700, which the local @font-face rules below immediately
+// shadowed for 400/600/700 — a duplicate fetch of a font that was never
+// rendered). The stylesheet itself is loaded non-blocking from index.html
+// (see the preload/onload swap there) rather than via @import, which is
+// always render-blocking.
 
 @font-face {
   font-family: 'Cinzel';
-  src: url('src/assets/fonts/Cinzel-Regular.ttf') format('truetype');
+  // WOFF2 first (same glyphs, ~65% smaller than the TTF — every current
+  // browser supports it); the TTF stays as a fallback source and as the
+  // original, uncompressed asset (see src/assets/fonts/*.ttf).
+  src:
+    url('src/assets/fonts/Cinzel-Regular.woff2') format('woff2'),
+    url('src/assets/fonts/Cinzel-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -10,7 +22,9 @@
 
 @font-face {
   font-family: 'Cinzel';
-  src: url('src/assets/fonts/Cinzel-SemiBold.ttf') format('truetype');
+  src:
+    url('src/assets/fonts/Cinzel-SemiBold.woff2') format('woff2'),
+    url('src/assets/fonts/Cinzel-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -18,7 +32,9 @@
 
 @font-face {
   font-family: 'Cinzel';
-  src: url('src/assets/fonts/Cinzel-Bold.ttf') format('truetype');
+  src:
+    url('src/assets/fonts/Cinzel-Bold.woff2') format('woff2'),
+    url('src/assets/fonts/Cinzel-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

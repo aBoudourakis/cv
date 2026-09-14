@@ -39,7 +39,14 @@ export default function ArtWork() {
 									onClick={() => setOpenItem(item)}
 									aria-haspopup="dialog"
 								>
-									<img src={item.file} alt={item.title} loading="lazy" decoding="async"/>
+									<img
+										src={item.file}
+										alt={item.title}
+										width={item.width}
+										height={item.height}
+										loading="lazy"
+										decoding="async"
+									/>
 								</button>
 							))}
 						</div>

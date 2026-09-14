@@ -4,11 +4,16 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import CV from './pages/CV/CV.tsx'
-import Portfolio from './pages/Portfolio/Portfolio.tsx'
-import CovidShieldCyprus from "src/pages/CovidShieldCyprus/CovidShieldCyprus.tsx";
-import BeyondWork from "src/pages/BeyondWork/BeyondWork.tsx";
 import BlankLayout from "src/layouts/blankLayout.tsx";
 
+// CV stays a static import: it's the index route (see the `index: true`
+// redirect below) and the highest-traffic page on a CV/portfolio site, so
+// shipping it in the main bundle avoids the extra chunk round-trip on the
+// most common first visit. Portfolio, Beyond Work and the standalone
+// COVID Shield Cyprus page are secondary routes — `lazy` (react-router's
+// route-level code splitting, https://reactrouter.com/start/framework/route-module#lazy)
+// keeps their code, styles and page-specific assets out of that initial
+// bundle entirely, so a CV-only visit never downloads them.
 const router = createBrowserRouter([
   {
     path: '/',
@@ -28,15 +33,15 @@ const router = createBrowserRouter([
       },
       {
         path: 'portfolio',
-        Component: Portfolio,
+        lazy: () => import('./pages/Portfolio/Portfolio.tsx').then((m) => ({ Component: m.default })),
       },
       {
         path: 'Portfolio',
-        Component: Portfolio,
+        lazy: () => import('./pages/Portfolio/Portfolio.tsx').then((m) => ({ Component: m.default })),
       },
       {
         path: 'beyond-work',
-        Component: BeyondWork,
+        lazy: () => import('./pages/BeyondWork/BeyondWork.tsx').then((m) => ({ Component: m.default })),
       },
       {
         path: 'Beyond-Work',
@@ -54,7 +59,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: CovidShieldCyprus,
+        lazy: () =>
+          import('src/pages/CovidShieldCyprus/CovidShieldCyprus.tsx').then((m) => ({ Component: m.default })),
       },
     ],
   },

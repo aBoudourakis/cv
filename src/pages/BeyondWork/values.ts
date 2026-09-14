@@ -132,6 +132,12 @@ export interface ArtWorkItem {
 	title: string;
 	/** Public-root path under /public/art, e.g. '/art/paintings/paintings_01.webp'. */
 	file: string;
+	/** Source image's intrinsic pixel size — lets the thumbnail <img> (fixed
+	 *  CSS height, auto width; see ArtWork.module.scss) reserve its correct
+	 *  width before the (lazy-loaded) image itself arrives, instead of the
+	 *  row reflowing as each thumbnail pops in. */
+	width: number;
+	height: number;
 }
 
 export interface ArtWorksSection {
@@ -156,18 +162,26 @@ export const artWorkSubSection1: ArtWorksSection = {
 		{
 			title: 'Acrylics and pencil on canvas',
 			file: '/art/paintings/paintings_01.webp',
+			width: 963,
+			height: 431,
 		},
 		{
 			title: 'Oil and pencil on canvas',
 			file: '/art/paintings/paintings_02.webp',
+			width: 998,
+			height: 493,
 		},
 		{
 			title: 'Acrylics and pencil on canvas',
 			file: '/art/paintings/paintings_03.webp',
+			width: 971,
+			height: 344,
 		},
 		{
 			title: 'Acrylics and pencil on canvas',
 			file: '/art/paintings/paintings_04.webp',
+			width: 969,
+			height: 611,
 		},
 	]
 }
@@ -180,14 +194,20 @@ export const artWorkSubSection2: ArtWorksSection = {
 		{
 			title: '3D Bell Modelling, Camera Matching, Lighting & CGI Compositing',
 			file: '/art/digital/digital_01.webp',
+			width: 1196,
+			height: 389,
 		},
 		{
 			title: '3D Car Modelling, Camera Matching, Lighting & CGI Compositing',
 			file: '/art/digital/digital_02.webp',
+			width: 943,
+			height: 671,
 		},
 		{
 			title: 'Photomanipulation & Digital Compositing',
 			file: '/art/digital/digital_03.webp',
+			width: 831,
+			height: 601,
 		},
 	]
 }

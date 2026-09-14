@@ -41,7 +41,7 @@ export default function NavBar() {
 					<span className={styles.BrandNamePart}>Athinodoros</span>
 					<img
 						className={styles.BrandMonogram}
-						src="/images/Monogram_favicon_512.png"
+						src="/images/Monogram_favicon_128.webp"
 						alt=""
 						aria-hidden="true"
 					/>
@@ -49,7 +49,7 @@ export default function NavBar() {
 				</span>
 				<img
 					className={styles.BrandMonogramCompact}
-					src="/images/Monogram_favicon_512.png"
+					src="/images/Monogram_favicon_128.webp"
 					alt=""
 					aria-hidden="true"
 				/>

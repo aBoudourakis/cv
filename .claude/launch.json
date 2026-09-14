@@ -7,6 +7,12 @@
       "runtimeArgs": ["run", "dev"],
       "port": 443,
       "url": "https://dev.athos-cv.com"
+    },
+    {
+      "name": "athos-cv-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "-l", "4174", "-s", "dist"],
+      "port": 4174
     }
   ]
 }
