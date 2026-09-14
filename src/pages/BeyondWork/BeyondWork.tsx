@@ -2,8 +2,7 @@ import styles from './BeyondWork.module.scss';
 import MusicWorks from './components/MusicWorks';
 import {
 	creativeInterests,
-	disciplines,
-	disciplinesIntro,
+	interestsActivities,
 	intro,
 	workingTraits,
 } from './values';
@@ -54,16 +53,10 @@ export default function BeyondWork() {
 						<h2 className={styles.SectionHeading} id="beyond-work-disciplines">
 							Disciplines &amp; Activities
 						</h2>
-						<div className={styles.Entry}>
-							<h3 className={styles.EntryTitle}>{disciplinesIntro.title}</h3>
-							{disciplinesIntro.description && (
-								<p className={styles.EntryDescription}>{disciplinesIntro.description}</p>
-							)}
-						</div>
 						<ul className={styles.DisciplineList}>
-							{disciplines.map((discipline) => (
-								<li className={styles.DisciplineItem} key={discipline.title}>
-									{discipline.title}
+							{interestsActivities.map((activity) => (
+								<li className={styles.ActivityItem} key={activity.name}>
+									{activity.name}
 								</li>
 							))}
 						</ul>

@@ -85,52 +85,29 @@ export const musicWorks: musicWorkEntry[] = [
 	}
 ];
 
-/**
- * "Disciplines & Activities" — the martial arts intro entry carries the
- * shared context (years of practice); each discipline below is its own
- * entry so a style, school or description can be attached individually
- * later without restructuring this list.
- */
-export const disciplinesIntro: BeyondWorkEntry = {
-	title: 'Martial Arts',
-	description: 'Approximately 8 years of consistent Kung Fu and Tai Chi practice, often training across multiple daily classes.',
-};
-
-export const disciplines: BeyondWorkEntry[] = [
-	{title: 'Hapkido', description: '1 year'},
-	{title: 'Ying Jow Pai Kung Fu', description: '1 year'},
-	{title: 'Northern Fist Shaolin Kung Fu', description: '6 years'},
-	{title: 'Traditional Yang Style Tai Chi', description: '2 years'},
-	{title: 'Wu Style Tai Chi', description: '1 year'},
-];
-
-export const disciplinesList: disciplineEntry[] = [
+export const interestsActivities = [
 	{
 		name: 'Martial Arts',
-		description: 'Approximately 8 years of consistent Kung Fu and Tai Chi practice, often training across multiple daily classes.',
-		items: [{title: 'Hapkido', description: '1 year'},
+		description: 'Practiced Kung Fu and Tai Chi intensively for approximately 8 years.',
+		more: [
+			{title: 'Hapkido', description: '1 year'},
 			{title: 'Ying Jow Pai Kung Fu', description: '1 year'},
 			{title: 'Northern Fist Shaolin Kung Fu', description: '6 years'},
 			{title: 'Traditional Yang Style Tai Chi', description: '2 years'},
-			{title: 'Wu Style Tai Chi', description: '1 year'},]
+			{title: 'Wu Style Tai Chi', description: '1 year'},
+		]
 	},
 	{
 		name: 'Archery',
 		description: 'Approximately 2 years of consistent recurve bow practice',
-		items: [{
-			title: 'Recurve Bow', description: 'Primary discipline',
-		},]
 	},
 	{
 		name: 'Kayaking',
-		description: 'Approximately 1 year of consistent kayaking practice',
-		items: [{
-			title: 'Kayaking', description: 'Primary discipline',
-		},]
+		description: 'An outdoor sport I practiced regularly for several years.',
 	},
 	{
 		name: 'Fishing',
-		description: 'An occasional early-morning hobby focused on quiet time outdoors.',
+		description: 'A former recreational hobby, mainly early-morning small-boat fishing with rod and net equipment.',
 	}
 ];
 
