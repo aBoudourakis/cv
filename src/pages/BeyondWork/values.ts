@@ -103,6 +103,14 @@ export const musicWorks: musicWorkEntry[] = [
 		instruments: ['Electric Guitars', 'Bass Guitar', 'Drums'],
 	},
 	{
+		id: 'snowglobe2',
+		file: '/audio/Snowglobe_demo_pt2.mp3',
+		title: 'Snowglobe Part 2',
+		type: 'Composition',
+		description: 'A heavy metal composition.',
+		instruments: ['Electric Guitars', 'Bass Guitar', 'Drums'],
+	},
+	{
 		id: 'avalanche',
 		file: '/audio/Avalanche_demo.mp3',
 		title: 'Avalanche',
