@@ -1,33 +1,9 @@
 /*
- * Mirrors the section-heading/intro/spacing rules already established in
- * ../BeyondWork.module.scss (.Section/.SectionHeading/.IntroText) — each
- * page-level section owns its own copy of these small heading rules rather
- * than sharing a component, matching the pattern already used across
- * CVContent/Portfolio/BeyondWork.
+ * The section heading/intro for "Music & Composition" now live directly in
+ * ../BeyondWork.module.scss (.SectionHeading/.SectionIntro) — MusicWorks.tsx
+ * renders only the track list + shared hidden <audio> element, wrapped by
+ * BeyondWork.tsx's own <section>.
  */
-
-.MusicWorks {
-  margin-bottom: var(--space-2xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--ab-divider-color);
-}
-
-.SectionHeading {
-  margin: 0 0 var(--space-2xs);
-  font-family: var(--font-title), serif;
-  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--ab-header-color);
-}
-
-.SectionIntro {
-  margin: 0 0 var(--space-lg);
-  max-width: 58ch;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--ab-text-color-faint);
-}
 
 .TrackList {
   display: flex;
@@ -46,10 +22,4 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-@media (max-width: 560px) {
-  .MusicWorks {
-    padding-top: var(--space-lg);
-  }
 }

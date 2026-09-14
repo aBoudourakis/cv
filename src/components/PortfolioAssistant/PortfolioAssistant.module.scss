@@ -1,8 +1,8 @@
 .Root {
   position: fixed;
   z-index: 40;
-  right: clamp(16px, 4vw, 32px);
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 56px);
+  right: clamp(20px, 4vw, 36px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 64px);
 
   display: flex;
   flex-direction: column;
@@ -35,6 +35,6 @@
     /* Clears the site footer (its text can wrap to two lines on very narrow
        viewports) — matches the desktop clearance below rather than sitting
        right on the safe-area edge. */
-    margin: 0 16px calc(env(safe-area-inset-bottom, 0px) + 44px) 0;
+    margin: 0 18px calc(env(safe-area-inset-bottom, 0px) + 50px) 0;
   }
 }

@@ -3,6 +3,12 @@
  * boundaries, no pills/badges/progress bars, generous whitespace. Reuses the
  * app's existing tokens (colors, fonts, spacing) rather than a separate
  * design system — see src/styles/global.scss.
+ *
+ * Visual iteration (see conversation) — one consistent content column,
+ * section headings pulled off bright blue and onto the same muted ink the
+ * hero title already uses, and a single symmetric spacing formula for every
+ * major-section transition instead of each section stacking its own
+ * independent margin/padding.
  */
 
 .BeyondWork {
@@ -23,9 +29,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* Narrower than the CV's column — this page is read, not scanned. */
+/* Narrower than the CV's column — this page is read, not scanned. Every
+   section below aligns to this same column; nothing is deliberately wider
+   or narrower than it. */
 .Content {
-  max-width: 700px;
+  max-width: 740px;
   margin-inline: auto;
   padding: var(--space-xl) clamp(20px, 4vw, 56px) 120px;
   box-sizing: border-box;
@@ -45,7 +53,7 @@
 
 /* ---------- Intro ---------- */
 .Intro {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
 }
 
 .Eyebrow {
@@ -76,65 +84,48 @@
 }
 
 /* ---------- Sections ---------- */
-/* A thin top rule stands in for the CV's bolder accent-underlined headings —
-   quieter, and it doubles as breathing room between sections. */
+/* One consistent formula for every major-section transition: 32px above the
+   divider, 32px below it before the heading (64px total — the top of the
+   "next major section" guideline), rather than each section separately
+   stacking its own margin-bottom *and* the next one's padding-top. */
 .Section {
-  margin-bottom: var(--space-2xl);
-  padding-top: var(--space-xl);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
   border-top: 1px solid var(--ab-divider-color);
 
   &:first-of-type {
+    margin-top: 0;
     padding-top: 0;
     border-top: 0;
   }
 }
 
+/* A quiet gold tick rather than a full accent border — enough to tie section
+   headings back to the hero eyebrow without turning them into banners. */
 .SectionHeading {
-  margin: 0 0 var(--space-lg);
-  margin-bottom: var(--space-2xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin: 0 0 var(--space-sm);
   font-family: var(--font-title), serif;
-  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 600;
   letter-spacing: 0.01em;
-  //color: var(--ab-header-color);
-  color: var(--royal-blue-soft);
+  color: var(--ab-header-color);
+
+  &::before {
+    content: '';
+    flex-shrink: 0;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--ab-accent-color);
+  }
 }
 
 .SectionIntro {
-  font-size: 0.9em;
-  color: var(--ab-text-color-faint);
-}
-
-/* ---------- Interests & Creative Work ---------- */
-.EntryGroup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.Entry {
-  min-width: 0;
-}
-
-.EntryTitle {
-  margin: 0 0 4px;
-  font-family: var(--font-body), sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ab-text-color);
-}
-
-.EntryItems {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--ab-text-color-faint);
-}
-
-.EntryDescription {
-  margin: var(--space-3xs) 0 0;
-  max-width: 58ch;
-  font-size: 0.95rem;
+  margin: 0 0 var(--space-md);
+  font-size: 0.9rem;
   line-height: 1.6;
   color: var(--ab-text-color-faint);
 }
@@ -145,7 +136,7 @@
    vertical rhythm. Each entry's own styling lives in
    components/InterestActivityItem.module.scss. */
 .ActivityList {
-  margin: var(--space-md) 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -168,7 +159,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--ab-header-color);
+  color: var(--ab-text-color);
 }
 
 .TraitDescription {
@@ -191,9 +182,13 @@
     padding-top: var(--space-lg);
   }
 
+  .Intro {
+    margin-bottom: var(--space-lg);
+  }
+
   .Section {
-    padding-top: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
   }
 }
 
