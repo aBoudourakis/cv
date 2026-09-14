@@ -1,13 +1,15 @@
+import { Fragment } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styles from './NavBar.module.scss';
 import ThemeSwitch from 'src/components/core/ThemeSwitch/ThemeSwitch.tsx';
+import WorkInProgressBadge from 'src/components/core/WorkInProgressBadge/WorkInProgressBadge.tsx';
 
 export default function NavBar() {
 	/** CONSTS **/
-	const navItems: { name: string; href: string; secondary?: boolean }[] = [
+	const navItems: { name: string; href: string; secondary?: boolean; wip?: boolean }[] = [
 		{ name: 'CV', href: '/CV' },
 		{ name: 'Portfolio', href: '/portfolio' },
-		{ name: 'Beyond Work', href: '/beyond-work', secondary: true },
+		{ name: 'Beyond Work', href: '/beyond-work', secondary: true, wip: true },
 	];
 	const location = useLocation();
 
@@ -55,21 +57,39 @@ export default function NavBar() {
 
 			<div className={styles.SiteControls}>
 				<nav className={styles.SiteNav} aria-label="Main navigation">
-					{navItems.map((item) => (
-						<NavLink
-							key={item.href}
-							to={item.href}
-							className={({ isActive }) =>
-								[
-									styles.NavItem,
-									item.secondary ? styles.NavItemSecondary : '',
-									isActive ? styles.Active : '',
-								].filter(Boolean).join(' ')
-							}
-						>
-							{item.name}
-						</NavLink>
-					))}
+					{navItems.map((item) => {
+						const navLink = (
+							<NavLink
+								to={item.href}
+								className={({ isActive }) =>
+									[
+										styles.NavItem,
+										item.secondary ? styles.NavItemSecondary : '',
+										isActive ? styles.Active : '',
+									].filter(Boolean).join(' ')
+								}
+							>
+								{item.name}
+							</NavLink>
+						);
+
+						/** The WIP badge is a real <button> — it can't nest inside the NavLink's own <a>,
+						 *  so it renders as a sibling wrapped alongside it, only for items that need one. */
+						if (!item.wip) {
+							return <Fragment key={item.href}>{navLink}</Fragment>;
+						}
+
+						return (
+							<span className={styles.NavItemWrap} key={item.href}>
+								{navLink}
+								<WorkInProgressBadge
+									variant="short"
+									label={`${item.name} status: Work in Progress`}
+									align="end"
+								/>
+							</span>
+						);
+					})}
 				</nav>
 
 				<span className={styles.ControlsDivider} aria-hidden="true" />

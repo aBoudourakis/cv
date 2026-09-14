@@ -1,14 +1,17 @@
+import {useRef} from 'react';
 import styles from './BeyondWork.module.scss';
 import MusicWorks from './components/MusicWorks';
 import ArtWork from './components/ArtWork';
 import InterestActivityItem from './components/InterestActivityItem';
 import InfoPopover from './components/InfoPopover';
+import WorkInProgressBadge from 'src/components/core/WorkInProgressBadge/WorkInProgressBadge.tsx';
 import {
 	artWorkSection,
 	interestsActivities,
 	intro,
 	musicWorksSection,
 	workingTraits,
+	workingTraitsSection,
 } from './values';
 
 /**
@@ -22,13 +25,19 @@ import {
  * in case anything on the site ever prints the live app shell.
  */
 export default function BeyondWork() {
+	/** Lets the hero's WorkInProgressBadge detect and avoid overlapping the title with its tooltip — see WorkInProgressBadge.tsx's avoidElementRef. */
+	const titleRef = useRef<HTMLHeadingElement | null>(null);
+
 	return (
 		<div className={styles.BeyondWork}>
 			<div className={styles.ScrollArea}>
 				<div className={styles.Content}>
 					<header className={styles.Intro}>
-						<p className={styles.Eyebrow}>A little more, off the résumé</p>
-						<h1 className={styles.Title}>{intro.heading}</h1>
+						<div className={styles.EyebrowRow}>
+							<p className={styles.Eyebrow}>A little more, off the résumé</p>
+							<WorkInProgressBadge variant="long" avoidElementRef={titleRef}/>
+						</div>
+						<h1 className={styles.Title} ref={titleRef}>{intro.heading}</h1>
 						<p className={styles.IntroText}>{intro.paragraph}</p>
 					</header>
 
@@ -61,10 +70,10 @@ export default function BeyondWork() {
 						</ul>
 					</section>
 
-					<section className={styles.Section} aria-labelledby="beyond-work-how-i-work">
-						<h2 className={styles.SectionHeading} id="beyond-work-how-i-work">
-							And Somehow, Back to Work
-						</h2>
+					<section className={styles.Section} aria-labelledby="beyond-work-outro">
+						<h2 className={styles.SectionHeading} id="beyond-work-outro">{workingTraitsSection.title}</h2>
+						<p className={styles.SectionIntro}>{workingTraitsSection.description}</p>
+
 						<div className={styles.TraitGroup}>
 							{workingTraits.map((trait) => (
 								<div className={styles.Trait} key={trait.title}>

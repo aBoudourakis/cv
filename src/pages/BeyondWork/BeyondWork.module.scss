@@ -56,8 +56,19 @@
   margin-bottom: var(--space-xl);
 }
 
-.Eyebrow {
+/* Groups the eyebrow with its WorkInProgressBadge (see BeyondWork.tsx) — the
+   row carries the eyebrow's own bottom margin so the two wrap together as
+   one unit rather than the badge trailing off on its own line. */
+.EyebrowRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px var(--space-sm);
   margin: 0 0 var(--space-xs);
+}
+
+.Eyebrow {
+  margin: 0;
   font-family: var(--font-body), sans-serif;
   font-size: 0.75rem;
   font-weight: 600;

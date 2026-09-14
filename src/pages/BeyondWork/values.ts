@@ -211,6 +211,16 @@ export const interestsActivities: InterestActivity[] = [
 	}
 ];
 
+export interface WorkingTraitsSection {
+	title: string;
+	description?: string;
+}
+
+export const workingTraitsSection: WorkingTraitsSection = {
+	title: 'And Somehow, Back to Work',
+	description: 'My interests and experiences beyond work, together with years of professional practice and continuous learning, have gradually shaped the way I think, create, collaborate and approach my work.',
+}
+
 /** "How I Work" — transferable characteristics, each with its own short description rather than a bare word cloud. */
 export const workingTraits: WorkingTrait[] = [
 	{

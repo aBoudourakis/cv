@@ -1,0 +1,100 @@
+/*
+ * A status hint, not an alert: muted gold outline, no fill, no icon, no
+ * motion. Reuses the same theme tokens as InfoPopover's tooltip surface
+ * (--background-highlight/--border-color/--shadow-color) for consistency.
+ */
+
+.Wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.Badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  border: 1px solid var(--ab-accent-color);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ab-accent-color);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 160ms ease, background-color 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    background: var(--ab-divider-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+  }
+}
+
+.BadgeLong {
+  font-size: 0.68rem;
+  padding: 2px 7px;
+}
+
+.Tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 5;
+
+  display: block;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(260px, calc(100vw - 40px));
+  padding: var(--space-2xs) var(--space-sm);
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--background-highlight);
+  box-shadow: 0 8px 24px var(--shadow-color);
+
+  color: var(--ab-text-color);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: normal;
+
+  animation: workInProgressTooltipIn 140ms ease both;
+}
+
+/* For a trigger near the right edge of its container (the nav) — opens
+   leftward from the badge's right edge instead of overflowing the viewport. */
+.TooltipAlignEnd {
+  left: auto;
+  right: 0;
+}
+
+@keyframes workInProgressTooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .Tooltip {
+    max-width: calc(100vw - 32px);
+  }
+}

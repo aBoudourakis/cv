@@ -84,6 +84,17 @@
   gap: var(--space-md);
 }
 
+/* Groups a NavLink with its WorkInProgressBadge (see NavBar.tsx) as one
+   flex item of .SiteNav, so "Beyond Work" and "WIP" read as a single unit
+   with a tight internal gap, distinct from the wider gap to the next nav
+   destination. The badge can't nest inside the NavLink's own <a> (it's a
+   real <button>), so this wrapper is what actually sits in the flex row. */
+.NavItemWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .NavItem {
   position: relative;
 
