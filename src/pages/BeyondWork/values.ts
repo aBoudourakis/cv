@@ -80,7 +80,18 @@ export const creativeInterests: BeyondWorkEntry[] = [
 	},
 ];
 
-export const musicWorksIntro = 'A selection of short excerpts from original musical work.';
+export interface MusicWorksSection {
+	title: string;
+	description?: string;
+	/** Rendered behind an info icon next to the heading — see components/InfoPopover.tsx. */
+	more?: InterestActivityMore;
+}
+
+export const musicWorksSection: MusicWorksSection = {
+	title: 'Music & Composition',
+	description: 'A selection of short excerpts from original musical work.',
+	more: 'All music featured here was originally composed, performed, mixed and orchestrated by me years before generative AI became part of modern creative workflows. The only exception is the Devil May Cry intro guitar cover, which is based on an original adaptation by Rangran.',
+}
 
 export const musicWorks: musicWorkEntry[] = [
 	{
@@ -104,7 +115,7 @@ export const musicWorks: musicWorkEntry[] = [
 		file: '/audio/DMC_demo.mp3',
 		title: 'DMC anime intro gut guitar cover',
 		type: 'Cover',
-		description: 'A guitar cover of the Devil May Cry anime intro.',
+		description: 'A guitar cover of the Devil May Cry anime intro by Rangran.',
 		instruments: ['Classical Guitars'],
 	}
 ];
@@ -162,6 +173,11 @@ export const workingTraits: WorkingTrait[] = [
 		title: 'Continuous Learning',
 		description:
 			'My interests regularly cross software engineering, UI/UX, AI, design, art and other disciplines, and I tend to learn through building and experimentation.',
+	},
+	{
+		title: 'AI-Assisted, Human-Reviewed',
+		description:
+			'I use AI tools to accelerate development and improve productivity, while maintaining active oversight of the process through continuous review, validation and testing to ensure correctness, maintainability and edge-case coverage.',
 	},
 ];
 

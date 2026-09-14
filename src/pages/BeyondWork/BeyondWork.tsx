@@ -1,9 +1,11 @@
 import styles from './BeyondWork.module.scss';
 import MusicWorks from './components/MusicWorks';
 import InterestActivityItem from './components/InterestActivityItem';
+import InfoPopover from './components/InfoPopover';
 import {
 	interestsActivities,
-	intro, musicWorksIntro,
+	intro,
+	musicWorksSection,
 	workingTraits,
 } from './values';
 
@@ -29,9 +31,12 @@ export default function BeyondWork() {
 					</header>
 
 					<section className={styles.Section} aria-labelledby="beyond-work-music">
-						<h2 className={styles.SectionHeading} id="beyond-work-music">Music &amp; Composition</h2>
-						<p className={styles.SectionIntro}>{musicWorksIntro}</p>
-					<MusicWorks/>
+						<div className={styles.SectionHeadingRow}>
+							<h2 className={styles.SectionHeading} id="beyond-work-music">{musicWorksSection.title}</h2>
+							<InfoPopover label={musicWorksSection.title} more={musicWorksSection.more}/>
+						</div>
+						<p className={styles.SectionIntro}>{musicWorksSection.description}</p>
+						<MusicWorks/>
 					</section>
 
 					<section className={styles.Section} aria-labelledby="beyond-work-interests-activities">

@@ -123,6 +123,20 @@
   }
 }
 
+/* Wraps a .SectionHeading together with an optional InfoPopover trigger
+   (see BeyondWork.tsx's "Music & Composition" heading) — the row carries the
+   usual heading-to-content spacing so the heading itself doesn't double up. */
+.SectionHeadingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin: 0 0 var(--space-sm);
+
+  .SectionHeading {
+    margin: 0;
+  }
+}
+
 .SectionIntro {
   margin: 0 0 var(--space-md);
   font-size: 0.9rem;
