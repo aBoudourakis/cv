@@ -1,0 +1,144 @@
+/*
+ * A real modal — the only one on this page — so it gets its own dimmed
+ * backdrop and elevated surface, reusing the same tokens InfoPopover's
+ * popover already established (--background-highlight/--shadow-color),
+ * plus a gold frame to give the artwork itself a bit of ceremony.
+ *
+ * The backdrop is `position: absolute; inset: 0` against #app-content-region
+ * (DesktopLayout's own content band, see desktopLayout.tsx) rather than
+ * `fixed` against the viewport — this component is portaled there (see
+ * ArtWorkLightbox.tsx) specifically so the dimmed area spans the full page
+ * width/height between the nav and footer, click-outside-to-close works
+ * across that whole area, and the nav/footer themselves stay undimmed.
+ *
+ * The image is sized via a flex `min-height: 0` wrapper rather than a raw
+ * `vh` max-height on the <img> itself — the earlier version sized the image
+ * against the viewport directly, ignoring the dialog's own padding/caption,
+ * which is exactly what let large images overflow past the dialog's edges.
+ * This way the image can never be larger than whatever space is actually
+ * left over after the chrome around it.
+ */
+
+.Backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-md);
+  box-sizing: border-box;
+
+  background: rgba(8, 10, 16, 0.72);
+
+  animation: artLightboxBackdropIn 160ms ease both;
+}
+
+@keyframes artLightboxBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ~50% larger footprint than the original (880px-capped) version, with
+   generous top/bottom padding so the close button and caption both sit
+   clearly outside the image itself rather than crowding it. */
+.Dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(1320px, 92vw);
+  max-height: 100%;
+  padding: 64px var(--space-lg) var(--space-lg);
+  box-sizing: border-box;
+
+  background: var(--background-highlight);
+  border: 2px solid var(--ab-accent-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 40px var(--shadow-color);
+
+  animation: artLightboxDialogIn 180ms ease both;
+}
+
+@keyframes artLightboxDialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.CloseButton {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ab-text-color-faint);
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease;
+
+  &:hover {
+    color: var(--ab-hyperlink-color);
+    background: var(--ab-divider-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+  }
+}
+
+/* The `flex: 1 1 auto; min-height: 0;` pairing is what actually fixes the
+   overflow: without `min-height: 0` a flex item defaults to its content's
+   intrinsic size as a floor, so the image would refuse to shrink below its
+   natural height even when the dialog itself has less room to give it. */
+.ImageWrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.Caption {
+  flex-shrink: 0;
+  margin: var(--space-md) 0 0;
+  max-width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ab-text-color-faint);
+}
+
+@media (max-width: 560px) {
+  .Dialog {
+    width: 94vw;
+    padding: 56px var(--space-sm) var(--space-sm);
+  }
+}

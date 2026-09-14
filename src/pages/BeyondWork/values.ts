@@ -90,7 +90,7 @@ export interface MusicWorksSection {
 export const musicWorksSection: MusicWorksSection = {
 	title: 'Music & Composition',
 	description: 'A selection of short excerpts from original musical work.',
-	more: 'All music featured here was originally composed, performed, mixed and orchestrated by me years before generative AI became part of modern creative workflows. The only exception is the Devil May Cry intro guitar cover, which is based on an original adaptation by Rangran.',
+	more: 'None of the music featured here is AI-generated — every track was composed, performed, mixed and orchestrated by me, years before generative AI became part of modern creative workflows. The one exception concerns originality, not this AI notice: the Devil May Cry intro guitar cover is my performance of an existing arrangement by Rangran rather than an original composition of mine.',
 }
 
 export const musicWorks: musicWorkEntry[] = [
@@ -119,6 +119,70 @@ export const musicWorks: musicWorkEntry[] = [
 		instruments: ['Classical Guitars'],
 	}
 ];
+
+export interface ArtWorkItem {
+	title: string;
+	/** Public-root path under /public/art, e.g. '/art/paintings/paintings_01.webp'. */
+	file: string;
+}
+
+export interface ArtWorksSection {
+	title: string;
+	description?: string;
+	/** Rendered behind an info icon next to the heading — see components/InfoPopover.tsx. */
+	more?: InterestActivityMore;
+	items?: ArtWorkItem[];
+}
+
+export const artWorkSection: ArtWorksSection = {
+	title: 'Art & Design',
+	description: 'A selection of original visual art work and graphic design.',
+	more: 'The visual artwork featured here is a small selection of my original creative work produced over the years, spanning drawing, painting, 3D design and graphic design. Created using a variety of traditional and digital techniques, these pieces reflect my personal style, experimentation and interest in visual composition, storytelling and creative expression.',
+}
+
+export const artWorkSubSection1: ArtWorksSection = {
+	title: 'Physical',
+	description: 'A selection of original Physical design work.',
+	// more: 'The paintings featured here are a small selection of my original creative work produced over the years, spanning drawing, painting, 3D design and graphic design. Created using a variety of traditional and digital techniques, these pieces reflect my personal style, experimentation and interest in visual composition, storytelling and creative expression.',
+	items: [
+		{
+			title: 'Acrylics and pencil on canvas',
+			file: '/art/paintings/paintings_01.webp',
+		},
+		{
+			title: 'Oil and pencil on canvas',
+			file: '/art/paintings/paintings_02.webp',
+		},
+		{
+			title: 'Acrylics and pencil on canvas',
+			file: '/art/paintings/paintings_03.webp',
+		},
+		{
+			title: 'Acrylics and pencil on canvas',
+			file: '/art/paintings/paintings_04.webp',
+		},
+	]
+}
+
+export const artWorkSubSection2: ArtWorksSection = {
+	title: 'Digital',
+	description: 'A selection of original Digital design work.',
+	// more: 'The digital design work featured here is a small selection of my original creative work produced over the years, spanning drawing, painting, 3D design and graphic design. Created using a variety of traditional and digital techniques, these pieces reflect my personal style, experimentation and interest in visual composition, storytelling and creative expression.',
+	items: [
+		{
+			title: '3D Bell Modelling, Camera Matching, Lighting & CGI Compositing',
+			file: '/art/digital/digital_01.webp',
+		},
+		{
+			title: '3D Car Modelling, Camera Matching, Lighting & CGI Compositing',
+			file: '/art/digital/digital_02.webp',
+		},
+		{
+			title: 'Photomanipulation & Digital Compositing',
+			file: '/art/digital/digital_03.webp',
+		},
+	]
+}
 
 export const interestsActivities: InterestActivity[] = [
 	{

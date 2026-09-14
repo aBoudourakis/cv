@@ -1,8 +1,10 @@
 import styles from './BeyondWork.module.scss';
 import MusicWorks from './components/MusicWorks';
+import ArtWork from './components/ArtWork';
 import InterestActivityItem from './components/InterestActivityItem';
 import InfoPopover from './components/InfoPopover';
 import {
+	artWorkSection,
 	interestsActivities,
 	intro,
 	musicWorksSection,
@@ -39,6 +41,15 @@ export default function BeyondWork() {
 						<MusicWorks/>
 					</section>
 
+					<section className={styles.Section} aria-labelledby="beyond-work-art">
+						<div className={styles.SectionHeadingRow}>
+							<h2 className={styles.SectionHeading} id="beyond-work-art">{artWorkSection.title}</h2>
+							<InfoPopover label={artWorkSection.title} more={artWorkSection.more}/>
+						</div>
+						<p className={styles.SectionIntro}>{artWorkSection.description}</p>
+						<ArtWork/>
+					</section>
+
 					<section className={styles.Section} aria-labelledby="beyond-work-interests-activities">
 						<h2 className={styles.SectionHeading} id="beyond-work-interests-activities">
 							Interests &amp; Activities
@@ -52,7 +63,7 @@ export default function BeyondWork() {
 
 					<section className={styles.Section} aria-labelledby="beyond-work-how-i-work">
 						<h2 className={styles.SectionHeading} id="beyond-work-how-i-work">
-							How I Work
+							And Somehow, Back to Work
 						</h2>
 						<div className={styles.TraitGroup}>
 							{workingTraits.map((trait) => (

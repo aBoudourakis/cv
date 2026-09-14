@@ -1,0 +1,75 @@
+/*
+ * "Art & Design" subsections — a name/description pair per group (mirrors
+ * the h3-tier treatment used elsewhere: MusicWorkCard's track title,
+ * InterestActivityItem's name, TraitTitle) followed by a row of wide
+ * thumbnails. No cropping into a forced aspect ratio: each thumbnail is a
+ * fixed height with auto width, so it reads at its own natural (already
+ * wide) shape.
+ */
+
+.ArtWork {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.SubSection {
+  min-width: 0;
+}
+
+.SubSectionTitle {
+  margin: 0 0 2px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ab-text-color);
+}
+
+.SubSectionDescription {
+  margin: 0 0 var(--space-xs);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ab-text-color-faint);
+}
+
+.ThumbnailRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.Thumbnail {
+  flex-shrink: 0;
+  display: block;
+  height: 140px;
+  padding: 0;
+  border: 1px solid var(--ab-divider-color);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 160ms ease;
+
+  img {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    border-color: var(--ab-hyperlink-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 560px) {
+  .Thumbnail {
+    height: 110px;
+  }
+}
