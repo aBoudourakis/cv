@@ -120,11 +120,34 @@ export default function CVContent() {
 		if (el) sectionRefs.current.set(id, el);
 	};
 
-	/** Smoothly scrolls the internal container to the requested section, respecting reduced-motion preference. **/
+	/** Mirrors the `scroll-margin-top: var(--space-sm)` set on .cvHeader/.cvSection below — kept
+	 *  in sync manually since scrollTo() (unlike scrollIntoView()) doesn't read scroll-margin. */
+	const SECTION_SCROLL_MARGIN_TOP = 16;
+
+	/**
+	 * Smoothly scrolls the internal `.scrollArea` container to the requested section, respecting
+	 * reduced-motion preference. Deliberately computes the offset and calls scrollTo() on the
+	 * known container rather than Element.scrollIntoView(): scrollIntoView() can walk up through
+	 * every scrollable ancestor, and on iOS Safari/Chrome — where a scroll can also trigger the
+	 * collapsible toolbar to hide, changing the visual viewport height mid-scroll — that has been
+	 * observed reaching beyond this container into the outer app shell (see layouts.module.scss /
+	 * useViewportHeight.ts), leaving the section nav and footer out of position. Scrolling the
+	 * container directly can't bubble past it.
+	 */
 	const scrollToSection = (id: SectionId) => {
-		sectionRefs.current.get(id)?.scrollIntoView({
+		const container = scrollRef.current;
+		const target = sectionRefs.current.get(id);
+		if (!container || !target) return;
+
+		const targetTop =
+			target.getBoundingClientRect().top -
+			container.getBoundingClientRect().top +
+			container.scrollTop -
+			SECTION_SCROLL_MARGIN_TOP;
+
+		container.scrollTo({
+			top: Math.max(0, targetTop),
 			behavior: prefersReducedMotion ? 'auto' : 'smooth',
-			block: 'start',
 		});
 	};
 

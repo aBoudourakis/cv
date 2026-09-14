@@ -24,9 +24,27 @@ export default function PortfolioAssistant() {
 	/** CONSTS **/
 	const handleClose = () => {
 		setIsOpen(false);
+
+		const launcher = launcherRef.current;
+		if (!launcher) return;
+
 		// Closing (via the close button, Escape, or otherwise) always returns
-		// focus to the launcher (docs/Clip_bot_specification.md #15).
-		launcherRef.current?.focus();
+		// focus to the launcher (docs/Clip_bot_specification.md #15) — needed
+		// for keyboard and VoiceOver users regardless of how this close was
+		// triggered. But iOS Safari/Chrome (WebKit) shows the launcher's
+		// `:focus-visible` ring on this programmatic focus() even when the
+		// close itself was a plain touch tap (Chromium correctly suppresses
+		// it there). Suppress the ring with an inline style — it outranks the
+		// CSS rule's specificity without needing `!important` — and clear the
+		// override on the next blur, so a later *real* keyboard Tab onto the
+		// launcher still shows the ring normally.
+		launcher.style.outline = 'none';
+		const clearRingSuppression = () => {
+			launcher.style.outline = '';
+			launcher.removeEventListener('blur', clearRingSuppression);
+		};
+		launcher.addEventListener('blur', clearRingSuppression);
+		launcher.focus({ preventScroll: true });
 	};
 
 	/** RENDER **/
