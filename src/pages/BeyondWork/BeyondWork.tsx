@@ -2,9 +2,8 @@ import styles from './BeyondWork.module.scss';
 import MusicWorks from './components/MusicWorks';
 import InterestActivityItem from './components/InterestActivityItem';
 import {
-	creativeInterests,
 	interestsActivities,
-	intro,
+	intro, musicWorksIntro,
 	workingTraits,
 } from './values';
 
@@ -29,26 +28,11 @@ export default function BeyondWork() {
 						<p className={styles.IntroText}>{intro.paragraph}</p>
 					</header>
 
-					<section className={styles.Section} aria-labelledby="beyond-work-interests">
-						<h2 className={styles.SectionHeading} id="beyond-work-interests">
-							Interests &amp; Creative Work
-						</h2>
-						<div className={styles.EntryGroup}>
-							{creativeInterests.map((entry) => (
-								<div className={styles.Entry} key={entry.title}>
-									<h3 className={styles.EntryTitle}>{entry.title}</h3>
-									{entry.items && entry.items.length > 0 && (
-										<p className={styles.EntryItems}>{entry.items.join(' · ')}</p>
-									)}
-									{entry.description && (
-										<p className={styles.EntryDescription}>{entry.description}</p>
-									)}
-								</div>
-							))}
-						</div>
-					</section>
-
+					<section className={styles.Section} aria-labelledby="beyond-work-music">
+						<h2 className={styles.SectionHeading} id="beyond-work-music">Music &amp; Composition</h2>
+						<p className={styles.SectionIntro}>{musicWorksIntro}</p>
 					<MusicWorks/>
+					</section>
 
 					<section className={styles.Section} aria-labelledby="beyond-work-interests-activities">
 						<h2 className={styles.SectionHeading} id="beyond-work-interests-activities">

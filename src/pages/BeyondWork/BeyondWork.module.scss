@@ -91,11 +91,18 @@
 
 .SectionHeading {
   margin: 0 0 var(--space-lg);
+  margin-bottom: var(--space-2xs);
   font-family: var(--font-title), serif;
   font-size: clamp(1.1rem, 2.2vw, 1.3rem);
   font-weight: 600;
   letter-spacing: 0.01em;
-  color: var(--ab-header-color);
+  //color: var(--ab-header-color);
+  color: var(--royal-blue-soft);
+}
+
+.SectionIntro {
+  font-size: 0.9em;
+  color: var(--ab-text-color-faint);
 }
 
 /* ---------- Interests & Creative Work ---------- */

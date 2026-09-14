@@ -1,7 +1,7 @@
 import {useCallback, useRef, useState} from 'react';
 import styles from './MusicWorks.module.scss';
 import MusicWorkCard, {type TrackPlaybackState} from './MusicWorkCard';
-import {musicWorks, musicWorksIntro, type musicWorkEntry} from '../values';
+import {musicWorks, type musicWorkEntry} from '../values';
 
 type TrackStates = Record<string, TrackPlaybackState>;
 
@@ -124,9 +124,10 @@ export default function MusicWorks() {
 	}, [activeTrackId, handlePlaybackError]);
 
 	return (
-		<section className={styles.MusicWorks} aria-labelledby="beyond-work-music">
-			<h2 className={styles.SectionHeading} id="beyond-work-music">Music &amp; Composition</h2>
-			<p className={styles.SectionIntro}>{musicWorksIntro}</p>
+		<>
+		{/*<section className={styles.MusicWorks} aria-labelledby="beyond-work-music">*/}
+		{/*<h2 className={styles.SectionHeading} id="beyond-work-music">Music &amp; Composition</h2>*/}
+		{/*<p className={styles.SectionIntro}>{musicWorksIntro}</p>*/}
 
 			<div className={styles.TrackList}>
 				{musicWorks.map((work) => (
@@ -154,6 +155,7 @@ export default function MusicWorks() {
 				onEnded={handleEnded}
 				onError={handleAudioError}
 			/>
-		</section>
+		{/*</section>*/}
+		</>
 	);
 }
