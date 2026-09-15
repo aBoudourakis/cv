@@ -156,7 +156,7 @@ export const artWorkSection: ArtWorksSection = {
 
 export const artWorkSubSection1: ArtWorksSection = {
 	title: 'Physical',
-	description: 'A selection of original Physical design work.',
+	description: 'A selection of Physical design work.',
 	// more: 'The paintings featured here are a small selection of my original creative work produced over the years, spanning drawing, painting, 3D design and graphic design. Created using a variety of traditional and digital techniques, these pieces reflect my personal style, experimentation and interest in visual composition, storytelling and creative expression.',
 	items: [
 		{
