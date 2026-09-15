@@ -86,6 +86,27 @@ export function CloseIcon() {
 	);
 }
 
+/** Used by the CV download button to indicate its dropdown menu. */
+export function ChevronDownIcon() {
+	return (
+		<svg
+			className="ab-icon ab-icon--chevron-down"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path
+				d="M6 9l6 6 6-6"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.8"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+		</svg>
+	);
+}
+
 /** A single quiet spinner arc, rotated via CSS — used while a music sample is loading. */
 export function LoadingIcon() {
 	return (

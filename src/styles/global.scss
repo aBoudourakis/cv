@@ -289,6 +289,14 @@ body.dark-mode {
   animation: ab-icon-spin 900ms linear infinite;
 }
 
+/* CV header's "Download PDF" menu toggle (see CVContent.tsx). */
+.ab-icon--chevron-down {
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 0.1em;
+  transition: transform 160ms ease;
+}
+
 @keyframes ab-icon-spin {
   to {
     transform: rotate(360deg);

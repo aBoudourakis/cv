@@ -3,4 +3,5 @@
 - [ ] consider table with property (public: boolean) to show on CV or only tracked by AI assistant / RAG
 - [X] add archery in sports and activities
 - [X] sort martial arts by temporal order of practice
-- [ ] add online CV web app in projects
+- [X] add online CV web app in projects
+- [X] 2 versions of PDF (compact and full) download

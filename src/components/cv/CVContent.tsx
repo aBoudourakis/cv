@@ -19,7 +19,7 @@ import SeminarEntry from "src/components/cv/CVSections/SeminarEntry.tsx";
 import LanguageEntry from "src/components/cv/CVSections/LanguageEntry.tsx";
 import ProjectEntry from "src/components/cv/CVSections/ProjectEntry.tsx";
 import CertificateEntry from "src/components/cv/CVSections/CertificateEntry.tsx";
-import {ExternalLinkIcon, PlayIcon} from "src/components/core/Icons/Icons.tsx";
+import {ChevronDownIcon, ExternalLinkIcon, PlayIcon} from "src/components/core/Icons/Icons.tsx";
 
 /** Small inline icon set used for the contact list, kept dependency-free. */
 const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
@@ -66,7 +66,12 @@ const SECTION_NAV = [
 ] as const;
 
 type SectionId = typeof SECTION_NAV[number]['id'];
-const PDF_PATH = '/Athinodoros_Boudourakis_CV_2026_digital.pdf';
+
+/** The two downloadable CV variants offered from the header's "Download PDF" menu. */
+const PDF_VARIANTS = [
+	{id: 'compact', label: 'Compact', description: 'One-page overview highlighting my most recent experience, core skills, and key achievements', path: '/Athos_CV_2026_compact.pdf', filename: 'Athinodoros_Boudourakis_CV_2026_compact.pdf'},
+	{id: 'detailed', label: 'Detailed', description: 'Full CV with extended experience, projects, education, skills, and additional background', path: '/Athos_CV_2026_detailed.pdf', filename: 'Athinodoros_Boudourakis_CV_2026_detailed.pdf'},
+] as const;
 
 /** Resolves whether a bullet/link points at a YouTube video, to show a play affordance instead of an external-link one. */
 function isVideoLink(url: string) {
@@ -77,9 +82,11 @@ export default function CVContent() {
 	/** REFS **/
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const sectionRefs = useRef<Map<SectionId, HTMLElement>>(new Map());
+	const downloadMenuRef = useRef<HTMLDivElement | null>(null);
 
 	/** STATE **/
 	const [activeSection, setActiveSection] = useState<SectionId>(SECTION_NAV[0].id);
+	const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState(false);
 
 	const prefersReducedMotion = useMemo(
 		() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -114,6 +121,27 @@ export default function CVContent() {
 			window.removeEventListener('resize', updateActiveSection);
 		};
 	}, []);
+
+	/** Closes the PDF variant menu on an outside click or Escape. */
+	useEffect(() => {
+		if (!isDownloadMenuOpen) return;
+
+		const handlePointerDown = (event: PointerEvent) => {
+			if (downloadMenuRef.current && !downloadMenuRef.current.contains(event.target as Node)) {
+				setIsDownloadMenuOpen(false);
+			}
+		};
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') setIsDownloadMenuOpen(false);
+		};
+
+		document.addEventListener('pointerdown', handlePointerDown);
+		document.addEventListener('keydown', handleKeyDown);
+		return () => {
+			document.removeEventListener('pointerdown', handlePointerDown);
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [isDownloadMenuOpen]);
 
 	/** Registers an element as the anchor point for a given CV section. **/
 	const registerSection = (id: SectionId) => (el: HTMLElement | null) => {
@@ -151,13 +179,14 @@ export default function CVContent() {
 		});
 	};
 
-	const downloadPdf = () => {
+	const downloadPdf = (variant: typeof PDF_VARIANTS[number]) => {
 		const link = document.createElement('a');
-		link.href = PDF_PATH;
-		link.download = 'Athinodoros_Boudourakis_CV_2026_digital.pdf';
+		link.href = variant.path;
+		link.download = variant.filename;
 		document.body.appendChild(link);
 		link.click();
 		link.remove();
+		setIsDownloadMenuOpen(false);
 	};
 
 	/** RENDER **/
@@ -201,12 +230,43 @@ export default function CVContent() {
 							</li>
 						))}
 					</ul>
-					<button className={styles.downloadButton} type="button" onClick={downloadPdf}>
-						<svg viewBox="0 0 24 24" aria-hidden="true">
-							<use href="/icons.svg#pdf-icon"/>
-						</svg>
-						Download PDF
-					</button>
+					<div className={styles.downloadMenu} ref={downloadMenuRef}>
+						<button
+							className={styles.downloadButton}
+							type="button"
+							aria-haspopup="menu"
+							aria-expanded={isDownloadMenuOpen}
+							onClick={() => setIsDownloadMenuOpen((open) => !open)}
+						>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<use href="/icons.svg#pdf-icon"/>
+							</svg>
+							Download PDF
+							<ChevronDownIcon/>
+						</button>
+						{isDownloadMenuOpen && (
+							<ul className={styles.downloadMenuList} role="menu">
+								{PDF_VARIANTS.map((variant) => (
+									<li key={variant.id} role="none">
+										<button
+											className={styles.downloadMenuItem}
+											type="button"
+											role="menuitem"
+											onClick={() => downloadPdf(variant)}
+										>
+											<span className={styles.downloadMenuItemText}>
+												<span className={styles.downloadMenuItemLabel}>{variant.label}</span>
+												<span className={styles.downloadMenuItemDescription}>{variant.description}</span>
+											</span>
+											<svg className={styles.downloadMenuItemIcon} viewBox="0 0 24 24" aria-hidden="true">
+												<use href="/icons.svg#download-icon"/>
+											</svg>
+										</button>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
 				</header>
 
 				<section className={styles.cvSection} id="cv-experience" ref={registerSection('cv-experience')}>

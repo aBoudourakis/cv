@@ -187,6 +187,11 @@
   border-radius: var(--radius-sm);
 }
 
+.downloadMenu {
+  position: relative;
+  display: inline-block;
+}
+
 .downloadButton {
   display: inline-flex;
   align-items: center;
@@ -202,7 +207,7 @@
   cursor: pointer;
   transition: border-color 160ms ease, color 160ms ease;
 
-  svg {
+  > svg:not(:global(.ab-icon--chevron-down)) {
     width: 20px;
     height: 20px;
     color: var(--ab-header-color);
@@ -217,6 +222,87 @@
     outline: 2px solid var(--royal-blue-soft);
     outline-offset: 2px;
   }
+
+  &[aria-expanded="true"] :global(.ab-icon--chevron-down) {
+    transform: rotate(180deg);
+  }
+}
+
+.downloadMenuList {
+  position: absolute;
+  top: calc(100% + var(--space-2xs));
+  left: 0;
+  z-index: 3;
+  min-width: min(380px, calc(100vw - 2 * clamp(20px, 3.5vw, 40px)));
+  margin: 0;
+  padding: var(--space-2xs);
+  list-style: none;
+  background: var(--ab-background-color);
+  border: 1px solid var(--ab-divider-color);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.downloadMenuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-2xs) var(--space-sm);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ab-text-color);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+
+  &:hover {
+    background: var(--ab-divider-color);
+  }
+
+  &:hover .downloadMenuItemLabel {
+    color: var(--ab-hyperlink-color);
+  }
+
+  &:hover .downloadMenuItemIcon {
+    color: var(--ab-hyperlink-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--royal-blue-soft);
+    outline-offset: -2px;
+  }
+}
+
+.downloadMenuItemText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.downloadMenuItemLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ab-header-color);
+  transition: color 160ms ease;
+}
+
+.downloadMenuItemDescription {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ab-text-color-faint);
+}
+
+.downloadMenuItemIcon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--ab-text-color-faint);
+  transition: color 160ms ease;
 }
 
 /* ---------- Sections ---------- */
