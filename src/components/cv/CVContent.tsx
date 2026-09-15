@@ -347,6 +347,7 @@ export default function CVContent() {
 							source3={item.source3}
 							sourceUrl3={item.sourceUrl3}
 							description={item.description}
+							technologies={item.technologies}
 						/>
 					))}
 				</section>

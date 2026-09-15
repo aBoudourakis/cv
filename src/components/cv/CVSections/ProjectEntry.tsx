@@ -12,11 +12,20 @@ interface IProjectEntryProps {
 	source3?: string;
 	sourceUrl3?: string;
 	description?: string;
+	technologies?: string[] | string;
+}
+
+/** Array entries are joined visually with the same `·` separator used by string entries entered as-is. */
+function formatTechnologies(technologies?: string[] | string): string | undefined {
+	if (!technologies) return undefined;
+	return Array.isArray(technologies) ? technologies.join(' · ') : technologies;
 }
 
 export default function ProjectEntry({
-	period, title, source, sourceUrl, source2, sourceUrl2, source3, sourceUrl3, description
+	period, title, source, sourceUrl, source2, sourceUrl2, source3, sourceUrl3, description, technologies
                                      }:IProjectEntryProps) {
+  const technologiesText = formatTechnologies(technologies);
+
   return <div className={styles.ProjectEntry}>
 	  <div className={styles.Period}>{period}</div>
 	  <div className={styles.Content}>
@@ -44,6 +53,7 @@ export default function ProjectEntry({
 			  </div>
 		  )}
 		  <div className={styles.Description}>{description}</div>
+		  {technologiesText && <div className={styles.Technologies}>{technologiesText}</div>}
 	  </div>
   </div>;
 }

@@ -231,6 +231,9 @@
 /* ---------- Projects ---------- */
 .ProjectEntry {
   @extend %entry-grid;
+  /* Slightly tighter than the shared entry gap — keeps the date visually
+     attached to its project without touching other entry types. */
+  gap: 0 var(--space-xs);
 
   .Period {
     @extend %entry-period;
@@ -259,6 +262,21 @@
 
     .Description {
       @extend %entry-subtitle;
+    }
+
+    /* Reads as a metadata layer beneath the description: smaller, tighter
+       line-height, more muted, and set apart with its own top margin rather
+       than the shared 2px stack gap. */
+    .Technologies {
+      margin-top: 6px;
+      font-family: var(--font-body), sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+      text-align: start;
+      color: var(--ab-text-color-faint);
+      opacity: 0.78;
     }
   }
 }

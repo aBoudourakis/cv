@@ -89,6 +89,7 @@ export interface ProjectItem {
 	sourceUrl3?: string;
 	description?: string;
 	bullets?: string[];
+	technologies?: string[] | string;
 }
 
 export const totalPages = 2;
@@ -500,11 +501,23 @@ export const languages: LanguageItem[] = [
 export const projects: ProjectItem[] = [
 	{
 		page: 2,
+		period: '2026 – Present',
+		title: 'Interactive Online CV & Portfolio',
+		source: 'Personal Project',
+		sourceUrl: 'https://athinodoros.boudourakis.com',
+		description:
+			'Built an interactive React + Vite + TypeScript CV and portfolio application with Supabase, GitHub Pages hosting, GitHub Actions CI/CD, responsive theming, optimized media content, and “Clip” — a RAG-powered AI assistant using embeddings, semantic vector search and pgvector-backed retrieval to answer questions from curated personal and professional knowledge.',
+		technologies:
+			'React · TypeScript · Vite · Supabase · RAG · pgvector · GitHub Actions · CI/CD',
+	},
+	{
+		page: 2,
 		period: '2017 – 2021',
 		title: 'Cyber Range training platform',
 		source: 'Cyber Ranges',
 		sourceUrl: 'https://app.cyberranges.com',
 		description: 'Cyber security training platform used for National competitions in the Middle East and Africa',
+		technologies: ['Vue.js', 'Quasar Framework', 'D3.js', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Audition'],
 	},
 	{
 		page: 2,
@@ -522,7 +535,8 @@ export const projects: ProjectItem[] = [
 			'Contributed to the production of protective face shields for hospitals, clinics and medical professionals.',
 			'Supported an initiative that later expanded to more than 70 contributors.',
 			'Designed the group’s logo used in communication channels.'
-		]
+		],
+		technologies: ['Artillery Sidewinder X1', 'Cura Slicer', 'Adobe Illustrator'],
 	},
 	{
 		page: 2,
@@ -534,6 +548,7 @@ export const projects: ProjectItem[] = [
 		sourceUrl2: 'https://digicash.synapse.gr',
 		description: 'cryptocurrency wallet integration, peer-to-peer asset transfers, crypto-denominated lending,\n' +
 			'and digital currency payments',
+		technologies: ['Vue.js', 'Quasar Framework', 'Flutter', 'Firebase', 'Ethers.js', 'Web3'],
 	},
 	{
 		page: 2,
@@ -542,6 +557,7 @@ export const projects: ProjectItem[] = [
 		source: 'Cyprus University of Technology',
 		sourceUrl: 'https://www.cut.ac.cy/',
 		description: 'Web-based application for payments and research projects management.',
+		technologies: ['PHP', 'SQL', 'AJAX', 'jQuery'],
 	},
 	{
 		page: 2,
@@ -550,6 +566,15 @@ export const projects: ProjectItem[] = [
 		source: 'Skitali / nowwhat',
 		sourceUrl: 'https://nowwhat.com.cy/projects/skitali/aboudourakis/',
 		description: 'Original audiovisual artwork created for Skitali, a collaborative video-art project and digital archive supported by the Cyprus Ministry of Education and Culture',
+		technologies: [
+			'Steinberg Cubase',
+			'Adobe Premiere Pro',
+			'Nikon Camera',
+			'BC Rich Beast NJ Electric Guitar',
+			'Digitech GNX4',
+			'Custom-Built Cello',
+			'Behringer B-1 Microphone',
+		],
 	},
 	{
 		page: 2,
@@ -558,6 +583,7 @@ export const projects: ProjectItem[] = [
 		source: 'APSIDA',
 		sourceUrl: 'https://apsida.cut.ac.cy/collections/show/141',
 		description: '3D Models of Cultural Heritage content of Cyprus aggregated into Europeana',
+		technologies: ['Autodesk Maya', 'Adobe Photoshop'],
 	},
 	{
 		page: 2,
@@ -565,6 +591,7 @@ export const projects: ProjectItem[] = [
 		title: 'Complete Management System - Fasouri Watermania Waterpark',
 		source: 'Fasouri Watermania Waterpark',
 		description: 'Staff management - Stock Control - Machinery - Maintenance Management (Mobile First - Employees Tablets)',
+		technologies: ['HTML', 'jQuery', 'SQL', 'AJAX'],
 	},
 ];
 

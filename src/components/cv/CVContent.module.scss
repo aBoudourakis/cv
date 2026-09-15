@@ -83,7 +83,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  padding: var(--space-xl) clamp(20px, 4vw, 56px) 120px;
+  padding: var(--space-xl) clamp(20px, 3.5vw, 40px) 120px;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
 }
@@ -396,8 +396,8 @@
 /* ---------- Responsive: large desktop ---------- */
 @media (min-width: 1400px) {
   .scrollArea {
-    padding-left: clamp(20px, 3vw, 72px);
-    padding-right: clamp(20px, 3vw, 72px);
+    padding-left: clamp(20px, 2.5vw, 52px);
+    padding-right: clamp(20px, 2.5vw, 52px);
   }
 }
 

@@ -1,5 +1,6 @@
 - [X] update InterPrice website to current (consider demo synapse digicash as 2nd URL)
-- [ ] add hobbies in database information
+- [X] add hobbies in database information
 - [ ] consider table with property (public: boolean) to show on CV or only tracked by AI assistant / RAG
-- [ ] add archery in sports and activities
-- [ ] sort martial arts by temporal order of practice
+- [X] add archery in sports and activities
+- [X] sort martial arts by temporal order of practice
+- [ ] add online CV web app in projects
