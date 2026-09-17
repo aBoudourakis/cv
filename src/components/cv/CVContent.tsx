@@ -30,7 +30,11 @@ const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
 		</svg>
 	),
 	email: (
-		<svg viewBox="0 0 24 24" aria-hidden="true">
+		<svg
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+			style={{transform: 'scaleY(1.4)', marginTop: '2px'}}
+		>
 			<path
 				d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 2.2V17h16V8.2l-8 5-8-5zm.8-.2 7.2 4.5L19.2 8H4.8z"/>
 		</svg>
@@ -54,7 +58,11 @@ const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
 		</svg>
 	),
 	npm: (
-		<svg viewBox="0 0 32 32" aria-hidden="true">
+		<svg
+			viewBox="0 0 32 32"
+			aria-hidden="true"
+			style={{transform: 'scale(0.9)'}}
+		>
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"

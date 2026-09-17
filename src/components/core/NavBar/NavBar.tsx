@@ -45,7 +45,7 @@ export default function NavBar() {
 						alt=""
 						aria-hidden="true"
 					/>
-					<span className={styles.BrandNamePart}>Boudourakis</span>
+					<span className={styles.BrandNamePart} style={{marginLeft: '2px'}}>Boudourakis</span>
 				</span>
 				<img
 					className={styles.BrandMonogramCompact}

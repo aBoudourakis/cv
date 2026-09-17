@@ -132,7 +132,7 @@ export const experience: ExperienceItem[] = [
 		page: 1,
 		period: '05.2021 – 06.2023',
 		title: 'Software Developer',
-		company: 'Bernhard Schulte Management',
+		company: 'Bernhard Schulte Shipmanagement',
 		companyUrl: 'https://www.bs-shipmanagement.com/',
 		location: 'Limassol, Cyprus',
 		bullets: [
