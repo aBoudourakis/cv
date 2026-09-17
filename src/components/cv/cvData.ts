@@ -6,7 +6,7 @@
 export interface ContactLink {
 	label: string;
 	href?: string;
-	icon: 'phone' | 'email' | 'linkedin' | 'portfolio' | 'github';
+	icon: 'phone' | 'email' | 'linkedin' | 'portfolio' | 'github' | 'npm';
 }
 
 export type BulletItem = string | { name: string; url: string; description: string };
@@ -111,6 +111,7 @@ export const contactLinks: ContactLink[] = [
 	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/athinodoros-boudourakis-25498041', icon: 'linkedin' },
 	{ label: 'Portfolio', href: '/portfolio', icon: 'portfolio' },
 	{ label: 'GitHub', href: 'https://github.com/aBoudourakis', icon: 'github' },
+	{ label: 'npm', href: 'https://www.npmjs.com/~giftofathena', icon: 'npm' },
 ];
 
 export const experience: ExperienceItem[] = [
