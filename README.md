@@ -110,7 +110,7 @@ The CV content is maintained as structured data in `src/components/cv/cvData.ts`
 
 The knowledge base is built from two sources: the public CV/portfolio data (`src/components/cv/cvData.ts`) and a curated, recruiter-facing `assistant_knowledge` table (working style, career preferences, architectural priorities, etc.) that isn't necessarily rendered on the CV page itself — see spec §39, "Assistant-Only Professional Knowledge Layer", for how the two are combined and how to add/update/disable an entry.
 
-The UI lives entirely in `src/components/PortfolioAssistant/` and talks to the already-deployed `supabase/functions/portfolio-chat` Edge Function. To run it locally against the real backend, set these in `.env.local` (see `.env.example`):
+The widget itself is [`familiar-js`](https://github.com/aBoudourakis/familiar-js) (a separate, standalone package); `src/components/PortfolioAssistant/` is a thin integration layer around it — `PortfolioAssistant.tsx` mounts/tears down the `FamiliarAssistant` class and reroutes its internal links through React Router, and `portfolioTransport.ts` is the custom `Transport` that calls the already-deployed `supabase/functions/portfolio-chat` Edge Function and maps its response (categorized/section-linked sources) onto familiar-js's plainer `{ title, url? }` shape. To run it locally against the real backend, set these in `.env.local` (see `.env.example`):
 
 ```text
 VITE_SUPABASE_URL=       # the Supabase project URL
@@ -119,9 +119,9 @@ VITE_SUPABASE_ANON_KEY=  # the project's anon/publishable key — never the serv
 
 Without them, the assistant still renders (launcher, mascot, suggested questions) but shows a friendly "not configured yet" notice instead of calling the backend — it never crashes or silently fails.
 
-Cloudflare Turnstile bot verification is not wired into the frontend yet (see `useAssistantChat.ts`); the Edge Function currently only checks that a token was sent, not that it's valid.
+Cloudflare Turnstile bot verification is not wired into the frontend yet (see `portfolioTransport.ts`); the Edge Function currently only checks that a token was sent, not that it's valid.
 
-The mascot's illustrated states live in `public/images/Clip/` (source PNGs) and `public/images/Clip/optimized/` (the WebP files actually loaded at runtime — re-encode with a tool like ffmpeg after replacing any source artwork, so the app keeps loading the small optimized versions rather than the multi-megabyte originals).
+The mascot uses familiar-js's own bundled artwork for its four built-in presets (`Clip`/`Lens`/`Seer`/`Wizard`, with the "Change mascot" picker enabled) rather than a custom skin — familiar-js merges any `mascotAssets` override on top of every preset, not just one, so a custom skin would make all four choices in the switcher look identical. Archived custom-skin source art (not currently wired in) lives in `src/assets/design-sources/Clip/` — see its README for why.
 
 ## Deployment
 
