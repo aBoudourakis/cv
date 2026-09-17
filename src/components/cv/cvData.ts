@@ -503,6 +503,17 @@ export const projects: ProjectItem[] = [
 	{
 		page: 2,
 		period: '2026 – Present',
+		title: 'Familiar JS package',
+		source: 'Published npm Package',
+		sourceUrl: 'https://www.npmjs.com/package/familiar-js',
+		description:
+			'Open-source JavaScript package for configurable AI assistant experiences, covering package/API design, RAG integration, product design and developer-facing UX.',
+		technologies:
+			'TypeScript · Vite · Vitest · npm (published package) · Pluggable RAG/AI Backends',
+	},
+	{
+		page: 2,
+		period: '2026 – Present',
 		title: 'Interactive Online CV & Portfolio',
 		source: 'Personal Project',
 		sourceUrl: 'https://athinodoros.boudourakis.com',
