@@ -121,7 +121,7 @@ Without them, the assistant still renders (launcher, mascot, suggested questions
 
 Cloudflare Turnstile bot verification is not wired into the frontend yet (see `portfolioTransport.ts`); the Edge Function currently only checks that a token was sent, not that it's valid.
 
-The mascot's illustrated states are a custom skin passed to familiar-js via `mascotAssets`, served from `public/images/Clip/wizard/` (the WebP files actually loaded at runtime); full-resolution source art lives in `src/assets/design-sources/Clip/` — re-encode with a tool like ffmpeg after replacing any source artwork, so the app keeps loading the small optimized versions rather than the multi-megabyte originals.
+The mascot uses familiar-js's own bundled artwork for its four built-in presets (`Clip`/`Lens`/`Seer`/`Wizard`, with the "Change mascot" picker enabled) rather than a custom skin — familiar-js merges any `mascotAssets` override on top of every preset, not just one, so a custom skin would make all four choices in the switcher look identical. Archived custom-skin source art (not currently wired in) lives in `src/assets/design-sources/Clip/` — see its README for why.
 
 ## Deployment
 

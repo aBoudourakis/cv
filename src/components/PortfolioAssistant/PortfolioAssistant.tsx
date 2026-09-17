@@ -13,8 +13,6 @@ import { PortfolioChatTransport } from './portfolioTransport.ts';
 import { scrollToCvSection } from './scrollToCvSection.ts';
 import { sectionIdFromLink } from './sectionLink.ts';
 
-const MASCOT_BASE = '/images/Clip/wizard';
-
 /**
  * Mounts the familiar-js assistant widget — a self-contained DOM class, not
  * a React tree — into a ref'd container, and tears it down on unmount.
@@ -56,18 +54,12 @@ export default function PortfolioAssistant() {
 				// rule so our site-palette mapping (which already tracks body.dark-mode
 				// on its own) is the only thing setting these variables.
 				theme: 'light',
+				// No mascotAssets override: familiar-js merges any custom mascotAssets
+				// on top of *every* preset, not just the selected one, so a custom
+				// skin here would make all 4 choices below look identical. Using each
+				// preset's own bundled art is what makes switching visually meaningful.
 				mascot: 'Clip',
-				mascotAssets: {
-					idle: `${MASCOT_BASE}/idle.webp`,
-					hover: `${MASCOT_BASE}/hover.webp`,
-					thinking: `${MASCOT_BASE}/thinking.webp`,
-					open: `${MASCOT_BASE}/focused.webp`,
-					// No dedicated error frame exists yet — idle reads better than a mismatched built-in fallback.
-					error: `${MASCOT_BASE}/idle.webp`,
-					eyesClosing: `${MASCOT_BASE}/closing.webp`,
-					eyesClosed: `${MASCOT_BASE}/closed.webp`,
-				},
-				mascotPicker: false,
+				mascotPicker: true,
 			});
 		});
 

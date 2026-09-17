@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import PortfolioAssistant from '../PortfolioAssistant.tsx';
@@ -66,6 +66,28 @@ describe('PortfolioAssistant', () => {
 
 		await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
 		expect(launcher).toHaveFocus();
+	});
+
+	it('lets a visitor switch between the built-in mascot presets', async () => {
+		const user = userEvent.setup();
+		const { container } = renderAssistant();
+		await openPanel(user);
+
+		await user.click(screen.getByRole('button', { name: 'Change mascot' }));
+
+		const picker = await screen.findByRole('group', { name: /choose a mascot/i });
+		expect(within(picker).getAllByRole('button')).toHaveLength(4);
+		expect(within(picker).getByLabelText(/clip \(current mascot\)/i)).toBeInTheDocument();
+
+		const headerMascotImage = () => container.querySelector<HTMLImageElement>('.familiar-panel__header .familiar-mascot__image');
+		const clipSrc = headerMascotImage()?.src;
+
+		await user.click(within(picker).getByRole('button', { name: /switch to wizard/i }));
+
+		// familiar-js doesn't re-render the (already-sent) picker message's own
+		// aria-label after switching, so the visible effect is checked instead —
+		// the header/launcher mascot images actually swap to the new preset's art.
+		await waitFor(() => expect(headerMascotImage()?.src).not.toBe(clipSrc));
 	});
 
 	it('cannot submit an empty or whitespace-only question', async () => {

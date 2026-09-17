@@ -1,18 +1,20 @@
 # Clip mascot — source art
 
-Full-resolution originals for the "Clip" portfolio-assistant mascot, passed
-to familiar-js's `mascotAssets` config in
-`src/components/PortfolioAssistant/PortfolioAssistant.tsx`. These are the
-source files a re-export would start from; the app only ever loads the
-optimized WebP derivatives in `public/images/Clip/wizard/`.
+Full-resolution/archived source art for a custom "Clip" portfolio-assistant
+mascot skin. **Not currently wired into the app** — the assistant
+(`src/components/PortfolioAssistant/PortfolioAssistant.tsx`) uses
+familiar-js's own built-in mascot presets (`Clip`/`Lens`/`Seer`/`Wizard`) with
+its mascot-switcher enabled, and familiar-js merges any `mascotAssets`
+override on top of *every* preset rather than just one, so a custom skin here
+would make all four choices in the switcher look identical. See the
+"Category badges"/"Switching approach" decisions in git history around
+2026-09 for the reasoning.
 
-Kept here (under `src/assets`, outside `public/`) rather than alongside the
-optimized files so they aren't copied into the production build — the
-top-level PNGs previously sat in `public/images/Clip/` and shipped ~7.5 MB of
-unused originals to every visitor's deploy target (never fetched by the app
-itself, but still published). Moved out as part of the 2026-09 performance
-pass.
+Kept here (under `src/assets`, outside `public/`) as archived reference
+rather than deleted — useful again if familiar-js adds a way to scope
+`mascotAssets` to a single preset, or if the switcher is ever dropped in
+favor of a single custom skin.
 
-`wizard/` holds the current skin actually wired into the app (already
-optimized WebP, no PNG originals kept alongside it); the top-level PNGs are
-the prior "Clip" skin, kept as reference.
+- Top-level PNGs: the original custom "Clip" skin.
+- `wizard/`: a newer custom skin (already-optimized WebP), prepared but not
+  wired in for the reason above.
