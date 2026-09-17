@@ -1,0 +1,24 @@
+// Reassigns familiar-js's own CSS custom properties to this site's palette
+// tokens (src/styles/global.scss) instead of the package's defaults. Every
+// mapped variable below is redefined again under body.dark-mode there, so
+// this single rule tracks the site's light/dark toggle automatically — no
+// separate dark block or JS theme sync needed. Must load after
+// 'familiar-js/styles.css' so this rule wins the same-specificity tie.
+.familiar-assistant {
+	--familiar-primary: var(--ab-hyperlink-color);
+	--familiar-primary-deep: var(--royal-blue-deep);
+	--familiar-primary-soft: var(--royal-blue-soft);
+	--familiar-accent: var(--assistant-accent);
+	--familiar-accent-strong: var(--assistant-accent-strong);
+	--familiar-notice: var(--assistant-accent);
+	--familiar-focus-ring: var(--royal-blue-soft);
+	--familiar-surface: var(--assistant-surface);
+	--familiar-surface-alt: var(--assistant-surface-alt);
+	--familiar-text: var(--ab-text-color);
+	--familiar-text-muted: var(--ab-text-color-faint);
+	--familiar-border: var(--assistant-border);
+	--familiar-shadow: var(--assistant-shadow);
+	--familiar-radius-sm: var(--radius-sm);
+	--familiar-radius-md: var(--radius-md);
+	font-family: var(--font-body), sans-serif;
+}

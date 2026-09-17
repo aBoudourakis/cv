@@ -7,8 +7,8 @@ import '@testing-library/jest-dom/vitest';
 // doesn't enable `test.globals`, so it's wired up explicitly here instead.
 afterEach(() => cleanup());
 
-// jsdom doesn't implement matchMedia — several components query
-// `prefers-reduced-motion` directly (ClipMascot/CVContent/NavBar).
+// jsdom doesn't implement matchMedia — several things query
+// `prefers-reduced-motion` directly (familiar-js's mascot blink loop, scrollToCvSection, CVContent/NavBar).
 if (!window.matchMedia) {
 	window.matchMedia = (query: string) =>
 		({

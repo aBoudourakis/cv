@@ -2,7 +2,7 @@
   "name": "athos-cv",
   "private": true,
   "type": "module",
-  "version": "1.3.23",
+  "version": "1.3.24",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -16,6 +16,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "familiar-js": "^0.4.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2"

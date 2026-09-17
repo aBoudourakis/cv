@@ -1,64 +1,106 @@
-import { lazy, Suspense, useRef, useState } from 'react';
-import styles from './PortfolioAssistant.module.scss';
-import AssistantLauncher from './AssistantLauncher.tsx';
-import { useAssistantChat } from './useAssistantChat.ts';
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './familiar-theme.scss';
+import {
+	ASSISTANT_DISCLOSURE,
+	ASSISTANT_INTRO,
+	ASSISTANT_SUBTITLE,
+	ASSISTANT_TITLE,
+	MAX_CONVERSATION_MESSAGES,
+	SUGGESTED_QUESTIONS,
+} from './constants.ts';
+import { PortfolioChatTransport } from './portfolioTransport.ts';
+import { scrollToCvSection } from './scrollToCvSection.ts';
+import { sectionIdFromLink } from './sectionLink.ts';
 
-// The panel (messages, sources, input) only loads once a visitor actually
-// opens the assistant — the closed launcher stays lightweight
-// (docs/Clip_bot_specification.md #21).
-const AssistantPanel = lazy(() => import('./AssistantPanel.tsx'));
+const MASCOT_BASE = '/images/Clip/wizard';
 
 /**
- * Floating "Clip" portfolio assistant — mounted once near the root of the
- * app. Owns open/close + focus-restoration; network/message state lives in
- * useAssistantChat, visual mascot state lives in the child components.
+ * Mounts the familiar-js assistant widget — a self-contained DOM class, not
+ * a React tree — into a ref'd container, and tears it down on unmount.
  */
 export default function PortfolioAssistant() {
-	/** REFS **/
-	const launcherRef = useRef<HTMLButtonElement | null>(null);
+	const containerRef = useRef<HTMLDivElement | null>(null);
+	const navigate = useNavigate();
+	// familiar-js's click listener is attached once at mount; a ref keeps it
+	// calling the latest `navigate` from react-router without re-mounting the widget.
+	const navigateRef = useRef(navigate);
+	navigateRef.current = navigate;
 
-	/** STATE **/
-	const [isOpen, setIsOpen] = useState(false);
-	const chat = useAssistantChat();
+	useEffect(() => {
+		const container = containerRef.current;
+		if (!container) return;
 
-	/** CONSTS **/
-	const handleClose = () => {
-		setIsOpen(false);
+		let assistant: import('familiar-js').FamiliarAssistant | undefined;
+		let cancelled = false;
 
-		const launcher = launcherRef.current;
-		if (!launcher) return;
+		// familiar-js's own bundle inlines all four mascot presets' artwork as
+		// base64 (~900KB gzipped) even though every state below is overridden —
+		// deferred so that dead weight never sits in the app's main chunk.
+		void Promise.all([import('familiar-js'), import('familiar-js/styles.css')]).then(([{ FamiliarAssistant, AssistantTransportError }]) => {
+			if (cancelled) return;
 
-		// Closing (via the close button, Escape, or otherwise) always returns
-		// focus to the launcher (docs/Clip_bot_specification.md #15) — needed
-		// for keyboard and VoiceOver users regardless of how this close was
-		// triggered. But iOS Safari/Chrome (WebKit) shows the launcher's
-		// `:focus-visible` ring on this programmatic focus() even when the
-		// close itself was a plain touch tap (Chromium correctly suppresses
-		// it there). Suppress the ring with an inline style — it outranks the
-		// CSS rule's specificity without needing `!important` — and clear the
-		// override on the next blur, so a later *real* keyboard Tab onto the
-		// launcher still shows the ring normally.
-		launcher.style.outline = 'none';
-		const clearRingSuppression = () => {
-			launcher.style.outline = '';
-			launcher.removeEventListener('blur', clearRingSuppression);
+			assistant = new FamiliarAssistant({
+				container,
+				transport: new PortfolioChatTransport(AssistantTransportError),
+				title: ASSISTANT_TITLE,
+				subtitle: ASSISTANT_SUBTITLE,
+				greeting: ASSISTANT_INTRO,
+				disclosure: ASSISTANT_DISCLOSURE,
+				suggestions: SUGGESTED_QUESTIONS,
+				historyLimit: MAX_CONVERSATION_MESSAGES,
+				// Pinned rather than 'auto': familiar-js's own dark/auto variants are
+				// selected via an attribute selector ([data-familiar-theme=...]),
+				// which out-specificities familiar-theme.scss's plain .familiar-assistant
+				// override — pinning 'light' keeps familiar-js on its base (attribute-less)
+				// rule so our site-palette mapping (which already tracks body.dark-mode
+				// on its own) is the only thing setting these variables.
+				theme: 'light',
+				mascot: 'Clip',
+				mascotAssets: {
+					idle: `${MASCOT_BASE}/idle.webp`,
+					hover: `${MASCOT_BASE}/hover.webp`,
+					thinking: `${MASCOT_BASE}/thinking.webp`,
+					open: `${MASCOT_BASE}/focused.webp`,
+					// No dedicated error frame exists yet — idle reads better than a mismatched built-in fallback.
+					error: `${MASCOT_BASE}/idle.webp`,
+					eyesClosing: `${MASCOT_BASE}/closing.webp`,
+					eyesClosed: `${MASCOT_BASE}/closed.webp`,
+				},
+				mascotPicker: false,
+			});
+		});
+
+		// familiar-js's FamiliarSource only carries { title, url }, so CV-section
+		// citations are encoded as fake internal links (see sectionLink.ts) and
+		// decoded back here, and plain internal paths get client-side routing
+		// instead of a full page navigation.
+		function handleClick(event: MouseEvent) {
+			const anchor = (event.target as HTMLElement | null)?.closest('a.familiar-sources__link');
+			const href = anchor?.getAttribute('href');
+			if (!href) return;
+
+			const sectionId = sectionIdFromLink(href);
+			if (sectionId) {
+				event.preventDefault();
+				scrollToCvSection(sectionId, navigateRef.current);
+				return;
+			}
+
+			if (href.startsWith('/')) {
+				event.preventDefault();
+				navigateRef.current(href);
+			}
+		}
+
+		container.addEventListener('click', handleClick);
+
+		return () => {
+			cancelled = true;
+			container.removeEventListener('click', handleClick);
+			assistant?.destroy();
 		};
-		launcher.addEventListener('blur', clearRingSuppression);
-		launcher.focus({ preventScroll: true });
-	};
+	}, []);
 
-	/** RENDER **/
-	return (
-		<div className={styles.Root} data-open={isOpen}>
-			<div className={styles.LauncherLayer}>
-				<AssistantLauncher ref={launcherRef} isOpen={isOpen} onOpen={() => setIsOpen(true)} />
-			</div>
-
-			{isOpen && (
-				<Suspense fallback={null}>
-					<AssistantPanel onClose={handleClose} chat={chat} />
-				</Suspense>
-			)}
-		</div>
-	);
+	return <div className="portfolio-assistant-mount" ref={containerRef} />;
 }
