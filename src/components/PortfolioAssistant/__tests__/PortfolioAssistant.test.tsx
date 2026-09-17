@@ -68,26 +68,31 @@ describe('PortfolioAssistant', () => {
 		expect(launcher).toHaveFocus();
 	});
 
-	it('lets a visitor switch between the built-in mascot presets', async () => {
+	it('lets a visitor switch between the built-in mascot presets via the header dropdown', async () => {
 		const user = userEvent.setup();
-		const { container } = renderAssistant();
+		renderAssistant();
 		await openPanel(user);
 
-		await user.click(screen.getByRole('button', { name: 'Change mascot' }));
+		// familiar-js 0.4.5 added a persistent header control for this, distinct
+		// from the "Change mascot" *suggestion chip* (also present since we set
+		// mascotPicker: true) which posts a one-off picker into the conversation.
+		const trigger = screen.getByRole('button', { name: 'Change mascot', expanded: false });
+		await user.click(trigger);
 
 		const picker = await screen.findByRole('group', { name: /choose a mascot/i });
 		expect(within(picker).getAllByRole('button')).toHaveLength(4);
 		expect(within(picker).getByLabelText(/clip \(current mascot\)/i)).toBeInTheDocument();
 
-		const headerMascotImage = () => container.querySelector<HTMLImageElement>('.familiar-panel__header .familiar-mascot__image');
-		const clipSrc = headerMascotImage()?.src;
-
 		await user.click(within(picker).getByRole('button', { name: /switch to wizard/i }));
 
-		// familiar-js doesn't re-render the (already-sent) picker message's own
-		// aria-label after switching, so the visible effect is checked instead —
-		// the header/launcher mascot images actually swap to the new preset's art.
-		await waitFor(() => expect(headerMascotImage()?.src).not.toBe(clipSrc));
+		// Picking an option closes the dropdown without touching the conversation.
+		await waitFor(() => expect(screen.queryByRole('group', { name: /choose a mascot/i })).not.toBeInTheDocument());
+		expect(trigger).toHaveFocus();
+
+		// Reopening reflects the live selection (this is what 0.4.5 fixed).
+		await user.click(trigger);
+		const reopenedPicker = await screen.findByRole('group', { name: /choose a mascot/i });
+		expect(within(reopenedPicker).getByLabelText(/wizard \(current mascot\)/i)).toBeInTheDocument();
 	});
 
 	it('cannot submit an empty or whitespace-only question', async () => {

@@ -2,9 +2,16 @@
 // tokens (src/styles/global.scss) instead of the package's defaults. Every
 // mapped variable below is redefined again under body.dark-mode there, so
 // this single rule tracks the site's light/dark toggle automatically — no
-// separate dark block or JS theme sync needed. Must load after
-// 'familiar-js/styles.css' so this rule wins the same-specificity tie.
-.familiar-assistant {
+// separate dark block or JS theme sync needed.
+//
+// Selector is `body .familiar-assistant`, not the bare class, so this rule's
+// specificity (0,1,1) beats familiar-js's own base `.familiar-assistant` rule
+// (0,1,0) outright. It can't rely on load order to win a same-specificity
+// tie: 'familiar-js/styles.css' is dynamically imported (PortfolioAssistant.tsx,
+// to keep its bundled mascot art out of the main chunk) and its <link> lands
+// in the DOM whenever that import resolves — sometimes after this stylesheet,
+// which silently made familiar-js's own light-mode defaults win instead.
+body .familiar-assistant {
 	--familiar-primary: var(--ab-hyperlink-color);
 	--familiar-primary-deep: var(--royal-blue-deep);
 	--familiar-primary-soft: var(--royal-blue-soft);
