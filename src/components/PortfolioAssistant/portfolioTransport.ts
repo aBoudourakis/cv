@@ -1,4 +1,5 @@
 import type { AssistantRequest, AssistantResponse, AssistantTransportError, Transport } from 'familiar-js';
+import { BEYOND_WORK_ANSWER, BEYOND_WORK_QUESTION, BEYOND_WORK_ROUTE } from './constants.ts';
 import { toFamiliarSource } from './toFamiliarSource.ts';
 import type { PortfolioChatResponse } from './types.ts';
 
@@ -67,6 +68,14 @@ export class PortfolioChatTransport implements Transport {
 	}
 
 	async send(request: AssistantRequest, signal?: AbortSignal): Promise<AssistantResponse> {
+		// The Beyond Work page isn't in the RAG index, so answer locally with a link to it.
+		if (request.question.trim() === BEYOND_WORK_QUESTION) {
+			return {
+				answer: BEYOND_WORK_ANSWER,
+				sources: [{ title: 'Beyond Work · Visit the page', url: BEYOND_WORK_ROUTE }],
+			};
+		}
+
 		if (!this.supabaseUrl || !this.supabaseAnonKey || !/^https?:\/\//.test(this.supabaseUrl)) {
 			throw new this.TransportError('The portfolio assistant is not configured yet. Please check back later.', 'server');
 		}

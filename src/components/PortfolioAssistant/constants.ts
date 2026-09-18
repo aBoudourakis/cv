@@ -14,12 +14,18 @@ export const ASSISTANT_INTRO =
 export const ASSISTANT_DISCLOSURE =
 	"AI-powered. Answers are generated from Athinodoros' CV and portfolio information.";
 
+export const BEYOND_WORK_QUESTION = 'Tell me about Athinodoros beyond work.';
+export const BEYOND_WORK_ROUTE = '/beyond-work';
+export const BEYOND_WORK_ANSWER =
+	"Outside of engineering, Athinodoros has creative interests and disciplines - music composition, art and more - that shape how he thinks and works. You can explore them on the Beyond Work page.";
+
 export const SUGGESTED_QUESTIONS: string[] = [
 	'What experience does he have with React?',
 	'Has he worked with real-time systems?',
 	'What UI/UX experience does he have?',
 	'Does he have AI or machine learning experience?',
 	'Tell me about the COVID-19 shield initiative.',
+	BEYOND_WORK_QUESTION,
 ];
 
 /**
