@@ -9,7 +9,7 @@ export default function NavBar() {
 	const navItems: { name: string; href: string; secondary?: boolean; wip?: boolean }[] = [
 		{ name: 'CV', href: '/CV' },
 		{ name: 'Portfolio', href: '/portfolio' },
-		{ name: 'Beyond Work', href: '/beyond-work', secondary: true, wip: true },
+		// { name: 'Beyond Work', href: '/beyond-work', secondary: true, wip: true },
 	];
 	const location = useLocation();
 

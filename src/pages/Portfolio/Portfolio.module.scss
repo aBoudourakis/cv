@@ -76,11 +76,21 @@
 }
 
 .Disclaimer {
-  margin: var(--space-2xs) 0 0;
-  max-width: 62ch;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3xs);
+  margin: var(--space-sm) 0 0;
+  padding: var(--space-xs) 0;
+  //max-width: 62ch;
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--ab-text-color-faint);
+  border-top: 1px solid #ffa500a8;
+  border-bottom: 1px solid #ffa500a8;
+
+  svg {
+    margin-top: 2px;
+  }
 }
 
 /* ---------- Portfolio page sequence ---------- */

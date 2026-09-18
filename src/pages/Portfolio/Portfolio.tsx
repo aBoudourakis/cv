@@ -1,5 +1,5 @@
 import styles from './Portfolio.module.scss';
-import {ExternalLinkIcon} from 'src/components/core/Icons/Icons.tsx';
+import {ExternalLinkIcon, WarningIcon} from 'src/components/core/Icons/Icons.tsx';
 import {portfolioPagesImages, PORTFOLIO_PAGE_ASPECT_RATIO} from 'src/assets/values.ts';
 
 const portfolioPdfUrl = '/Athos_Work_Samples_2017.pdf';
@@ -25,7 +25,7 @@ function Portfolio() {
 						</div>
 
 						<p className={styles.Disclaimer}>
-							Selected work up to 2017 — more recent professional work is referenced in the CV.
+							<WarningIcon/> Selected work up to 2017 — recent work is mostly client-facing, private, or internal, so it isn't shown here. See the CV for more recent experience.
 						</p>
 					</div>
 				</header>

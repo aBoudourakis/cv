@@ -107,6 +107,28 @@ export function ChevronDownIcon() {
 	);
 }
 
+/** Amber alert triangle with an exclamation mark, for surfacing warnings inline. */
+export function WarningIcon() {
+	return (
+		<svg
+			className="ab-icon ab-icon--warning"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path
+				d="M12 3.5l9.5 16.5H2.5L12 3.5z"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.6"
+				strokeLinejoin="round"
+			/>
+			<line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+			<circle cx="12" cy="17.25" r="1.05" fill="currentColor" />
+		</svg>
+	);
+}
+
 /** A single quiet spinner arc, rotated via CSS — used while a music sample is loading. */
 export function LoadingIcon() {
 	return (
