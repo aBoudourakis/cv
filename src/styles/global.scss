@@ -1,11 +1,7 @@
-// Roboto (body text) is the only family actually loaded from Google Fonts —
-// Cinzel is self-hosted below, so the request only asks Google for the
-// weights that aren't already local (previously this @import also requested
-// Cinzel 400/500/600/700, which the local @font-face rules below immediately
-// shadowed for 400/600/700 — a duplicate fetch of a font that was never
-// rendered). The stylesheet itself is loaded non-blocking from index.html
-// (see the preload/onload swap there) rather than via @import, which is
-// always render-blocking.
+// All fonts are self-hosted — nothing is requested from Google Fonts, so no
+// visitor IPs are shared with a third party. Cinzel (titles) is declared
+// below; Roboto (body text) comes from @fontsource-variable/roboto, imported
+// in src/main.tsx.
 
 @font-face {
   font-family: 'Cinzel';
@@ -43,7 +39,7 @@
 :root {
   // Font Families
   --font-title: 'Cinzel', serif;
-  --font-body: 'Roboto', sans-serif;
+  --font-body: 'Roboto Variable', 'Roboto', sans-serif;
 
   // Color Palette
   --royal-blue: #2447D8;

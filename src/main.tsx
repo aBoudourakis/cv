@@ -1,6 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+// Roboto (body text) is self-hosted from the npm package rather than loaded
+// from Google Fonts, so visitors' IP addresses never reach Google. The
+// variable font covers every weight in use (400-700) plus italics; each
+// unicode-range subset is only downloaded when the page actually needs it.
+import '@fontsource-variable/roboto/wght.css'
+import '@fontsource-variable/roboto/wght-italic.css'
 import './index.css'
 import App from './App.tsx'
 import CV from './pages/CV/CV.tsx'

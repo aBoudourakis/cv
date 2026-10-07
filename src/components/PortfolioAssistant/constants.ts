@@ -12,7 +12,9 @@ export const ASSISTANT_INTRO =
 	"Hi! I can answer questions about experience, projects, technologies and education.";
 
 export const ASSISTANT_DISCLOSURE =
-	"AI-powered. Answers are generated from Athinodoros' CV and portfolio information.";
+	"AI-powered. Answers are generated from Athinodoros' CV and portfolio information. " +
+	'Privacy: your questions are sent to Supabase and an AI provider to generate answers, and are not stored. ' +
+	'A scrambled (hashed) form of your IP address is kept for 35 days for rate limiting.';
 
 export const BEYOND_WORK_QUESTION = 'Tell me about Athinodoros beyond work.';
 export const BEYOND_WORK_ROUTE = '/beyond-work';
