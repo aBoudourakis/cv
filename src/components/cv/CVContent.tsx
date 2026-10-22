@@ -20,6 +20,7 @@ import LanguageEntry from "src/components/cv/CVSections/LanguageEntry.tsx";
 import ProjectEntry from "src/components/cv/CVSections/ProjectEntry.tsx";
 import CertificateEntry from "src/components/cv/CVSections/CertificateEntry.tsx";
 import {ChevronDownIcon, ExternalLinkIcon, PlayIcon} from "src/components/core/Icons/Icons.tsx";
+import InfoIconTooltip from "src/components/core/InfoIconTooltip/InfoIconTooltip.tsx";
 
 /** Small inline icon set used for the contact list, kept dependency-free. */
 const CONTACT_ICONS: Record<ContactLink['icon'], React.ReactNode> = {
@@ -85,8 +86,20 @@ type SectionId = typeof SECTION_NAV[number]['id'];
 
 /** The two downloadable CV variants offered from the header's "Download PDF" menu. */
 const PDF_VARIANTS = [
-	{id: 'compact', label: 'Compact', description: 'One-page overview highlighting my most recent experience, core skills, and key achievements', path: '/Athos_CV_2026_compact.pdf', filename: 'Athinodoros_Boudourakis_CV_2026_compact.pdf'},
-	{id: 'detailed', label: 'Detailed', description: 'Full CV with extended experience, projects, education, skills, and additional background', path: '/Athos_CV_2026_detailed.pdf', filename: 'Athinodoros_Boudourakis_CV_2026_detailed.pdf'},
+	{
+		id: 'compact',
+		label: 'Compact',
+		description: 'One-page overview highlighting my most recent experience, core skills, and key achievements',
+		path: '/Athos_CV_2026_compact.pdf',
+		filename: 'Athinodoros_Boudourakis_CV_2026_compact.pdf'
+	},
+	{
+		id: 'detailed',
+		label: 'Detailed',
+		description: 'Full CV with extended experience, projects, education, skills, and additional background',
+		path: '/Athos_CV_2026_detailed.pdf',
+		filename: 'Athinodoros_Boudourakis_CV_2026_detailed.pdf'
+	},
 ] as const;
 
 /** Resolves whether a bullet/link points at a YouTube video, to show a play affordance instead of an external-link one. */
@@ -228,7 +241,13 @@ export default function CVContent() {
 					id="cv-profile"
 					ref={registerSection('cv-profile')}
 				>
-					<p className={styles.cvEyebrow}>Curriculum Vitae</p>
+					<p className={styles.cvEyebrow}>
+						Curriculum Vitae
+						<InfoIconTooltip
+							tooltipText="This CV Web application is written in React Vite, combining several development methods including manual coding, AI assisted, and fully AI parts (agentic), SCSS, plain CSS, BEM, and SCSS modules. The CV content is stored in a separate data file (cvData.ts) and rendered dynamically. The CV can be downloaded as a PDF in two variants: compact and detailed."
+							style={{marginLeft: '4px'}}
+						/>
+					</p>
 					<h1 className={styles.cvName}>{header.name}</h1>
 					<p className={styles.cvJobTitle}>{header.title}</p>
 					<p className={styles.cvSummary}>{header.summary}</p>

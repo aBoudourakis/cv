@@ -103,6 +103,10 @@
 }
 
 .cvEyebrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   margin: 0 0 var(--space-xs);
   font-family: var(--font-body), sans-serif;
   font-size: 0.75rem;
